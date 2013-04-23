@@ -1,0 +1,59 @@
+/*
+ *= require 'normalize'
+ *= require 'minimal'
+ *= require 'pygment'
+ */
+
+header {
+  padding-bottom: 0.5em;
+}
+header h1 {
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+h1, h2 {
+  font-family: 'Droid Serif', Georgia, serif;
+  font-weight: bold;
+}
+h1 a, h2 a {
+  font-weight: bold;
+}
+footer {
+  font-size: 13px;
+}
+footer h4 {
+  margin-bottom: 10px;
+}
+footer ol {
+  list-style: none;
+  padding-left: 0;
+}
+footer ol li {
+  margin: 3px 0;
+}
+footer .col {
+  width: 250px;
+  float: left;
+  padding: 0 20px 10px 0;
+}
+footer p {
+  clear: both;
+}
+section .summary {
+  margin-bottom: 75px;
+}
+section .article_footer {
+  font-size: 13px;
+  padding-top: 20px;
+}
+section .article_footer .tags {
+  float: left;
+}
+section .article_footer .timestamp {
+  float: right;
+}
+@media print, screen and (min-width: 1011px) and (max-height: 700px) {
+  footer .col {
+    display: none;
+  }
+}

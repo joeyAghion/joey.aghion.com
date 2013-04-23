@@ -1,0 +1,7 @@
+---
+title: Floor!
+date: 2009-10-02 7:43
+tags: home, kitchen
+---
+
+<img src="/images/2009-10-02-floor.jpg" alt="floor" />

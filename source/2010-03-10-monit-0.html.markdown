@@ -1,0 +1,140 @@
+---
+title: Monit
+date: 2010-03-10 7:43
+tags: monitoring, programming, ruby, tools
+---
+
+<img src="/images/2010-03-10-monit.jpg" alt="Monit" />
+
+First in what will hopefully be a series of posts about building out a production server environment, I'll share a few of my lessons from working with [monit](http://mmonit.com/monit).
+
+Monit is a small, fairly sophisticated tool for monitoring the daemons, files, and other services running on a server. Not only can it alert an administrator when there is a problem, but it can try to correct the situation with any number of measures (most simply, by restarting the affected service, but also by capturing log output and executing arbitrary commands).
+
+Monit's monitoring is not limited to confirming that a given process is running. It can monitor the existence, size, checksum, permissions, or timestamps of files or directories. It can also respond to general system states, such as high CPU load or low memory.
+
+Downloading and installing monit:
+
+    $ wget http://mmonit.com/monit/dist/monit-5.1.1.tar.gz
+    $ tar zxvf monit-5.1.1.tar.gz
+    $ cd monit-5.1.1
+    $ ./configure --bindir=/usr/local/bin/ --mandir=/usr/local/man/ --sysconfdir=/etc/
+    $ make
+    $ sudo make install
+
+All the interesting stuff is in monit's control file, at `/etc/monitrc`, `~/.monitrc`, or `./monitrc`. In my naive installation, the file was generated in my current working directory, so I can start monit with the `-c` flag and include its location, or simply move the file to the expected `/etc/monitrc` location.
+
+So how do I configure monit to monitor a service like [Redis](http://code.google.com/p/redis)? There are 2 types of entries: Service entries specify particular targets for monitoring, while global entries configure the monit service itself. My bare-bones global config simply tells monit to run in the background, checking services every minute:
+
+    set daemon 60
+
+Finally, I add a few service-specific lines:
+
+    check process redis
+      with pidfile /var/run/redis.pid
+      start program = "/usr/local/bin/redis-server /etc/redis.conf"
+      stop program = "/usr/local/bin/redis-cli shutdown"
+      if failed host 127.0.0.1 port 6379 then restart
+      if 5 restarts within 5 cycles then timeout
+
+The syntax is fairly natural. This block sets up the Redis service for monitoring. It specifies the location to find the service's PID file, start and stop commands, and then a condition for restarting the service. In this case, we're simply confirming that monit is able to open a connection to redis at the specified port. If not, monit will issue the start command defined above. The final line tells monit to give up if the condition fails for 5 cycles in a row. (In a more typical environment, we might use 'alert' here instead of 'timeout,' so a system administrator is informed of the failure.) 
+
+Now, when I start monit and ask it for my system's status, I see:
+
+    $ monit # starts daemon which detaches from terminal
+    $ sudo monit summary
+    The Monit daemon 5.1.1 uptime: 1m
+    
+    Process 'redis' running
+    System 'my-laptop.local' running
+
+Now if Redis is killed or becomes unresponsive, monit will automatically restart it. When I want to stop or start Redis manually, I also use monit:
+
+    $ sudo monit stop redis 
+    $ sudo monit start redis 
+
+Monit speaks many common protocols such as HTTP, FTP, and SMTP. You can find examples of those and others at [http://mmonit.com/wiki/Monit/ConfigurationExamples](http://mmonit.com/wiki/Monit/ConfigurationExamples). In the case of Redis, though, we can use monit's support for general text-based protocols to perform a more thorough check that Redis is behaving correctly:
+
+    if failed port 6379
+      send "SET an_example_key 7\r\nsumthin\r\n"
+      expect "OK"
+      send "EXISTS an_example_key\r\n"
+      expect ":1"
+    then alert
+
+When I've edited the monitrc file, I can have monit reload it with: 
+
+    $ sudo monit reload
+
+On a server, it's recommended that monit be started by init to ensure that it's always running. Example /etc/inittab entry:
+
+    mo:2345:respawn:/usr/local/sbin/monit -Ic /etc/monitrc
+
+(Note the potential race condition of configuring monit to monitor other services that are started at boot time. See [http://mmonit.com/wiki/Monit/FAQ#init](http://mmonit.com/wiki/Monit/FAQ#init) for a few solutions).
+
+On my local macbook, I set up a `com.tildeslash.monit.plist` file so that monit is started automatically with the system:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+      <dict>
+        <key>Label</key>
+        <string>com.tildeslash.monit</string>
+        <key>ProgramArguments</key>
+        <array>
+          <string>/usr/local/bin/monit</string>
+          <string>-c</string>
+          <string>/etc/monitrc</string>
+        </array>
+        <key>RunAtLoad</key>
+        <true/>
+      </dict>
+    </plist>
+
+Then I made sure the new plist file was loaded:
+
+    $ sudo launchctl load /Library/LaunchDaemons/com.tildeslash.plist
+
+Finally, let's add some global entries to our monitrc file to enable the web-based interface:
+
+    set httpd port 2812 and
+      use address localhost # only accept connection from localhost
+      allow localhost # allow localhost to connect
+
+Now, browsing to http://localhost:2812 displays my services' current status and allows me to perform basic management operations (see screenshot).
+
+Monit vs. god
+-------------
+
+[God.rb](http://god.rubyforge.org) is a Ruby clone of monit and worth mentioning here. It's written in Ruby and accepts configuration in Ruby, so the syntax can in many cases be more powerful and less repetitive. As an exercise, I've incompletely translated our initial Redis configuration from above into god-compatible syntax:
+
+    God.watch do |w|
+      w.name = 'redis'
+      w.interval = 60.seconds
+      w.start = "/usr/local/bin/redis-server /etc/redis.conf"
+      w.stop = "/usr/local/bin/redis-cli shutdown"
+      w.pid_file = "/var/run/redis.pid"
+      
+      w.behavior(:clean_pid_file)
+      
+      w.start_if do |start|
+        start.condition(:process_running) do |c|
+          c.interval = 5.seconds
+          c.running = false
+        end
+      end
+      
+      w.lifecycle do |on|
+        on.condition(:flapping) do |c|
+          c.to_state = [:start, :restart]
+          c.times = 5
+          c.within = 5.minutes
+          c.transition = :unmonitored
+        end
+      end
+      
+      # not sure how to test connection with redis db... 
+    end
+
+God suffered from stability problems early on, but seems to have recovered. Both tools are under active development. If your use case requires extra extensibility or significant repetition, god might be worth considering. Monit has been more stable and requires less resources, and with its reasonable syntax and convenient web interface, should probably be near the top of anyone's list.
+
+Plenty more details in the docs: [http://mmonit.com/monit/documentation](http://mmonit.com/monit/documentation)

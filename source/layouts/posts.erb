@@ -1,0 +1,19 @@
+<% wrap_layout :layout do %>
+  <h2>
+    <a href="<%= current_page.url %>"><%= data.page.title %></a>
+  </h2>
+  <article>
+    <%= yield %>
+  </article>
+  <% if current_page.tags.any? %>
+    <div class="article_footer">
+      <p class="tags">
+        Tags:
+        <%= current_page.tags.map { |tag| link_to tag, tag_path(tag) }.join(', ') %>
+      </p>
+      <p class="timestamp">
+        <%= current_page.date.strftime('%Y-%m-%d') %>
+      </p>
+    </div>
+  <% end %>
+<% end %>
