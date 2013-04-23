@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Monit</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/monit-0/">Monit</a>
+  </h2>
+  <article>
+    <img alt='Monit' src='/images/2010-03-10-monit.jpg' />
+<p>First in what will hopefully be a series of posts about building out a production server environment, I&#8217;ll share a few of my lessons from working with <a href='http://mmonit.com/monit'>monit</a>.</p>
+
+<p>Monit is a small, fairly sophisticated tool for monitoring the daemons, files, and other services running on a server. Not only can it alert an administrator when there is a problem, but it can try to correct the situation with any number of measures (most simply, by restarting the affected service, but also by capturing log output and executing arbitrary commands).</p>
+
+<p>Monit&#8217;s monitoring is not limited to confirming that a given process is running. It can monitor the existence, size, checksum, permissions, or timestamps of files or directories. It can also respond to general system states, such as high CPU load or low memory.</p>
+
+<p>Downloading and installing monit:</p>
+
+<pre><code>$ wget http://mmonit.com/monit/dist/monit-5.1.1.tar.gz
+$ tar zxvf monit-5.1.1.tar.gz
+$ cd monit-5.1.1
+$ ./configure --bindir=/usr/local/bin/ --mandir=/usr/local/man/ --sysconfdir=/etc/
+$ make
+$ sudo make install</code></pre>
+
+<p>All the interesting stuff is in monit&#8217;s control file, at <code>/etc/monitrc</code>, <code>~/.monitrc</code>, or <code>./monitrc</code>. In my naive installation, the file was generated in my current working directory, so I can start monit with the <code>-c</code> flag and include its location, or simply move the file to the expected <code>/etc/monitrc</code> location.</p>
+
+<p>So how do I configure monit to monitor a service like <a href='http://code.google.com/p/redis'>Redis</a>? There are 2 types of entries: Service entries specify particular targets for monitoring, while global entries configure the monit service itself. My bare-bones global config simply tells monit to run in the background, checking services every minute:</p>
+
+<pre><code>set daemon 60</code></pre>
+
+<p>Finally, I add a few service-specific lines:</p>
+
+<pre><code>check process redis
+  with pidfile /var/run/redis.pid
+  start program = &quot;/usr/local/bin/redis-server /etc/redis.conf&quot;
+  stop program = &quot;/usr/local/bin/redis-cli shutdown&quot;
+  if failed host 127.0.0.1 port 6379 then restart
+  if 5 restarts within 5 cycles then timeout</code></pre>
+
+<p>The syntax is fairly natural. This block sets up the Redis service for monitoring. It specifies the location to find the service&#8217;s PID file, start and stop commands, and then a condition for restarting the service. In this case, we&#8217;re simply confirming that monit is able to open a connection to redis at the specified port. If not, monit will issue the start command defined above. The final line tells monit to give up if the condition fails for 5 cycles in a row. (In a more typical environment, we might use &#8216;alert&#8217; here instead of &#8216;timeout,&#8217; so a system administrator is informed of the failure.)</p>
+
+<p>Now, when I start monit and ask it for my system&#8217;s status, I see:</p>
+
+<pre><code>$ monit # starts daemon which detaches from terminal
+$ sudo monit summary
+The Monit daemon 5.1.1 uptime: 1m
+
+Process &#39;redis&#39; running
+System &#39;my-laptop.local&#39; running</code></pre>
+
+<p>Now if Redis is killed or becomes unresponsive, monit will automatically restart it. When I want to stop or start Redis manually, I also use monit:</p>
+
+<pre><code>$ sudo monit stop redis 
+$ sudo monit start redis </code></pre>
+
+<p>Monit speaks many common protocols such as HTTP, FTP, and SMTP. You can find examples of those and others at <a href='http://mmonit.com/wiki/Monit/ConfigurationExamples'>http://mmonit.com/wiki/Monit/ConfigurationExamples</a>. In the case of Redis, though, we can use monit&#8217;s support for general text-based protocols to perform a more thorough check that Redis is behaving correctly:</p>
+
+<pre><code>if failed port 6379
+  send &quot;SET an_example_key 7\r\nsumthin\r\n&quot;
+  expect &quot;OK&quot;
+  send &quot;EXISTS an_example_key\r\n&quot;
+  expect &quot;:1&quot;
+then alert</code></pre>
+
+<p>When I&#8217;ve edited the monitrc file, I can have monit reload it with:</p>
+
+<pre><code>$ sudo monit reload</code></pre>
+
+<p>On a server, it&#8217;s recommended that monit be started by init to ensure that it&#8217;s always running. Example /etc/inittab entry:</p>
+
+<pre><code>mo:2345:respawn:/usr/local/sbin/monit -Ic /etc/monitrc</code></pre>
+
+<p>(Note the potential race condition of configuring monit to monitor other services that are started at boot time. See <a href='http://mmonit.com/wiki/Monit/FAQ#init'>http://mmonit.com/wiki/Monit/FAQ#init</a> for a few solutions).</p>
+
+<p>On my local macbook, I set up a <code>com.tildeslash.monit.plist</code> file so that monit is started automatically with the system:</p>
+
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+  &lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;com.tildeslash.monit&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+      &lt;string&gt;/usr/local/bin/monit&lt;/string&gt;
+      &lt;string&gt;-c&lt;/string&gt;
+      &lt;string&gt;/etc/monitrc&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;
+    &lt;true/&gt;
+  &lt;/dict&gt;
+&lt;/plist&gt;</code></pre>
+
+<p>Then I made sure the new plist file was loaded:</p>
+
+<pre><code>$ sudo launchctl load /Library/LaunchDaemons/com.tildeslash.plist</code></pre>
+
+<p>Finally, let&#8217;s add some global entries to our monitrc file to enable the web-based interface:</p>
+
+<pre><code>set httpd port 2812 and
+  use address localhost # only accept connection from localhost
+  allow localhost # allow localhost to connect</code></pre>
+
+<p>Now, browsing to http://localhost:2812 displays my services&#8217; current status and allows me to perform basic management operations (see screenshot).</p>
+
+<h2 id='monit_vs_god'>Monit vs. god</h2>
+
+<p><a href='http://god.rubyforge.org'>God.rb</a> is a Ruby clone of monit and worth mentioning here. It&#8217;s written in Ruby and accepts configuration in Ruby, so the syntax can in many cases be more powerful and less repetitive. As an exercise, I&#8217;ve incompletely translated our initial Redis configuration from above into god-compatible syntax:</p>
+
+<pre><code>God.watch do |w|
+  w.name = &#39;redis&#39;
+  w.interval = 60.seconds
+  w.start = &quot;/usr/local/bin/redis-server /etc/redis.conf&quot;
+  w.stop = &quot;/usr/local/bin/redis-cli shutdown&quot;
+  w.pid_file = &quot;/var/run/redis.pid&quot;
+  
+  w.behavior(:clean_pid_file)
+  
+  w.start_if do |start|
+    start.condition(:process_running) do |c|
+      c.interval = 5.seconds
+      c.running = false
+    end
+  end
+  
+  w.lifecycle do |on|
+    on.condition(:flapping) do |c|
+      c.to_state = [:start, :restart]
+      c.times = 5
+      c.within = 5.minutes
+      c.transition = :unmonitored
+    end
+  end
+  
+  # not sure how to test connection with redis db... 
+end</code></pre>
+
+<p>God suffered from stability problems early on, but seems to have recovered. Both tools are under active development. If your use case requires extra extensibility or significant repetition, god might be worth considering. Monit has been more stable and requires less resources, and with its reasonable syntax and convenient web interface, should probably be near the top of anyone&#8217;s list.</p>
+
+<p>Plenty more details in the docs: <a href='http://mmonit.com/monit/documentation'>http://mmonit.com/monit/documentation</a></p>
+  </article>
+  
+    <div class="article_footer">
+      <p class="tags">
+        Tags:
+        <a href="/tags/monitoring/">monitoring</a>, <a href="/tags/programming/">programming</a>, <a href="/tags/ruby/">ruby</a>, <a href="/tags/tools/">tools</a>
+      </p>
+      <p class="timestamp">
+        2010-03-10
+      </p>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a> <span>Mar  8</span></li>
+            
+              
+              <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
+            
+              
+              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
+            
+              
+              <li><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a> <span>Feb  1</span></li>
+            
+              
+              <li><a href="/bash-aliases-and-helpers/">Bash aliases and helpers</a> <span>Jan 12</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+              <li><a href="/tags/electrical/">electrical (1)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/architecture/">architecture (1)</a></li>
+            
+              
+              <li><a href="/tags/remodeling/">remodeling (1)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

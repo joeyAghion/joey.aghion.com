@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blog Name</title>
+  <subtitle>Blog subtitle</subtitle>
+  <id>http://blog.url.com/</id>
+  <link href="http://blog.url.com/"/>
+  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <updated>2013-03-08T00:00:00Z</updated>
+  <author>
+    <name>Blog Author</name>
+  </author>
+  <entry>
+    <title>Unique Tabs - a Chrome extension for staying sane</title>
+    <link rel="alternate" href="/unique-tabs/"/>
+    <id>/unique-tabs/</id>
+    <published>2013-03-08T00:00:00Z</published>
+    <updated>2013-03-08T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;The internet is a maze. Sometimes in my travels through this maze, I circle back on a path I&amp;#8217;ve already traveled. When that happens, my browser tabs start to look like this:&lt;/p&gt;
+&lt;img src='/images/2013-03-08-tabs.png' /&gt;
+&lt;p&gt;Some of those tabs are purely redundant. I discovered that Chrome used to include a Labs feature called &amp;#8220;Focus existing tab to open&amp;#8221; that attempted to avoid this, but it seems to have been removed.&lt;/p&gt;
+
+&lt;p&gt;You can now install my solution from the Chrome Web Store:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk'&gt;Unique Tabs&lt;/a&gt;&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;The internet is a maze. Sometimes in my travels through this maze, I circle back on a path I&amp;#8217;ve already traveled. When that happens, my browser tabs start to look like this:&lt;/p&gt;
+&lt;img src='/images/2013-03-08-tabs.png' /&gt;
+&lt;p&gt;Some of those tabs are purely redundant. I discovered that Chrome used to include a Labs feature called &amp;#8220;Focus existing tab to open&amp;#8221; that attempted to avoid this, but it seems to have been removed.&lt;/p&gt;
+
+&lt;p&gt;You can now install my solution from the Chrome Web Store:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk'&gt;Unique Tabs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Upon opening a new tab or navigating to a new page, it closes any earlier, duplicate tabs in the same window. Before closing the tabs, a notification is displayed. Clicking the notification within a brief delay (~5 seconds) prevents the tabs from being closed.&lt;/p&gt;
+
+&lt;p&gt;There are a lot of tab-management extensions available for Chrome, but none accomplished exactly what I wanted:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Close the duplicate tabs automatically and without interrupting the user&lt;/li&gt;
+
+&lt;li&gt;Allow the default action to be canceled on a case-by-case basis&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since installing the extension, it&amp;#8217;s closed dozens of tabs for me and helped preserve my sanity (and RAM). I hope you find it useful!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Using `git bisect run` with RVM</title>
+    <link rel="alternate" href="/using-git-bisect-run-with-rvm/"/>
+    <id>/using-git-bisect-run-with-rvm/</id>
+    <published>2012-07-24T00:00:00Z</published>
+    <updated>2012-07-24T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;
+
+&lt;p&gt;If you can test whether a given commit is good or bad with a single command, it gets even better. The &lt;code&gt;git bisect run&lt;/code&gt; command is autopilot for &lt;code&gt;git bisect&lt;/code&gt;&amp;#8211;just specify the command to test each commit and let it loose:&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;
+
+&lt;p&gt;If you can test whether a given commit is good or bad with a single command, it gets even better. The &lt;code&gt;git bisect run&lt;/code&gt; command is autopilot for &lt;code&gt;git bisect&lt;/code&gt;&amp;#8211;just specify the command to test each commit and let it loose:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git bisect run bundle exec rspec spec/models/whoops.rb&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;em&gt;BUT&lt;/em&gt;, if you use &lt;a href='https://rvm.io/'&gt;RVM&lt;/a&gt; and your environment is anything like mine, you might see errors implying that the command&amp;#8217;s &lt;code&gt;PATH&lt;/code&gt; isn&amp;#8217;t set correctly. The reason is that &lt;code&gt;git bisect&lt;/code&gt; prepends &lt;code&gt;/usr/libexec/git-core:/user/bin&lt;/code&gt; to the &lt;code&gt;PATH&lt;/code&gt; when executing your test command, and this can bypass the executables that RVM prefers. The solution:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git bisect run sh -c &amp;#39;source ~/.rvm/scripts/rvm &amp;amp;&amp;amp; bundle exec rspec spec/models/whoops.rb&amp;#39;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Reminder: Spend time with your site</title>
+    <link rel="alternate" href="/reminder-spend-time-with-your-site/"/>
+    <id>/reminder-spend-time-with-your-site/</id>
+    <published>2012-07-08T00:00:00Z</published>
+    <updated>2012-07-08T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;I&amp;#8217;ve been posting at the &lt;a href='http://artsy.github.com'&gt;Artsy engineering blog&lt;/a&gt;, most recently about how we &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;trick ourselves into sharing end users&amp;#8217; experiences&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;#8230;we stole a page from the agile development handbook and built an &lt;a href='http://alistair.cockburn.us/Information+radiator'&gt;information radiator&lt;/a&gt;. Like a &lt;a href='http://en.wikipedia.org/wiki/Kanban_board'&gt;kanban board&lt;/a&gt;, news ticker, or &lt;a href='https://demo.geckoboard.com/dashboard/B6782E562794C2F2'&gt;analytics wall board&lt;/a&gt;, our information radiator gives us an ambient awareness of end users&amp;#8217; experiences. How?&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    <content type="html">&lt;p&gt;I&amp;#8217;ve been posting at the &lt;a href='http://artsy.github.com'&gt;Artsy engineering blog&lt;/a&gt;, most recently about how we &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;trick ourselves into sharing end users&amp;#8217; experiences&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;#8230;we stole a page from the agile development handbook and built an &lt;a href='http://alistair.cockburn.us/Information+radiator'&gt;information radiator&lt;/a&gt;. Like a &lt;a href='http://en.wikipedia.org/wiki/Kanban_board'&gt;kanban board&lt;/a&gt;, news ticker, or &lt;a href='https://demo.geckoboard.com/dashboard/B6782E562794C2F2'&gt;analytics wall board&lt;/a&gt;, our information radiator gives us an ambient awareness of end users&amp;#8217; experiences. How?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;It&amp;#8217;s our site, as a slideshow.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;#8217;s all. Our wall-mounted display shows the same web page that a visitor to our site recently requested. Every 20 seconds, it refreshes and shows a new, more recently requested page.&lt;/p&gt;
+
+&lt;p&gt;Without much effort, this gives us a sense of where users spend time on the site (&lt;em&gt;nudes seem popular today&lt;/em&gt;). The impact of events such as email blasts or celebrity mentions is immediately apparent (&lt;em&gt;did &lt;a href='https://twitter.com/aplusk'&gt;@aplusk&lt;/a&gt; just tweet us?&lt;/em&gt;). And when problems happen, we notice them as soon as errors pop up on the screen (&lt;em&gt;&lt;a href='http://gigaom.com/cloud/some-of-amazon-web-services-are-down-again'&gt;AWS down again?&lt;/a&gt;&lt;/em&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Check out the &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;full post&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Heroku with a side of EC2</title>
+    <link rel="alternate" href="/heroku-with-a-side-of-ec2/"/>
+    <id>/heroku-with-a-side-of-ec2/</id>
+    <published>2012-02-01T00:00:00Z</published>
+    <updated>2012-02-01T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;I &lt;a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'&gt;posted&lt;/a&gt; on the &lt;a href='http://artsy.github.com'&gt;Artsy Engineering blog&lt;/a&gt; about supplementing our Heroku web app with EC2-hosted Delayed Job workers:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Artsy engineers are big users and abusers of Heroku. It&amp;#8217;s a neat abstraction of server resources, so we were conflicted when parts of our application started to bump into Heroku&amp;#8217;s limitations. While we weren&amp;#8217;t eager to start managing additional infrastructure, we found that&amp;#8211;with a few good tools&amp;#8211;we could migrate some components away from Heroku without fragmenting the codebase or over-complicating our development environments.&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    <content type="html">&lt;p&gt;I &lt;a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'&gt;posted&lt;/a&gt; on the &lt;a href='http://artsy.github.com'&gt;Artsy Engineering blog&lt;/a&gt; about supplementing our Heroku web app with EC2-hosted Delayed Job workers:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Artsy engineers are big users and abusers of Heroku. It&amp;#8217;s a neat abstraction of server resources, so we were conflicted when parts of our application started to bump into Heroku&amp;#8217;s limitations. While we weren&amp;#8217;t eager to start managing additional infrastructure, we found that&amp;#8211;with a few good tools&amp;#8211;we could migrate some components away from Heroku without fragmenting the codebase or over-complicating our development environments.&lt;/p&gt;
+
+&lt;p&gt;There are a number of reasons your app might need to go beyond Heroku. It might rely on a locally installed tool (not possible on Heroku&amp;#8217;s locked-down servers), or require heavy file-system usage (limited to tmp/ and log/, and not permanent or shared). In our case, the culprit was Heroku&amp;#8217;s 512 MB RAM limit&amp;#8211;reasonable for most web processes, but quickly exceeded by the image-processing tasks of our delayed_job workers. We considered building a specialized image-processing service, but decided instead to supplement our web apps with a custom EC2 instance dedicated to processing background tasks. We call these servers &amp;#8220;satellites.&amp;#8221;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We use &lt;a href='http://www.opscode.com/chef'&gt;Chef&lt;/a&gt; and &lt;a href='http://fog.io'&gt;Fog&lt;/a&gt; to simplify the servers&amp;#8217; administration. Take a look at &lt;a href='https://github.com/joeyAghion/satellite_setup'&gt;the source&lt;/a&gt;, and see &lt;a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'&gt;the original post&lt;/a&gt; for all the gory details. Feedback welcome!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Bash aliases and helpers</title>
+    <link rel="alternate" href="/bash-aliases-and-helpers/"/>
+    <id>/bash-aliases-and-helpers/</id>
+    <published>2012-01-12T07:43:00Z</published>
+    <updated>2012-01-12T07:43:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;My ~/.bash_profile file contains these helpers and aliases.&lt;/p&gt;
+&lt;!-- from https://gist.github.com/joeyAghion/1371971 --&gt;
+&lt;pre&gt;&lt;code&gt;# Display current git branch, nicely colored, in the prompt (with a * if there are changes)
+function parse_git_dirty {
+  [[ $(git status 2&amp;gt; /dev/null | tail -n1) != &amp;quot;nothing to commit (working directory clean)&amp;quot; ]] &amp;amp;&amp;amp; echo &amp;quot;*&amp;quot;
+}
+function parse_git_branch {
+  git branch --no-color 2&amp;gt; /dev/null | sed -e &amp;#39;/^[^*]/d&amp;#39; -e &amp;quot;s/* \(.*\)/[\1$(parse_git_dirty)]/&amp;quot;
+}&lt;/code&gt;&lt;/pre&gt;</summary>
+    <content type="html">&lt;p&gt;My ~/.bash_profile file contains these helpers and aliases.&lt;/p&gt;
+&lt;!-- from https://gist.github.com/joeyAghion/1371971 --&gt;
+&lt;pre&gt;&lt;code&gt;# Display current git branch, nicely colored, in the prompt (with a * if there are changes)
+function parse_git_dirty {
+  [[ $(git status 2&amp;gt; /dev/null | tail -n1) != &amp;quot;nothing to commit (working directory clean)&amp;quot; ]] &amp;amp;&amp;amp; echo &amp;quot;*&amp;quot;
+}
+function parse_git_branch {
+  git branch --no-color 2&amp;gt; /dev/null | sed -e &amp;#39;/^[^*]/d&amp;#39; -e &amp;quot;s/* \(.*\)/[\1$(parse_git_dirty)]/&amp;quot;
+}
+export PS1=&amp;#39;\u:\[\033[31;40m\]\w\[\033[0;33m\]$(parse_git_branch)\[\e[0m\]$ &amp;#39;
+
+export EDITOR=&amp;#39;mate -w&amp;#39;
+
+export PATH=$PATH:/usr/local/rvm/bin:~/bin
+ [[ -s &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot; ]] &amp;amp;&amp;amp; . &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;
+
+# colorize terminal
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# Find running processes, e.g.:
+#   $ psx chrome
+alias psx=&amp;#39;ps aux | grep $1&amp;#39;
+
+
+# Recursive full text search, e.g.:
+#   $ g somestring app/
+alias g=&amp;#39;grep -rn&amp;#39;
+export GREP_OPTIONS=&amp;#39;--color=auto&amp;#39;
+
+# Output my current IP address (thanks @hmason), e.g.:
+#   $ whatsmyip
+alias whatsmyip=&amp;#39;curl http://automation.whatismyip.com/n09230945.asp&amp;#39;
+
+
+# Open man pages in Preview (thanks @brynary), e.g.:
+#   $ pman grep
+pman () {
+    man -t &amp;quot;${1}&amp;quot; | open -f -a /Applications/Preview.app
+}
+
+# Who hosts that site (thanks @jcn), e.g.:
+#   $ whohosts foursquare.com
+whohosts () {
+  whois `/opt/local/lib/mysql5/bin/resolveip -s $*`;
+}
+
+# exclude tmp/ and log/ when opening a rails project in textmate
+alias mater=&amp;quot;ls | grep -Ev &amp;#39;log|tmp&amp;#39; | xargs mate&amp;quot;
+
+# via @desandro http://desandro.github.com/dropshado.ws/
+alias glog=&amp;quot;git log --format=&amp;#39;%Cgreen%h%Creset %C(cyan)%an%Creset - %s&amp;#39; --graph&amp;quot;&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <title>Helpful IRB methods</title>
+    <link rel="alternate" href="/helpful-irb-methods/"/>
+    <id>/helpful-irb-methods/</id>
+    <published>2012-01-12T07:38:00Z</published>
+    <updated>2012-01-12T07:38:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;My &lt;code&gt;~/.irbrc&lt;/code&gt; file contains these helpers for performing sql queries and outputting raw database (SQL or MongoDB) queries to the console. Just add them to your home directory&amp;#8217;s .irbrc file to have these methods available in IRB or the Rails console.&lt;/p&gt;
+&lt;!-- from https://gist.github.com/joeyAghion/1371971 --&gt;
+&lt;pre&gt;&lt;code&gt;# Output ActiveRecord-generated queries to the console
+def log_to_console
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  reload!
+end
+
+# Execute arbitrary SQL selects&lt;/code&gt;&lt;/pre&gt;</summary>
+    <content type="html">&lt;p&gt;My &lt;code&gt;~/.irbrc&lt;/code&gt; file contains these helpers for performing sql queries and outputting raw database (SQL or MongoDB) queries to the console. Just add them to your home directory&amp;#8217;s .irbrc file to have these methods available in IRB or the Rails console.&lt;/p&gt;
+&lt;!-- from https://gist.github.com/joeyAghion/1371971 --&gt;
+&lt;pre&gt;&lt;code&gt;# Output ActiveRecord-generated queries to the console
+def log_to_console
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  reload!
+end
+
+# Execute arbitrary SQL selects
+def sql(query)
+  ActiveRecord::Base.connection.select_rows(query)
+end
+
+# Output Mongoid-generated queries to the console
+def log_mongo_to_console
+  # For mongoid 2:
+  #   Mongoid.config.logger = Logger.new(STDOUT)
+  Mongoid.logger = Logger.new(STDOUT)
+  Moped.logger = Mongoid.logger
+end
+
+# The list of methods to which obj responds.
+def m(obj)
+  obj.methods.sort - Object.methods
+end&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+</feed>

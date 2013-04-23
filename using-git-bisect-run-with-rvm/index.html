@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Using `git bisect run` with RVM</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a>
+  </h2>
+  <article>
+    <p>If you&#8217;re not familiar with <code>git bisect</code>, <a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'>check out the docs</a>. It&#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as <em>good</em> or <em>bad</em>, and <code>git bisect</code> narrows down the offending code.</p>
+
+<p>If you can test whether a given commit is good or bad with a single command, it gets even better. The <code>git bisect run</code> command is autopilot for <code>git bisect</code>&#8211;just specify the command to test each commit and let it loose:</p>
+
+<pre><code>git bisect run bundle exec rspec spec/models/whoops.rb</code></pre>
+
+<p><em>BUT</em>, if you use <a href='https://rvm.io/'>RVM</a> and your environment is anything like mine, you might see errors implying that the command&#8217;s <code>PATH</code> isn&#8217;t set correctly. The reason is that <code>git bisect</code> prepends <code>/usr/libexec/git-core:/user/bin</code> to the <code>PATH</code> when executing your test command, and this can bypass the executables that RVM prefers. The solution:</p>
+
+<pre><code>git bisect run sh -c &#39;source ~/.rvm/scripts/rvm &amp;&amp; bundle exec rspec spec/models/whoops.rb&#39;</code></pre>
+  </article>
+  
+    <div class="article_footer">
+      <p class="tags">
+        Tags:
+        <a href="/tags/git/">git</a>, <a href="/tags/programming/">programming</a>, <a href="/tags/tools/">tools</a>
+      </p>
+      <p class="timestamp">
+        2012-07-24
+      </p>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a> <span>Mar  8</span></li>
+            
+              
+              <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
+            
+              
+              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
+            
+              
+              <li><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a> <span>Feb  1</span></li>
+            
+              
+              <li><a href="/bash-aliases-and-helpers/">Bash aliases and helpers</a> <span>Jan 12</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+              <li><a href="/tags/electrical/">electrical (1)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/architecture/">architecture (1)</a></li>
+            
+              
+              <li><a href="/tags/remodeling/">remodeling (1)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

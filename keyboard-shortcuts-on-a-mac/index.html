@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Keyboard shortcuts on a Mac</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/keyboard-shortcuts-on-a-mac/">Keyboard shortcuts on a Mac</a>
+  </h2>
+  <article>
+    <p>I&#8217;ve been working exclusively on Macs for a while now, but am in the process of configuring my first brand-new machine. Sadly, I&#8217;m still not as fluid with Mac OSX keyboard shortcuts as I was on Windows. As a result, I&#8217;m much more mouse-dependent (and so slower) on the Mac. That ends now.</p>
+
+<p>Luckily, <strong>Command+Tab</strong> for switching among applications works similarly to Windows&#8217; Alt+Tab. <strong>Command-`</strong> (back-tick) usually allows you to switch between windows of a single application, but the occasional application uses <strong>Ctrl+Tab</strong> (like Windows) instead.</p>
+
+<p><strong>Fn+F9</strong> will show you (and, again, allow you to switch between) all open windows.</p>
+
+<p><strong>Command+M</strong> will minimize the current window to the dock, although that&#8217;s hardly ever useful to me since one of the first customizations I make to a machine is usually to <strong>Automatically hide and show the Dock</strong> (_System Preferences_ &gt; <em>Dock</em>).</p>
+
+<p>Want to maximize a window the way you might on Windows? Not so fast. The green plus-sign (<strong>+</strong>) button looks like it might maximize the window, but in fact it chooses a best-fit based on the window&#8217;s content. I don&#8217;t know of a keyboard shortcut for triggering this effect, but the following post from Simon Dorfman provided an adequate solution:</p>
+
+<p><a href='http://www.macosxhints.com/article.php?story=20051227001809626'>http://www.macosxhints.com/article.php?story=20051227001809626</a></p>
+
+<p>Adapted slightly:</p>
+
+<ol>
+<li>
+<p>Go to <em>System Preferences</em> &gt; <em>Universal Access</em> and check <em>Enable access for assistive devices</em></p>
+</li>
+
+<li>
+<p>Paste the following script into a file called <em>Maximize.scpt</em> in your <em>~/Library/Scripts</em> directory:</p>
+
+<p>tell application &#8220;System Events&#8221; set FrontApplication to (get name of every process whose frontmost is true) as string tell process FrontApplication click button 2 of window 1 end tell end tell</p>
+</li>
+
+<li>
+<p>Download and install Quiksilver: <a href='http://quicksilver.en.softonic.com/mac'>http://quicksilver.en.softonic.com/mac</a></p>
+</li>
+
+<li>
+<p>Open Quiksilver <em>triggers</em> (<strong>Ctrl+Space</strong> to open Quiksilver, then <strong>Command-&#8217;</strong> to open triggers)</p>
+</li>
+
+<li>
+<p>Add a HotKey pointing to your <em>Maximize.scpt</em> script, and assign it a keystroke (e.g., <strong>Ctrl+Option+Z</strong>)</p>
+</li>
+</ol>
+
+<p>Now, your custom keystroke should toggle between window sizes the way clicking the green <strong>+</strong> button would.</p>
+
+<p>On Windows, hitting the Alt key to move focus to the menu bar is a convenient fall-back if you don&#8217;t know the shortcut for a particular function. On Macs, hitting <strong>Ctrl+fn+F2</strong> does the same. (Note that this applies to the laptop-sized keyboards&#8230; full-sized ones probably don&#8217;t require the fn.)</p>
+
+<p>One final time-saver: Under <em>Keyboard</em> &gt; <em>Keyboard Shortcuts</em>, I updated the <em>Full Keyboard Access</em> setting from <em>Text boxes and lists only</em> to <em>All controls</em>. This way, tabbing between form fields selects radio buttons and checkboxes in addition to the usual text fields.</p>
+
+<p>More shortcuts available at <a href='http://support.apple.com/kb/ht1343'>http://support.apple.com/kb/ht1343</a>. Learn one a day!</p>
+  </article>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a> <span>Mar  8</span></li>
+            
+              
+              <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
+            
+              
+              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
+            
+              
+              <li><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a> <span>Feb  1</span></li>
+            
+              
+              <li><a href="/bash-aliases-and-helpers/">Bash aliases and helpers</a> <span>Jan 12</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+              <li><a href="/tags/electrical/">electrical (1)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/architecture/">architecture (1)</a></li>
+            
+              
+              <li><a href="/tags/remodeling/">remodeling (1)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

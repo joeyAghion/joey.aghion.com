@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Half a Mind</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+        
+  
+    <p>Page 2 of 5</p>
+    <p><a href="/">Previous page</a></p>
+  
+
+  <h2><a href="/the-national-resident-matching-programs-nrmp/">The National Resident Matching Program's (NRMP) Resident/Fellow Matching Algorithm, in Ruby</a> <span>Dec  1</span></h2>
+  <div class="summary"><p>This implements the algorithm used by the National Resident Matching Program (NRMP) to match residency and fellowship applicants to programs.</p>
+
+<p><a href='https://gist.github.com/joeyAghion/719701'>View this code as a gist.</a></p>
+
+<p>The implementation:</p>
+
+<pre><code># Implements the algorithm used by the National Resident Matching Program
+# (NRMP) to match residency and fellowship applicants to programs. The
+# algorithm is described here:
+#   http://www.nrmp.org/fellow/algorithm.html
+# and again here:
+#   http://www.nrmp.org/res_match/about_res/algorithms.html</code></pre></div>
+  <h2><a href="/crazy-inception-esque-infographic-in-ftcgovs/">Crazy, Inception-esque infographic in @FTCgov's new privacy framework doc (p.107 of 122)</a> <span>Dec  1</span></h2>
+  <div class="summary"><img src='/images/2010-12-01_ftc.jpg' />
+<p>The full report: <a href='http://www.ftc.gov/opa/2010/12/privacyreport.shtm'>http://www.ftc.gov/opa/2010/12/privacyreport.shtm</a></p></div>
+  <h2><a href="/profile-redis-memory-usage-by-key-pattern/">Profile Redis memory usage by key pattern</a> <span>Oct 13</span></h2>
+  <div class="summary"><p>At <a href='http://www.weplay.com'>Weplay</a>, we use <a href='http://code.google.com/p/redis/'>Redis</a> quite a bit. As a Redis database grows, though, it can be difficult to understand how the space is being used. This script tries to identify which types of keys are occupying the most space in your Redis databases. To do so, it takes a random sample of keys and collapses them into similar patterns (basically by ignoring the numeric values).</p>
+
+<p>Sample output:</p>
+
+<pre><code>Profiling &quot;db0&quot;...
+--------------------
+---</code></pre></div>
+  <h2><a href="/choosing-nursery-wall-colors/">Choosing nursery wall colors</a> <span>Jun  7</span></h2>
+  <div class="summary"><img alt='Nursery wall colors' src='/images/2010-06-07-choosing-nursery-wall-colors.jpg' />
+<p>Been looking for a not-too-over-the-top yellow or green for the nursery. From left to right:</p>
+
+<ul>
+<li>Glidden GLG07 Spring Cactus</li>
+
+<li>Glidden GLG08 Spring Leaf</li>
+
+<li>Glidden GLG17 Pistachio Ice Cream</li>
+
+<li>Glidden GLY04 Goldenrod</li>
+
+<li>Glidden GLY10 Buttercup</li>
+
+<li>Glidden GLY11 Fresh Pineapple</li>
+
+<li>Glidden GLY14 Lemon Ice</li>
+</ul></div>
+  <h2><a href="/keyboard-shortcuts-on-a-mac/">Keyboard shortcuts on a Mac</a> <span>Apr 25</span></h2>
+  <div class="summary"><p>I&#8217;ve been working exclusively on Macs for a while now, but am in the process of configuring my first brand-new machine. Sadly, I&#8217;m still not as fluid with Mac OSX keyboard shortcuts as I was on Windows. As a result, I&#8217;m much more mouse-dependent (and so slower) on the Mac. That ends now.</p>
+
+<p>Luckily, <strong>Command+Tab</strong> for switching among applications works similarly to Windows&#8217; Alt+Tab. <strong>Command-`</strong> (back-tick) usually allows you to switch between windows of a single application, but the occasional application uses <strong>Ctrl+Tab</strong> (like Windows) instead.</p></div>
+  <h2><a href="/nerd-poll-deploying-rails-to-ec2-poolparty-ru/">Nerd poll: Deploying Rails to EC2. Poolparty? Rubber? Something else?</a> <span>Mar 11</span></h2>
+  <div class="summary"><p>Rubber seems to inherit from capistrano and is focused on role-based app deployments.</p>
+
+<p><a href='http://wiki.github.com/wr0ngway/rubber'>http://wiki.github.com/wr0ngway/rubber</a></p>
+
+<p>Poolparty is also built from the ground-up for the EC2 use case, but is a little more generic.</p>
+
+<p><a href='http://auser.github.com/poolparty'>http://auser.github.com/poolparty</a></p>
+
+<p>Both have terribly appealing &#8220;it-couldn&#8217;t-be-easier&#8221;-style intro docs.</p></div>
+  <h2><a href="/monit-0/">Monit</a> <span>Mar 10</span></h2>
+  <div class="summary"><img alt='Monit' src='/images/2010-03-10-monit.jpg' />
+<p>First in what will hopefully be a series of posts about building out a production server environment, I&#8217;ll share a few of my lessons from working with <a href='http://mmonit.com/monit'>monit</a>.</p>
+
+<p>Monit is a small, fairly sophisticated tool for monitoring the daemons, files, and other services running on a server. Not only can it alert an administrator when there is a problem, but it can try to correct the situation with any number of measures (most simply, by restarting the affected service, but also by capturing log output and executing arbitrary commands).</p></div>
+  <h2><a href="/embed-code-blocks-in-posterous-by-email/">Embed code blocks in posterous posts by email</a> <span>Mar  9</span></h2>
+  <div class="summary"><p>This took a little figuring out, so hopefully this post will be useful for others. To embed monospaced, syntax-highlighted code in a posterous post by email, surround it in square-bracketed &#8220;code&#8221; and &#8220;/code&#8221; tags. You can even specify a language, e.g.: &#8220;code lang=&#8217;ruby&#8217;&#8221;</p>
+
+<p>Just make sure to compose your email in plain text, or the code will be packed with unwanted div tags.</p>
+
+<pre><code>[code lang=&#39;ruby&#39;]
+switch_to(:plain_text) if current_format == :rich
+between(&quot;code&quot;, &quot;/code&quot;) do
+  yourHelloWorld || whatever</code></pre></div>
+  <h2><a href="/much-delayed-after-shots/">Much-delayed 'after' shots</a> <span>Dec 21</span></h2>
+  <div class="summary"><img alt='kitchen 1' src='/images/2009-12-21_kitchen1.jpg' /><img alt='kitchen 2' src='/images/2009-12-21_kitchen2.jpg' /><img alt='kitchen 3' src='/images/2009-12-21_kitchen3.jpg' /><img alt='kitchen 4' src='/images/2009-12-21_kitchen4.jpg' />
+<p>Details:</p>
+
+<ul>
+<li>Floor: <a href='http://www.lumberliquidators.com/catalog/product.jsp?productId=1528&amp;categoryId=5&amp;sectionId=1&amp;subCategoryId=53'>Bellawood 3/4&#8221; x 3-1/4&#8221; Red Oak prefinished &#8220;Natural&#8221; grade</a></li>
+
+<li>Cabinets: <a href='http://www.ikea.com/us/en/catalog/categories/departments/kitchen'>Ikea Akurum/Rationell with Adel doors in white</a></li>
+</ul></div>
+  <h2><a href="/goodbye-fridge/">Goodbye, fridge</a> <span>Nov  8</span></h2>
+  <div class="summary"><img alt='fridge' src='/images/2009-11-08_fridge.jpg' /></div>
+
+  
+    <p><a href="/page/3/">Next page</a></p>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a> <span>Mar  8</span></li>
+            
+              
+              <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
+            
+              
+              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
+            
+              
+              <li><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a> <span>Feb  1</span></li>
+            
+              
+              <li><a href="/bash-aliases-and-helpers/">Bash aliases and helpers</a> <span>Jan 12</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+              <li><a href="/tags/electrical/">electrical (1)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/architecture/">architecture (1)</a></li>
+            
+              
+              <li><a href="/tags/remodeling/">remodeling (1)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

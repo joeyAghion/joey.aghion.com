@@ -1,0 +1,197 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Tracking Application Metrics with Statsd</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/tracking-application-metrics-with-statsd/">Tracking Application Metrics with Statsd</a>
+  </h2>
+  <article>
+    <p>At <a href='http://www.weplay.com'>Weplay</a>, I often find myself wanting a dead-simple way to track an application-level metric or event. That&#8217;s why I found Etsy&#8217;s post about Statsd (<a href='http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/'>Measure Anything, Measure Everything</a>) very appealing. Statsd is a node.js daemon that receives notifications of application events and sends the data to <a href='http://graphite.wikidot.com/'>Graphite</a> for graphing.</p>
+
+<p><a href='https://github.com/joeyAghion/statsd_setup'>Skip to the chef recipes</a></p>
+
+<p>Three characteristics in particular got my attention:</p>
+
+<ul>
+<li>Minimal connection overhead for the calling app, since data is sent to the statsd daemon via UDP (fire and forget)</li>
+
+<li>Bounded data storage needs, since Graphite stores the ever-growing metrics data in decreasing resolution over time (<a href='http://graphite.wikidot.com/faq#toc8'>like RRDtool but different</a>)</li>
+
+<li>Practically no management of metrics is necessary&#8211;the first time a metric is triggered, statsd will start tracking it and Graphite will start making the graph available, with results organized into &#8220;folders&#8221; according to the dots in their names (e.g., <code>system.deploys</code>, <code>cart.products_added</code>, etc.)</li>
+</ul>
+
+<p><img alt='Log-in successes and failures, courtesy of Etsys Code as Craft blog' src='http://etsycodeascraft.files.wordpress.com/2011/02/logins2.png?w=500&amp;amp;h=300' /></p>
+
+<p><em>(Graph from <a href='http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/'>Measure Anything, Measure Everything</a>.)</em></p>
+
+<p>Graphite offers a competent web UI and loads of options for data manipulation and presentation, including overlaying different streams of data and returning raw metrics. And because Graphite&#8217;s graphs are completely specified by URLs, they can easily be embedded in your other dashboards and reporting tools.</p>
+
+<p>In a related vein, <a href='http://www.mattinsler.com/'>Matt Insler</a> of <a href='http://www.signpost.com'>Signpost</a> recently posted about <a href='http://www.mattinsler.com/signpost-tracking-analytics-mysql-mongodb/'>building a tracking infrastructure on MongoDB</a>. Both approaches use a &#8220;fire and forget&#8221; method of emitting the tracked data, but while Statsd&#8217;s metrics are stripped down streams of counts and times, Matt opted to store exhaustive request and event data. One offers automatic graphing, the other powerful ad hoc querying&#8211;interesting and perhaps complementary strategies.</p>
+
+<h2 id='setting_up_statsd'>Setting up statsd</h2>
+
+<p>Here are my steps for spawning and configuring a simple EC2 instance with statsd and graphite:</p>
+
+<p>If you haven&#8217;t already&#8230;</p>
+
+<ul>
+<li>download and install the <a href='http://aws.amazon.com/developertools/351'>EC2 API tools</a> (e.g., into <code>~/tools</code>)</li>
+
+<li>generate a X.509 certificate (both public <code>cert-...pem</code> and <code>private pk-...pem</code> files) on the <a href='https://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key'>AWS Security Credentials page</a></li>
+
+<li>generate a keypair (<code>statsd_setup.pem</code>) in the <a href='https://console.aws.amazon.com/'>AWS Management Console</a></li>
+</ul>
+
+<p>I store the key files in <code>~/.ec2/</code> locally.</p>
+
+<pre><code>$ sudo chmod 600 ~/.ec2/statsd_setup.pem  # set appropriate permissions on private key file</code></pre>
+
+<p>The EC2 API tools require certain environment variables to be set. I put the following in a local file (e.g., <code>~/bash/statsd_setup.sh</code>):</p>
+
+<pre><code>export EC2_HOME=~/tools/ec2-api-tools-1.4.3.0
+export EC2_PRIVATE_KEY=~/.ec2/pk-statsd_setup.pem
+export EC2_CERT=~/.ec2/cert-statsd_setup.pem
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+export PATH=$PATH:$EC2_HOME/bin</code></pre>
+
+<p>&#8230;and load them:</p>
+
+<pre><code>$ source ~/bash/statsd_setup.sh</code></pre>
+
+<p>Finally, start the instances and modify some basic security settings:</p>
+
+<pre><code>$ ec2-run-instances ami-06ad526f -k statsd_setup  # start a new instance with a recent Ubuntu 11 image
+$ ec2-authorize default -p 22                     # permit SSH
+$ ec2-authorize default -p 80                     # permit HTTP
+$ ec2-authorize default -p 8125 -P udp            # statsd will listen here</code></pre>
+
+<p>I use <a href='http://github.com/trotter/spatula'>spatula</a> to apply <a href='http://www.opscode.com/chef/'>chef</a> recipes to simple environments. Chef recipes and another set of these instructions can be cloned from <a href='http://github.com/joeyAghion/statsd_setup'>my <code>statsd_setup</code> github repo</a> as follows:</p>
+
+<pre><code>$ git clone git@github.com:joeyAghion/statsd_setup.git
+$ cd statsd_setup</code></pre>
+
+<p>Run <code>ec2-describe-instances</code> to view the new instance&#8217;s external IP, then substitute it in the following commands:</p>
+
+<pre><code>$ spatula prepare ubuntu@184.72.76.150 --identity ~/.ec2/statsd_setup.pem    # set up chef prerequisites
+$ spatula cook ubuntu@184.72.76.150 node --identity ~/.ec2/statsd_setup.pem  # apply recipes for statsd and graphite</code></pre>
+
+<p>At this point, statsd and Graphite are ready to start tracking metrics. Visit your instance in a browser to access Graphite&#8217;s web interface.</p>
+
+<h2 id='tracking_metrics_from_your_ruby_or_rails_app'>Tracking metrics from your Ruby or Rails app</h2>
+
+<p>I added the <code>statsd-ruby</code> gem to my app&#8217;s <code>Gemfile</code> and created an initializer with something like:</p>
+
+<pre><code>require &#39;statsd&#39;
+$statsd = Statsd.new(&#39;10.71.75.149&#39;)  # substitute your host</code></pre>
+
+<p>Then, tracking stats is as simple as:</p>
+
+<pre><code>$statsd.increment(&#39;deploys&#39;)                  # increment a stat
+$statsd.decrement(&#39;usage.active_users&#39;)       # decrement a stat
+$statsd.count(&#39;cart.products_added&#39;, 3)       # track an arbitrary stat
+$statsd.count(&#39;cart.products_added&#39;, 3, 0.1)  # track a stat, sampling 10%
+$statsd.timing(&#39;partners.twitter_api&#39;, 650)   # track a time value (in ms)
+$statsd.time(&#39;partners.facebook_api&#39;) {...}   # track time spent executing the given block</code></pre>
+
+<p>You can always terminate the instance with <code>ec2-terminate-instance i-17fc3c76</code> (substituting the appropriate instance id).</p>
+  </article>
+  
+    <div class="article_footer">
+      <p class="tags">
+        Tags:
+        <a href="/tags/chef/">chef</a>, <a href="/tags/programming/">programming</a>, <a href="/tags/ruby/">ruby</a>, <a href="/tags/startups/">startups</a>
+      </p>
+      <p class="timestamp">
+        2011-07-22
+      </p>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a> <span>Mar  8</span></li>
+            
+              
+              <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
+            
+              
+              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
+            
+              
+              <li><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a> <span>Feb  1</span></li>
+            
+              
+              <li><a href="/bash-aliases-and-helpers/">Bash aliases and helpers</a> <span>Jan 12</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+              <li><a href="/tags/electrical/">electrical (1)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/architecture/">architecture (1)</a></li>
+            
+              
+              <li><a href="/tags/remodeling/">remodeling (1)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>The National Resident Matching Program's (NRMP) Resident/Fellow Matching Algorithm, in Ruby</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/the-national-resident-matching-programs-nrmp/">The National Resident Matching Program's (NRMP) Resident/Fellow Matching Algorithm, in Ruby</a>
+  </h2>
+  <article>
+    <p>This implements the algorithm used by the National Resident Matching Program (NRMP) to match residency and fellowship applicants to programs.</p>
+
+<p><a href='https://gist.github.com/joeyAghion/719701'>View this code as a gist.</a></p>
+
+<p>The implementation:</p>
+
+<pre><code># Implements the algorithm used by the National Resident Matching Program
+# (NRMP) to match residency and fellowship applicants to programs. The
+# algorithm is described here:
+#   http://www.nrmp.org/fellow/algorithm.html
+# and again here:
+#   http://www.nrmp.org/res_match/about_res/algorithms.html
+#
+# The Test class computes the example match scenario described on those pages.
+
+module Match
+
+  class Matcher
+    attr_accessor :applicants, :programs
+
+    def self.run(applicants_hash, programs_hash)
+      applicants = applicants_hash.map { |name, list| Applicant.new(name, list) }
+      programs = programs_hash.map { |name, attr| Program.new(name, attr[:positions], attr[:list]) }
+      self.new(applicants, programs).run
+    end
+
+    def initialize(applicants, programs)
+      self.applicants = applicants
+      self.programs = {}
+      programs.each do |program|
+        self.programs[program.name] = program
+      end
+    end
+
+    def run
+      while remaining_applicants.any?
+        puts &quot;Round ##{round ||= 0; round += 1} (#{remaining_applicants.map(&amp;:name).join(&#39;, &#39;)})&quot;
+        remaining_applicants.each do |applicant|
+          print &quot;  #{applicant.name}: &quot;
+          while !applicant.exhausted_programs? &amp;&amp; !applicant.matched?
+            program = programs[applicant.next_program]
+            print &quot;#{program.name} &quot;
+            program.try_to_match(applicant)
+          end
+          puts &quot;&quot;
+        end
+      end
+      self
+    end
+
+    def remaining_applicants
+      applicants.reject{|applicant| applicant.matched? || applicant.exhausted_programs? }
+    end
+
+    def results_description
+      &quot;\nMatch results:\n&quot;.tap do |str|
+        programs.each { |name, program| str &lt;&lt; program.description + &quot;\n&quot; }
+        str &lt;&lt; &quot;Unmatched: #{applicants.reject(&amp;:matched?).map(&amp;:name).join(&#39;, &#39;)}&quot;
+      end
+    end
+  end
+
+
+  class Program
+    attr_accessor :name, :positions, :list, :matches
+
+    def initialize(name, positions, list)
+      self.name = name
+      self.positions = positions
+      self.list = list
+      self.matches = []
+    end
+
+    def try_to_match(applicant)
+      if list.index(applicant.name)
+        print &quot;(#{list.index(applicant.name)}) &quot;
+        matches &lt;&lt; applicant
+        applicant.matched = true
+        cull_matches
+      else
+        print &quot;(unranked) &quot;
+      end
+    end
+
+    def cull_matches
+      while matches.size &gt; positions do
+        reject = matches.sort_by{|applicant| list.index(applicant.name) }.last
+        reject.matched = false
+        matches.delete(reject)
+        print &quot;[culled #{reject.name}] &quot;
+      end
+    end
+
+    def description
+      &quot;#{name}: #{matches.map(&amp;:name).join(&#39;, &#39;)} #{&quot;(#{positions - matches.size} unfilled)&quot; if matches.size &lt; positions}&quot;
+    end
+  end
+
+
+  class Applicant
+    attr_accessor :name, :list, :matched
+
+    def initialize(name, list)
+      self.name = name
+      self.list = list
+      @ranking_position = -1
+    end
+
+    def exhausted_programs?
+      @ranking_position &gt;= self.list.size - 1
+    end
+
+    def next_program
+      raise &quot;No ranked programs available!&quot; if exhausted_programs?
+      @ranking_position += 1
+      self.list[@ranking_position]
+    end
+
+    def matched?
+      matched
+    end
+  end
+end
+
+class Test
+
+  PROGRAMS = {
+    &#39;city&#39; =&gt; {:positions =&gt; 2, :list =&gt; [&#39;garcia&#39;, &#39;hassan&#39;, &#39;eastman&#39;, &#39;anderson&#39;, &#39;brown&#39;, &#39;chen&#39;, &#39;davis&#39;, &#39;ford&#39;]},
+    &#39;general&#39; =&gt; {:positions =&gt; 2, :list =&gt; [&#39;brown&#39;, &#39;eastman&#39;, &#39;hassan&#39;, &#39;anderson&#39;, &#39;chen&#39;, &#39;davis&#39;, &#39;garcia&#39;]},
+    &#39;mercy&#39; =&gt; {:positions =&gt; 2, :list =&gt; [&#39;chen&#39;, &#39;garcia&#39;]},
+    &#39;state&#39; =&gt; {:positions =&gt; 2, :list =&gt; [&#39;brown&#39;, &#39;eastman&#39;, &#39;anderson&#39;, &#39;chen&#39;, &#39;hassan&#39;, &#39;ford&#39;, &#39;davis&#39;, &#39;garcia&#39;]}
+  }
+
+  APPLICANTS = {
+    &#39;anderson&#39; =&gt; [&#39;city&#39;],
+    &#39;brown&#39; =&gt; [&#39;city&#39;, &#39;mercy&#39;],
+    &#39;chen&#39; =&gt; [&#39;city&#39;, &#39;mercy&#39;],
+    &#39;davis&#39; =&gt; [&#39;mercy&#39;, &#39;city&#39;, &#39;general&#39;, &#39;state&#39;],
+    &#39;eastman&#39; =&gt; [&#39;city&#39;, &#39;mercy&#39;, &#39;state&#39;, &#39;general&#39;],
+    &#39;ford&#39; =&gt; [&#39;city&#39;, &#39;general&#39;, &#39;mercy&#39;, &#39;state&#39;],
+    &#39;garcia&#39; =&gt; [&#39;city&#39;, &#39;mercy&#39;, &#39;state&#39;, &#39;general&#39;],
+    &#39;hassan&#39; =&gt; [&#39;state&#39;, &#39;city&#39;, &#39;mercy&#39;, &#39;general&#39;]
+  }
+
+  def self.main
+    matcher = Match::Matcher.run(APPLICANTS, PROGRAMS)
+    puts matcher.results_description
+  end
+end
+
+Test.main</code></pre>
+
+<p>And, the results:</p>
+
+<pre><code>Round #1 (chen, anderson, brown, garcia, davis, ford, eastman, hassan)
+  chen: city (5) 
+  anderson: city (3) 
+  brown: city (4) [culled chen] 
+  garcia: city (0) [culled brown] 
+  davis: mercy (unranked) city (6) [culled davis] general (5) 
+  ford: city (7) [culled ford] general (unranked) mercy (unranked) state (5) 
+  eastman: city (2) [culled anderson] 
+  hassan: state (4) 
+Round #2 (chen, brown)
+  chen: mercy (0) 
+  brown: mercy (unranked) 
+
+Match results:
+city: garcia, eastman 
+mercy: chen (1 unfilled)
+general: davis (1 unfilled)
+state: ford, hassan 
+Unmatched: anderson, brown</code></pre>
+  </article>
+  
+    <div class="article_footer">
+      <p class="tags">
+        Tags:
+        <a href="/tags/programming/">programming</a>, <a href="/tags/ruby/">ruby</a>
+      </p>
+      <p class="timestamp">
+        2010-12-01
+      </p>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a> <span>Mar  8</span></li>
+            
+              
+              <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
+            
+              
+              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
+            
+              
+              <li><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a> <span>Feb  1</span></li>
+            
+              
+              <li><a href="/bash-aliases-and-helpers/">Bash aliases and helpers</a> <span>Jan 12</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+              <li><a href="/tags/electrical/">electrical (1)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/architecture/">architecture (1)</a></li>
+            
+              
+              <li><a href="/tags/remodeling/">remodeling (1)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
