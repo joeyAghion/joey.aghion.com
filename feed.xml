@@ -5,10 +5,110 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2013-03-08T00:00:00Z</updated>
+  <updated>2013-04-28T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Building a blog with Middleman and GitHub pages</title>
+    <link rel="alternate" href="/building-a-blog-with-middleman-and-github-pages/"/>
+    <id>/building-a-blog-with-middleman-and-github-pages/</id>
+    <published>2013-04-28T00:00:00Z</published>
+    <updated>2013-04-28T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;
+
+&lt;h2 id='getting_started'&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href='https://github.com/middleman/middleman'&gt;middleman&lt;/a&gt; gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the &lt;a href='https://github.com/middleman/middleman-blog'&gt;middleman-blog&lt;/a&gt; extension.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;
+
+&lt;h2 id='getting_started'&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href='https://github.com/middleman/middleman'&gt;middleman&lt;/a&gt; gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the &lt;a href='https://github.com/middleman/middleman-blog'&gt;middleman-blog&lt;/a&gt; extension.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem install middleman-blog
+middleman init myblog --template=blog&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This generates the following folder structure:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;myblog
+ |- config.rb
+ |- Gemfile
+ |- Gemfile.lock
+ |- source
+    |- 2012-01-01-example-article.html.markdown
+    |- calendar.html.erb
+    |- feed.xml.builder
+    |- images
+    |- index.html.erb
+    |- javascripts
+    |- layout.erb
+    |- stylesheets
+    |- tag.html.erb&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Those files and folders are almost self-explanatory, but to call out a few:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;config.rb&lt;/strong&gt; holds all of middleman&amp;#8217;s configuration, including a block for blog-specific settings.&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;source&lt;/strong&gt; holds just that&amp;#8212;the source files. These are later compiled (according to the middleman settings you&amp;#8217;ve chosen) into a &lt;strong&gt;build&lt;/strong&gt; directory that contains the final site&amp;#8217;s files.&lt;/li&gt;
+
+&lt;li&gt;&lt;strong&gt;layout.erb&lt;/strong&gt; is the main site layout. ERB is used by default, but middleman supports &lt;a href='http://middlemanapp.com/templates/'&gt;many other templating engines&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id='creating_an_article'&gt;Creating an article&lt;/h2&gt;
+
+&lt;p&gt;Actually, there&amp;#8217;s an example article included. But, to create our own:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bundle exec middleman article &amp;quot;Launching my blog&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This creates a new source file at &lt;code&gt;source/2013-04-28-launching-my-blog.html.markdown&lt;/code&gt; with the appropriate YAML-formatted &amp;#8220;frontmatter.&amp;#8221; You can add comma-delimited tags and compose the post in markdown:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+title: Launching my blog
+date: 2013-04-25 03:26 UTC
+tags: posterous, github pages
+---
+
+Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After starting up the development server with &lt;code&gt;bundle exec middleman&lt;/code&gt;, we can open http://localhost:4567 to check our work:&lt;/p&gt;
+&lt;img alt='Initial middleman screenshot' src='/images/2013-04-28-middleman-screenshot.png' /&gt;
+&lt;p&gt;It&amp;#8217;s unsightly for now, but&amp;#8212;when deployed as static HTML&amp;#8212;it&amp;#8217;s very, very fast.&lt;/p&gt;
+
+&lt;h2 id='deploying'&gt;Deploying&lt;/h2&gt;
+
+&lt;p&gt;To compile the full site&amp;#8217;s static content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bundle exec middleman build&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Notice that the destination &lt;code&gt;build&lt;/code&gt; folder is included in the default &lt;code&gt;.gitignore&lt;/code&gt; file. At this stage, that folder&amp;#8217;s contents could be hosted just about anywhere. We&amp;#8217;ll deploy our site to &lt;a href='http://pages.github.com/'&gt;github pages&lt;/a&gt;, and the &lt;a href='https://github.com/neo/middleman-gh-pages'&gt;middleman-gh-pages&lt;/a&gt; gem will help. First, we add it to the Gemfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem &amp;quot;middleman-gh-pages&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And require it in a &lt;code&gt;Rakefile&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &amp;#39;middleman-gh-pages&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After bundle-installing again, we&amp;#8217;ll have a new &lt;code&gt;publish&lt;/code&gt; rake task that pushes the static site to a special &lt;code&gt;gh-pages&lt;/code&gt; branch on the same remote as the source. (If you haven&amp;#8217;t made a github repo for this project yet, now would be a good time.)&lt;/p&gt;
+
+&lt;p&gt;This last step is worth elaborating on. The &amp;#8220;gh-pages&amp;#8221; branch is specially named so that Github will publish the included content to your site at &lt;em&gt;username.github.io/projectname&lt;/em&gt;. It&amp;#8217;s an &amp;#8220;orphan&amp;#8221; branch (meaning it has no parents). I.e., it&amp;#8217;s completely divorced from your master branch&amp;#8217;s content. The master branch contains your source files, and the static files published to the &lt;code&gt;build&lt;/code&gt; subdirectory become (via the &lt;code&gt;publish&lt;/code&gt; rake task) the root folder&amp;#8217;s content in the &lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
+
+&lt;p&gt;Finally, setting up a nice domain for your site is as simple as updating DNS records and adding a &lt;code&gt;CNAME&lt;/code&gt; file to the root of your site (or, in middleman&amp;#8217;s case, the &lt;code&gt;source&lt;/code&gt; directory) with the specified domain. &lt;a href='https://help.github.com/articles/setting-up-a-custom-domain-with-pages'&gt;See github&amp;#8217;s more detailed instructions.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Styling the site is left as an exercise, or feel free to borrow from &lt;a href='http://github.com/joeyAghion/joey.aghion.com'&gt;this site&amp;#8217;s source&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id='more_information'&gt;More information&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;See the &lt;a href='http://middlemanapp.com/blogging/'&gt;middleman-blog docs&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://middlemanapp.com/pretty-urls/'&gt;&amp;#8220;Pretty&amp;#8221; URLs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Unique Tabs - a Chrome extension for staying sane</title>
     <link rel="alternate" href="/unique-tabs/"/>
@@ -189,49 +289,5 @@ alias mater=&amp;quot;ls | grep -Ev &amp;#39;log|tmp&amp;#39; | xargs mate&amp;q
 
 # via @desandro http://desandro.github.com/dropshado.ws/
 alias glog=&amp;quot;git log --format=&amp;#39;%Cgreen%h%Creset %C(cyan)%an%Creset - %s&amp;#39; --graph&amp;quot;&lt;/code&gt;&lt;/pre&gt;</content>
-  </entry>
-  <entry>
-    <title>Helpful IRB methods</title>
-    <link rel="alternate" href="/helpful-irb-methods/"/>
-    <id>/helpful-irb-methods/</id>
-    <published>2012-01-12T07:38:00Z</published>
-    <updated>2012-01-12T07:38:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;My &lt;code&gt;~/.irbrc&lt;/code&gt; file contains these helpers for performing sql queries and outputting raw database (SQL or MongoDB) queries to the console. Just add them to your home directory&amp;#8217;s .irbrc file to have these methods available in IRB or the Rails console.&lt;/p&gt;
-&lt;!-- from https://gist.github.com/joeyAghion/1371971 --&gt;
-&lt;pre&gt;&lt;code&gt;# Output ActiveRecord-generated queries to the console
-def log_to_console
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
-  reload!
-end
-
-# Execute arbitrary SQL selects&lt;/code&gt;&lt;/pre&gt;</summary>
-    <content type="html">&lt;p&gt;My &lt;code&gt;~/.irbrc&lt;/code&gt; file contains these helpers for performing sql queries and outputting raw database (SQL or MongoDB) queries to the console. Just add them to your home directory&amp;#8217;s .irbrc file to have these methods available in IRB or the Rails console.&lt;/p&gt;
-&lt;!-- from https://gist.github.com/joeyAghion/1371971 --&gt;
-&lt;pre&gt;&lt;code&gt;# Output ActiveRecord-generated queries to the console
-def log_to_console
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
-  reload!
-end
-
-# Execute arbitrary SQL selects
-def sql(query)
-  ActiveRecord::Base.connection.select_rows(query)
-end
-
-# Output Mongoid-generated queries to the console
-def log_mongo_to_console
-  # For mongoid 2:
-  #   Mongoid.config.logger = Logger.new(STDOUT)
-  Mongoid.logger = Logger.new(STDOUT)
-  Moped.logger = Mongoid.logger
-end
-
-# The list of methods to which obj responds.
-def m(obj)
-  obj.methods.sort - Object.methods
-end&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
 </feed>

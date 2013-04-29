@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Building a blog with Middleman and GitHub pages</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/building-a-blog-with-middleman-and-github-pages/">Building a blog with Middleman and GitHub pages</a>
+  </h2>
+  <article>
+    <p><a href='http://blog.posterous.com/thanks-from-posterous'>Posterous is shutting down</a>, so I was finally forced to figure out a better blogging solution. Since my <a href='http://artsy.net'>day job</a> revolves around building and maintaining dynamic sites, that was exactly what I <em>didn&#8217;t</em> want for my personal site. Enter <a href='http://middlemanapp.com/'>Middleman</a>, the super-simple <strong>static</strong> site engine. Best of all, it uses a toolchain that&#8217;s very familiar to Ruby developers.</p>
+
+<h2 id='getting_started'>Getting Started</h2>
+
+<p>The <a href='https://github.com/middleman/middleman'>middleman</a> gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the <a href='https://github.com/middleman/middleman-blog'>middleman-blog</a> extension.</p>
+
+<pre><code>gem install middleman-blog
+middleman init myblog --template=blog</code></pre>
+
+<p>This generates the following folder structure:</p>
+
+<pre><code>myblog
+ |- config.rb
+ |- Gemfile
+ |- Gemfile.lock
+ |- source
+    |- 2012-01-01-example-article.html.markdown
+    |- calendar.html.erb
+    |- feed.xml.builder
+    |- images
+    |- index.html.erb
+    |- javascripts
+    |- layout.erb
+    |- stylesheets
+    |- tag.html.erb</code></pre>
+
+<p>Those files and folders are almost self-explanatory, but to call out a few:</p>
+
+<ul>
+<li><strong>config.rb</strong> holds all of middleman&#8217;s configuration, including a block for blog-specific settings.</li>
+
+<li><strong>source</strong> holds just that&#8212;the source files. These are later compiled (according to the middleman settings you&#8217;ve chosen) into a <strong>build</strong> directory that contains the final site&#8217;s files.</li>
+
+<li><strong>layout.erb</strong> is the main site layout. ERB is used by default, but middleman supports <a href='http://middlemanapp.com/templates/'>many other templating engines</a>.</li>
+</ul>
+
+<h2 id='creating_an_article'>Creating an article</h2>
+
+<p>Actually, there&#8217;s an example article included. But, to create our own:</p>
+
+<pre><code>bundle exec middleman article &quot;Launching my blog&quot;</code></pre>
+
+<p>This creates a new source file at <code>source/2013-04-28-launching-my-blog.html.markdown</code> with the appropriate YAML-formatted &#8220;frontmatter.&#8221; You can add comma-delimited tags and compose the post in markdown:</p>
+
+<pre><code>---
+title: Launching my blog
+date: 2013-04-25 03:26 UTC
+tags: posterous, github pages
+---
+
+Buh bye posterous!</code></pre>
+
+<p>After starting up the development server with <code>bundle exec middleman</code>, we can open http://localhost:4567 to check our work:</p>
+<img alt='Initial middleman screenshot' src='/images/2013-04-28-middleman-screenshot.png' />
+<p>It&#8217;s unsightly for now, but&#8212;when deployed as static HTML&#8212;it&#8217;s very, very fast.</p>
+
+<h2 id='deploying'>Deploying</h2>
+
+<p>To compile the full site&#8217;s static content:</p>
+
+<pre><code>bundle exec middleman build</code></pre>
+
+<p>Notice that the destination <code>build</code> folder is included in the default <code>.gitignore</code> file. At this stage, that folder&#8217;s contents could be hosted just about anywhere. We&#8217;ll deploy our site to <a href='http://pages.github.com/'>github pages</a>, and the <a href='https://github.com/neo/middleman-gh-pages'>middleman-gh-pages</a> gem will help. First, we add it to the Gemfile:</p>
+
+<pre><code>gem &quot;middleman-gh-pages&quot;</code></pre>
+
+<p>And require it in a <code>Rakefile</code>:</p>
+
+<pre><code>require &#39;middleman-gh-pages&#39;</code></pre>
+
+<p>After bundle-installing again, we&#8217;ll have a new <code>publish</code> rake task that pushes the static site to a special <code>gh-pages</code> branch on the same remote as the source. (If you haven&#8217;t made a github repo for this project yet, now would be a good time.)</p>
+
+<p>This last step is worth elaborating on. The &#8220;gh-pages&#8221; branch is specially named so that Github will publish the included content to your site at <em>username.github.io/projectname</em>. It&#8217;s an &#8220;orphan&#8221; branch (meaning it has no parents). I.e., it&#8217;s completely divorced from your master branch&#8217;s content. The master branch contains your source files, and the static files published to the <code>build</code> subdirectory become (via the <code>publish</code> rake task) the root folder&#8217;s content in the <code>gh-pages</code> branch.</p>
+
+<p>Finally, setting up a nice domain for your site is as simple as updating DNS records and adding a <code>CNAME</code> file to the root of your site (or, in middleman&#8217;s case, the <code>source</code> directory) with the specified domain. <a href='https://help.github.com/articles/setting-up-a-custom-domain-with-pages'>See github&#8217;s more detailed instructions.</a></p>
+
+<p>Styling the site is left as an exercise, or feel free to borrow from <a href='http://github.com/joeyAghion/joey.aghion.com'>this site&#8217;s source</a>.</p>
+
+<h2 id='more_information'>More information</h2>
+
+<ul>
+<li>See the <a href='http://middlemanapp.com/blogging/'>middleman-blog docs</a></li>
+
+<li><a href='http://middlemanapp.com/pretty-urls/'>&#8220;Pretty&#8221; URLs</a></li>
+</ul>
+  </article>
+  
+    <div class="article_footer">
+      <p class="tags">
+        Tags:
+        <a href="/tags/programming/">programming</a>, <a href="/tags/middleman/">middleman</a>, <a href="/tags/github/">github</a>
+      </p>
+      <p class="timestamp">
+        2013-04-28
+      </p>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/building-a-blog-with-middleman-and-github-pages/">Building a blog with Middleman and GitHub pages</a> <span>Apr 28</span></li>
+            
+              
+              <li><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a> <span>Mar  8</span></li>
+            
+              
+              <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
+            
+              
+              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
+            
+              
+              <li><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a> <span>Feb  1</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+              <li><a href="/tags/electrical/">electrical (1)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/architecture/">architecture (1)</a></li>
+            
+              
+              <li><a href="/tags/remodeling/">remodeling (1)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
