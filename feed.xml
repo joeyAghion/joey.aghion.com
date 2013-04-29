@@ -35,6 +35,7 @@ middleman init myblog --template=blog&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This generates the following folder structure:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;myblog
+ |- .gitignore
  |- config.rb
  |- Gemfile
  |- Gemfile.lock
@@ -56,7 +57,7 @@ middleman init myblog --template=blog&lt;/code&gt;&lt;/pre&gt;
 
 &lt;li&gt;&lt;strong&gt;source&lt;/strong&gt; holds just that&amp;#8212;the source files. These are later compiled (according to the middleman settings you&amp;#8217;ve chosen) into a &lt;strong&gt;build&lt;/strong&gt; directory that contains the final site&amp;#8217;s files.&lt;/li&gt;
 
-&lt;li&gt;&lt;strong&gt;layout.erb&lt;/strong&gt; is the main site layout. ERB is used by default, but middleman supports &lt;a href='http://middlemanapp.com/templates/'&gt;many other templating engines&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;layout.erb&lt;/strong&gt; is the main site layout. ERB is the default, but middleman supports &lt;a href='http://middlemanapp.com/templates/'&gt;many other templating engines&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id='creating_an_article'&gt;Creating an article&lt;/h2&gt;
@@ -85,7 +86,9 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 
 &lt;pre&gt;&lt;code&gt;bundle exec middleman build&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Notice that the destination &lt;code&gt;build&lt;/code&gt; folder is included in the default &lt;code&gt;.gitignore&lt;/code&gt; file. At this stage, that folder&amp;#8217;s contents could be hosted just about anywhere. We&amp;#8217;ll deploy our site to &lt;a href='http://pages.github.com/'&gt;github pages&lt;/a&gt; with help from the &lt;a href='https://github.com/neo/middleman-gh-pages'&gt;middleman-gh-pages&lt;/a&gt; gem. First, we add it to the Gemfile:&lt;/p&gt;
+&lt;p&gt;Note that the &lt;code&gt;build&lt;/code&gt; folder containing the compiled site is &lt;em&gt;not&lt;/em&gt; checked in (it&amp;#8217;s listed in the default &lt;code&gt;.gitignore&lt;/code&gt; file).&lt;/p&gt;
+
+&lt;p&gt;At this stage, that folder&amp;#8217;s contents could be hosted just about anywhere. We&amp;#8217;ll deploy our site to &lt;a href='http://pages.github.com/'&gt;github pages&lt;/a&gt; with help from the &lt;a href='https://github.com/neo/middleman-gh-pages'&gt;middleman-gh-pages&lt;/a&gt; gem. First, we add it to the Gemfile:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;gem &amp;quot;middleman-gh-pages&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 
@@ -97,7 +100,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 
 &lt;pre&gt;&lt;code&gt;bundle exec rake publish&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This last step is worth explaining. The &amp;#8220;gh-pages&amp;#8221; branch is specially named so that Github will publish the included content to your site at &lt;em&gt;username.github.io/projectname&lt;/em&gt;. It&amp;#8217;s an &amp;#8220;orphan&amp;#8221; branch (meaning it has no parents). I.e., it&amp;#8217;s completely divorced from your master branch&amp;#8217;s content. The master branch contains your source files, and the static files published to the &lt;code&gt;build&lt;/code&gt; subdirectory become (via the &lt;code&gt;publish&lt;/code&gt; rake task) the root folder&amp;#8217;s content in the &lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
+&lt;p&gt;This last step is worth explaining. The &amp;#8220;gh-pages&amp;#8221; branch is specially named so that Github will publish its contents to your site at &lt;em&gt;username.github.io/projectname&lt;/em&gt;. It&amp;#8217;s an &amp;#8220;orphan&amp;#8221; branch (meaning it has no parents). I.e., it&amp;#8217;s completely divorced from your master branch&amp;#8217;s content. The master branch contains your source files, and the static files compiled to the &lt;code&gt;build&lt;/code&gt; subdirectory become the root folder&amp;#8217;s content in the &lt;code&gt;gh-pages&lt;/code&gt; branch. Luckily, you don&amp;#8217;t have to manage the &lt;code&gt;gh-pages&lt;/code&gt; branch directly; the &lt;code&gt;publish&lt;/code&gt; task takes care of compiling your site and creating the corresponding commits on &lt;code&gt;gh-pages&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Finally, setting up a nice domain for your site is as simple as updating DNS records and adding a &lt;code&gt;CNAME&lt;/code&gt; file to the root of your site (or, in middleman&amp;#8217;s case, the &lt;code&gt;source&lt;/code&gt; directory) with the specified domain. &lt;a href='https://help.github.com/articles/setting-up-a-custom-domain-with-pages'&gt;See github&amp;#8217;s more detailed instructions.&lt;/a&gt;&lt;/p&gt;
 

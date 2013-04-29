@@ -40,6 +40,7 @@ middleman init myblog --template=blog</code></pre>
 <p>This generates the following folder structure:</p>
 
 <pre><code>myblog
+ |- .gitignore
  |- config.rb
  |- Gemfile
  |- Gemfile.lock
@@ -61,7 +62,7 @@ middleman init myblog --template=blog</code></pre>
 
 <li><strong>source</strong> holds just that&#8212;the source files. These are later compiled (according to the middleman settings you&#8217;ve chosen) into a <strong>build</strong> directory that contains the final site&#8217;s files.</li>
 
-<li><strong>layout.erb</strong> is the main site layout. ERB is used by default, but middleman supports <a href='http://middlemanapp.com/templates/'>many other templating engines</a>.</li>
+<li><strong>layout.erb</strong> is the main site layout. ERB is the default, but middleman supports <a href='http://middlemanapp.com/templates/'>many other templating engines</a>.</li>
 </ul>
 
 <h2 id='creating_an_article'>Creating an article</h2>
@@ -90,7 +91,9 @@ Buh bye posterous!</code></pre>
 
 <pre><code>bundle exec middleman build</code></pre>
 
-<p>Notice that the destination <code>build</code> folder is included in the default <code>.gitignore</code> file. At this stage, that folder&#8217;s contents could be hosted just about anywhere. We&#8217;ll deploy our site to <a href='http://pages.github.com/'>github pages</a> with help from the <a href='https://github.com/neo/middleman-gh-pages'>middleman-gh-pages</a> gem. First, we add it to the Gemfile:</p>
+<p>Note that the <code>build</code> folder containing the compiled site is <em>not</em> checked in (it&#8217;s listed in the default <code>.gitignore</code> file).</p>
+
+<p>At this stage, that folder&#8217;s contents could be hosted just about anywhere. We&#8217;ll deploy our site to <a href='http://pages.github.com/'>github pages</a> with help from the <a href='https://github.com/neo/middleman-gh-pages'>middleman-gh-pages</a> gem. First, we add it to the Gemfile:</p>
 
 <pre><code>gem &quot;middleman-gh-pages&quot;</code></pre>
 
@@ -102,7 +105,7 @@ Buh bye posterous!</code></pre>
 
 <pre><code>bundle exec rake publish</code></pre>
 
-<p>This last step is worth explaining. The &#8220;gh-pages&#8221; branch is specially named so that Github will publish the included content to your site at <em>username.github.io/projectname</em>. It&#8217;s an &#8220;orphan&#8221; branch (meaning it has no parents). I.e., it&#8217;s completely divorced from your master branch&#8217;s content. The master branch contains your source files, and the static files published to the <code>build</code> subdirectory become (via the <code>publish</code> rake task) the root folder&#8217;s content in the <code>gh-pages</code> branch.</p>
+<p>This last step is worth explaining. The &#8220;gh-pages&#8221; branch is specially named so that Github will publish its contents to your site at <em>username.github.io/projectname</em>. It&#8217;s an &#8220;orphan&#8221; branch (meaning it has no parents). I.e., it&#8217;s completely divorced from your master branch&#8217;s content. The master branch contains your source files, and the static files compiled to the <code>build</code> subdirectory become the root folder&#8217;s content in the <code>gh-pages</code> branch. Luckily, you don&#8217;t have to manage the <code>gh-pages</code> branch directly; the <code>publish</code> task takes care of compiling your site and creating the corresponding commits on <code>gh-pages</code>.</p>
 
 <p>Finally, setting up a nice domain for your site is as simple as updating DNS records and adding a <code>CNAME</code> file to the root of your site (or, in middleman&#8217;s case, the <code>source</code> directory) with the specified domain. <a href='https://help.github.com/articles/setting-up-a-custom-domain-with-pages'>See github&#8217;s more detailed instructions.</a></p>
 
