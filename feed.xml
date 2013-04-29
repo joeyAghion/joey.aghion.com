@@ -69,7 +69,7 @@ middleman init myblog --template=blog&lt;/code&gt;&lt;/pre&gt;
 
 &lt;pre&gt;&lt;code&gt;---
 title: Launching my blog
-date: 2013-04-25 03:26 UTC
+date: 2013-04-28 03:26 UTC
 tags: posterous, github pages
 ---
 
@@ -85,7 +85,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 
 &lt;pre&gt;&lt;code&gt;bundle exec middleman build&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Notice that the destination &lt;code&gt;build&lt;/code&gt; folder is included in the default &lt;code&gt;.gitignore&lt;/code&gt; file. At this stage, that folder&amp;#8217;s contents could be hosted just about anywhere. We&amp;#8217;ll deploy our site to &lt;a href='http://pages.github.com/'&gt;github pages&lt;/a&gt;, and the &lt;a href='https://github.com/neo/middleman-gh-pages'&gt;middleman-gh-pages&lt;/a&gt; gem will help. First, we add it to the Gemfile:&lt;/p&gt;
+&lt;p&gt;Notice that the destination &lt;code&gt;build&lt;/code&gt; folder is included in the default &lt;code&gt;.gitignore&lt;/code&gt; file. At this stage, that folder&amp;#8217;s contents could be hosted just about anywhere. We&amp;#8217;ll deploy our site to &lt;a href='http://pages.github.com/'&gt;github pages&lt;/a&gt; with help from the &lt;a href='https://github.com/neo/middleman-gh-pages'&gt;middleman-gh-pages&lt;/a&gt; gem. First, we add it to the Gemfile:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;gem &amp;quot;middleman-gh-pages&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 
@@ -94,6 +94,8 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;require &amp;#39;middleman-gh-pages&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After bundle-installing again, we&amp;#8217;ll have a new &lt;code&gt;publish&lt;/code&gt; rake task that pushes the static site to a special &lt;code&gt;gh-pages&lt;/code&gt; branch on the same remote as the source. (If you haven&amp;#8217;t made a github repo for this project yet, now would be a good time.)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bundle exec rake publish&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;This last step is worth elaborating on. The &amp;#8220;gh-pages&amp;#8221; branch is specially named so that Github will publish the included content to your site at &lt;em&gt;username.github.io/projectname&lt;/em&gt;. It&amp;#8217;s an &amp;#8220;orphan&amp;#8221; branch (meaning it has no parents). I.e., it&amp;#8217;s completely divorced from your master branch&amp;#8217;s content. The master branch contains your source files, and the static files published to the &lt;code&gt;build&lt;/code&gt; subdirectory become (via the &lt;code&gt;publish&lt;/code&gt; rake task) the root folder&amp;#8217;s content in the &lt;code&gt;gh-pages&lt;/code&gt; branch.&lt;/p&gt;
 
@@ -104,7 +106,9 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id='more_information'&gt;More information&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;See the &lt;a href='http://middlemanapp.com/blogging/'&gt;middleman-blog docs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Advanced features, community extensions, and more at &lt;a href='http://middlemanapp.com'&gt;the middleman site&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://middlemanapp.com/blogging/'&gt;middleman-blog extension&lt;/a&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;a href='http://middlemanapp.com/pretty-urls/'&gt;&amp;#8220;Pretty&amp;#8221; URLs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>

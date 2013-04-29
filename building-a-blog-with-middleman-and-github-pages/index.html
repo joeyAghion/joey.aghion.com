@@ -74,7 +74,7 @@ middleman init myblog --template=blog</code></pre>
 
 <pre><code>---
 title: Launching my blog
-date: 2013-04-25 03:26 UTC
+date: 2013-04-28 03:26 UTC
 tags: posterous, github pages
 ---
 
@@ -90,7 +90,7 @@ Buh bye posterous!</code></pre>
 
 <pre><code>bundle exec middleman build</code></pre>
 
-<p>Notice that the destination <code>build</code> folder is included in the default <code>.gitignore</code> file. At this stage, that folder&#8217;s contents could be hosted just about anywhere. We&#8217;ll deploy our site to <a href='http://pages.github.com/'>github pages</a>, and the <a href='https://github.com/neo/middleman-gh-pages'>middleman-gh-pages</a> gem will help. First, we add it to the Gemfile:</p>
+<p>Notice that the destination <code>build</code> folder is included in the default <code>.gitignore</code> file. At this stage, that folder&#8217;s contents could be hosted just about anywhere. We&#8217;ll deploy our site to <a href='http://pages.github.com/'>github pages</a> with help from the <a href='https://github.com/neo/middleman-gh-pages'>middleman-gh-pages</a> gem. First, we add it to the Gemfile:</p>
 
 <pre><code>gem &quot;middleman-gh-pages&quot;</code></pre>
 
@@ -99,6 +99,8 @@ Buh bye posterous!</code></pre>
 <pre><code>require &#39;middleman-gh-pages&#39;</code></pre>
 
 <p>After bundle-installing again, we&#8217;ll have a new <code>publish</code> rake task that pushes the static site to a special <code>gh-pages</code> branch on the same remote as the source. (If you haven&#8217;t made a github repo for this project yet, now would be a good time.)</p>
+
+<pre><code>bundle exec rake publish</code></pre>
 
 <p>This last step is worth elaborating on. The &#8220;gh-pages&#8221; branch is specially named so that Github will publish the included content to your site at <em>username.github.io/projectname</em>. It&#8217;s an &#8220;orphan&#8221; branch (meaning it has no parents). I.e., it&#8217;s completely divorced from your master branch&#8217;s content. The master branch contains your source files, and the static files published to the <code>build</code> subdirectory become (via the <code>publish</code> rake task) the root folder&#8217;s content in the <code>gh-pages</code> branch.</p>
 
@@ -109,7 +111,9 @@ Buh bye posterous!</code></pre>
 <h2 id='more_information'>More information</h2>
 
 <ul>
-<li>See the <a href='http://middlemanapp.com/blogging/'>middleman-blog docs</a></li>
+<li>Advanced features, community extensions, and more at <a href='http://middlemanapp.com'>the middleman site</a></li>
+
+<li><a href='http://middlemanapp.com/blogging/'>middleman-blog extension</a></li>
 
 <li><a href='http://middlemanapp.com/pretty-urls/'>&#8220;Pretty&#8221; URLs</a></li>
 </ul>
