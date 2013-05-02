@@ -5,10 +5,47 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2013-04-28T00:00:00Z</updated>
+  <updated>2013-05-01T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>A Search Shortcut for "I'm Feeling Lucky"</title>
+    <link rel="alternate" href="/a-search-shortcut-for-i-m-feeling-lucky/"/>
+    <id>/a-search-shortcut-for-i-m-feeling-lucky/</id>
+    <published>2013-05-01T00:00:00Z</published>
+    <updated>2013-05-01T00:00:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;
+
+&lt;p&gt;I created a custom search engine in Chrome for Google&amp;#8217;s &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt; function.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Go to &lt;strong&gt;Settings&lt;/strong&gt;, then &lt;strong&gt;Manage search engines&amp;#8230;&lt;/strong&gt;&lt;/li&gt;
+
+&lt;li&gt;At the bottom of the &lt;strong&gt;Other search engines&lt;/strong&gt; list, add a new entry called &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt;&lt;/li&gt;
+
+&lt;li&gt;For &lt;strong&gt;Keyword&lt;/strong&gt;, choose a convenient shortcut. I chose the single character &lt;em&gt;&amp;gt;&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary>
+    <content type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;
+
+&lt;p&gt;I created a custom search engine in Chrome for Google&amp;#8217;s &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt; function.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Go to &lt;strong&gt;Settings&lt;/strong&gt;, then &lt;strong&gt;Manage search engines&amp;#8230;&lt;/strong&gt;&lt;/li&gt;
+
+&lt;li&gt;At the bottom of the &lt;strong&gt;Other search engines&lt;/strong&gt; list, add a new entry called &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt;&lt;/li&gt;
+
+&lt;li&gt;For &lt;strong&gt;Keyword&lt;/strong&gt;, choose a convenient shortcut. I chose the single character &lt;em&gt;&amp;gt;&lt;/em&gt;&lt;/li&gt;
+
+&lt;li&gt;For &lt;strong&gt;URL&lt;/strong&gt;, enter: &lt;em&gt;http://www.google.com/search?hl=en&amp;amp;q=%s&amp;amp;btnI=I%27m+Feeling+Lucky&amp;amp;aq=f&amp;amp;oq=&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img alt='Manage search engines screenshot' src='/images/2013-05-01-manage-search-engines.png' /&gt;
+&lt;p&gt;Now, you just need to type &lt;code&gt;&amp;gt;&lt;/code&gt; (or your preferred keyword) and hit &lt;code&gt;Tab&lt;/code&gt; to type a query. When you hit &lt;code&gt;Enter&lt;/code&gt;, you&amp;#8217;ll navigate directly to the first result.&lt;/p&gt;
+&lt;img alt='Search I&amp;apos;m feeling lucky' src='/images/2013-05-01-search-im-feeling-lucky.png' /&gt;</content>
+  </entry>
   <entry>
     <title>Building a blog with Middleman and GitHub pages</title>
     <link rel="alternate" href="/building-a-blog-with-middleman-and-github-pages/"/>
@@ -225,76 +262,5 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;We use &lt;a href='http://www.opscode.com/chef'&gt;Chef&lt;/a&gt; and &lt;a href='http://fog.io'&gt;Fog&lt;/a&gt; to simplify the servers&amp;#8217; administration. Take a look at &lt;a href='https://github.com/joeyAghion/satellite_setup'&gt;the source&lt;/a&gt;, and see &lt;a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'&gt;the original post&lt;/a&gt; for all the gory details. Feedback welcome!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Bash aliases and helpers</title>
-    <link rel="alternate" href="/bash-aliases-and-helpers/"/>
-    <id>/bash-aliases-and-helpers/</id>
-    <published>2012-01-12T07:43:00Z</published>
-    <updated>2012-01-12T07:43:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;My ~/.bash_profile file contains these helpers and aliases.&lt;/p&gt;
-&lt;!-- from https://gist.github.com/joeyAghion/1371971 --&gt;
-&lt;pre&gt;&lt;code&gt;# Display current git branch, nicely colored, in the prompt (with a * if there are changes)
-function parse_git_dirty {
-  [[ $(git status 2&amp;gt; /dev/null | tail -n1) != &amp;quot;nothing to commit (working directory clean)&amp;quot; ]] &amp;amp;&amp;amp; echo &amp;quot;*&amp;quot;
-}
-function parse_git_branch {
-  git branch --no-color 2&amp;gt; /dev/null | sed -e &amp;#39;/^[^*]/d&amp;#39; -e &amp;quot;s/* \(.*\)/[\1$(parse_git_dirty)]/&amp;quot;
-}&lt;/code&gt;&lt;/pre&gt;</summary>
-    <content type="html">&lt;p&gt;My ~/.bash_profile file contains these helpers and aliases.&lt;/p&gt;
-&lt;!-- from https://gist.github.com/joeyAghion/1371971 --&gt;
-&lt;pre&gt;&lt;code&gt;# Display current git branch, nicely colored, in the prompt (with a * if there are changes)
-function parse_git_dirty {
-  [[ $(git status 2&amp;gt; /dev/null | tail -n1) != &amp;quot;nothing to commit (working directory clean)&amp;quot; ]] &amp;amp;&amp;amp; echo &amp;quot;*&amp;quot;
-}
-function parse_git_branch {
-  git branch --no-color 2&amp;gt; /dev/null | sed -e &amp;#39;/^[^*]/d&amp;#39; -e &amp;quot;s/* \(.*\)/[\1$(parse_git_dirty)]/&amp;quot;
-}
-export PS1=&amp;#39;\u:\[\033[31;40m\]\w\[\033[0;33m\]$(parse_git_branch)\[\e[0m\]$ &amp;#39;
-
-export EDITOR=&amp;#39;mate -w&amp;#39;
-
-export PATH=$PATH:/usr/local/rvm/bin:~/bin
- [[ -s &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot; ]] &amp;amp;&amp;amp; . &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot;
-
-# colorize terminal
-export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
-
-# Find running processes, e.g.:
-#   $ psx chrome
-alias psx=&amp;#39;ps aux | grep $1&amp;#39;
-
-
-# Recursive full text search, e.g.:
-#   $ g somestring app/
-alias g=&amp;#39;grep -rn&amp;#39;
-export GREP_OPTIONS=&amp;#39;--color=auto&amp;#39;
-
-# Output my current IP address (thanks @hmason), e.g.:
-#   $ whatsmyip
-alias whatsmyip=&amp;#39;curl http://automation.whatismyip.com/n09230945.asp&amp;#39;
-
-
-# Open man pages in Preview (thanks @brynary), e.g.:
-#   $ pman grep
-pman () {
-    man -t &amp;quot;${1}&amp;quot; | open -f -a /Applications/Preview.app
-}
-
-# Who hosts that site (thanks @jcn), e.g.:
-#   $ whohosts foursquare.com
-whohosts () {
-  whois `/opt/local/lib/mysql5/bin/resolveip -s $*`;
-}
-
-# exclude tmp/ and log/ when opening a rails project in textmate
-alias mater=&amp;quot;ls | grep -Ev &amp;#39;log|tmp&amp;#39; | xargs mate&amp;quot;
-
-# via @desandro http://desandro.github.com/dropshado.ws/
-alias glog=&amp;quot;git log --format=&amp;#39;%Cgreen%h%Creset %C(cyan)%an%Creset - %s&amp;#39; --graph&amp;quot;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
 </feed>
