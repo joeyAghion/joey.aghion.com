@@ -13,8 +13,8 @@ I created a custom search engine in Chrome for Google's _I'm Feeling Lucky_ func
 3. For **Keyword**, choose a convenient shortcut. I chose the single character _>_
 4. For **URL**, enter: _http://www.google.com/search?hl=en&q=%s&btnI=I%27m+Feeling+Lucky&aq=f&oq=_
 
-<img src="/images/2013-05-01-manage-search-engines.png" alt="Manage search engines screenshot" />
+![Manage search engines screenshot](/images/2013-05-01-manage-search-engines.png)
 
 Now, you just need to type `>` (or your preferred keyword) and hit `Tab` to type a query. When you hit `Enter`, you'll navigate directly to the first result.
 
-<img src="/images/2013-05-01-search-im-feeling-lucky.png" alt="Search I'm feeling lucky" />
+![Search I'm feeling lucky](/images/2013-05-01-search-im-feeling-lucky.png)
