@@ -42,9 +42,12 @@
 
 &lt;li&gt;For &lt;strong&gt;URL&lt;/strong&gt;, enter: &lt;em&gt;http://www.google.com/search?hl=en&amp;amp;q=%s&amp;amp;btnI=I%27m+Feeling+Lucky&amp;amp;aq=f&amp;amp;oq=&lt;/em&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;img alt='Manage search engines screenshot' src='/images/2013-05-01-manage-search-engines.png' /&gt;
+
+&lt;p&gt;&lt;img alt='Manage search engines screenshot' src='/images/2013-05-01-manage-search-engines.png' /&gt;&lt;/p&gt;
+
 &lt;p&gt;Now, you just need to type &lt;code&gt;&amp;gt;&lt;/code&gt; (or your preferred keyword) and hit &lt;code&gt;Tab&lt;/code&gt; to type a query. When you hit &lt;code&gt;Enter&lt;/code&gt;, you&amp;#8217;ll navigate directly to the first result.&lt;/p&gt;
-&lt;img alt='Search I&amp;apos;m feeling lucky' src='/images/2013-05-01-search-im-feeling-lucky.png' /&gt;</content>
+
+&lt;p&gt;&lt;img alt='Search Im feeling lucky' src='/images/2013-05-01-search-im-feeling-lucky.png' /&gt;&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Building a blog with Middleman and GitHub pages</title>
