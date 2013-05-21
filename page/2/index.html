@@ -31,6 +31,10 @@
   
   
 
+  <h2><a href="/tracking-application-metrics-with-statsd/">Tracking Application Metrics with Statsd</a> <span>Jul 22</span></h2>
+  <div class="summary"><p>At <a href='http://www.weplay.com'>Weplay</a>, I often find myself wanting a dead-simple way to track an application-level metric or event. That&#8217;s why I found Etsy&#8217;s post about Statsd (<a href='http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/'>Measure Anything, Measure Everything</a>) very appealing. Statsd is a node.js daemon that receives notifications of application events and sends the data to <a href='http://graphite.wikidot.com/'>Graphite</a> for graphing.</p>
+
+<p><a href='https://github.com/joeyAghion/statsd_setup'>Skip to the chef recipes</a></p></div>
   <h2><a href="/im-selling-my-apple-stock-and-so-should-you-a/">I'm selling my Apple stock, and so should you ($AAPL)</a> <span>Mar 25</span></h2>
   <div class="summary"><p>If you work in any field related to technology, do yourself a favor and sell that <a href='http://finance.yahoo.com/q?s=aapl&amp;ql=1'>Apple (AAPL)</a> stock I know you&#8217;ve been hanging on to. I&#8217;m as much of a fan as the next guy, but this is about diversification. And let&#8217;s face it, you&#8217;ve been lucky so far:</p>
 <img src='/images/2011-03-25_aapl.png' />
@@ -101,15 +105,6 @@
 <p>First in what will hopefully be a series of posts about building out a production server environment, I&#8217;ll share a few of my lessons from working with <a href='http://mmonit.com/monit'>monit</a>.</p>
 
 <p>Monit is a small, fairly sophisticated tool for monitoring the daemons, files, and other services running on a server. Not only can it alert an administrator when there is a problem, but it can try to correct the situation with any number of measures (most simply, by restarting the affected service, but also by capturing log output and executing arbitrary commands).</p></div>
-  <h2><a href="/embed-code-blocks-in-posterous-by-email/">Embed code blocks in posterous posts by email</a> <span>Mar  9</span></h2>
-  <div class="summary"><p>This took a little figuring out, so hopefully this post will be useful for others. To embed monospaced, syntax-highlighted code in a posterous post by email, surround it in square-bracketed &#8220;code&#8221; and &#8220;/code&#8221; tags. You can even specify a language, e.g.: &#8220;code lang=&#8217;ruby&#8217;&#8221;</p>
-
-<p>Just make sure to compose your email in plain text, or the code will be packed with unwanted div tags.</p>
-
-<pre><code>[code lang=&#39;ruby&#39;]
-switch_to(:plain_text) if current_format == :rich
-between(&quot;code&quot;, &quot;/code&quot;) do
-  yourHelloWorld || whatever</code></pre></div>
 
   
     <p><a href="/page/3/">Next page</a></p>
@@ -122,6 +117,9 @@ between(&quot;code&quot;, &quot;/code&quot;) do
           <ol>
             
               
+              <li><a href="/eliminating-textmate-lag/">Eliminating TextMate Lag</a> <span>May 21</span></li>
+            
+              
               <li><a href="/a-search-shortcut-for-i-m-feeling-lucky/">A Search Shortcut for "I'm Feeling Lucky"</a> <span>May  1</span></li>
             
               
@@ -132,9 +130,6 @@ between(&quot;code&quot;, &quot;/code&quot;) do
             
               
               <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
-            
-              
-              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
             
           </ol>
         </div>

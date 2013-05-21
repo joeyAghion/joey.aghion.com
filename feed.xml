@@ -5,10 +5,42 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2013-05-01T00:00:00Z</updated>
+  <updated>2013-05-21T16:12:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Eliminating TextMate Lag</title>
+    <link rel="alternate" href="/eliminating-textmate-lag/"/>
+    <id>/eliminating-textmate-lag/</id>
+    <published>2013-05-21T16:12:00Z</published>
+    <updated>2013-05-21T16:12:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;
+
+&lt;p&gt;These tips have eliminated the problem for me. Feel free to mix and match:&lt;/p&gt;
+
+&lt;h3 id='avoid_loading_the_entire_project_directory'&gt;Avoid loading the entire project directory&lt;/h3&gt;
+
+&lt;p&gt;If you&amp;#8217;re working with a Rails project, you can avoid loading the heavy &lt;code&gt;log/&lt;/code&gt; and &lt;code&gt;tmp/&lt;/code&gt; directories with the &lt;code&gt;mater&lt;/code&gt; alias. Just put this in one of your shell start-up scripts:&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;
+
+&lt;p&gt;These tips have eliminated the problem for me. Feel free to mix and match:&lt;/p&gt;
+
+&lt;h3 id='avoid_loading_the_entire_project_directory'&gt;Avoid loading the entire project directory&lt;/h3&gt;
+
+&lt;p&gt;If you&amp;#8217;re working with a Rails project, you can avoid loading the heavy &lt;code&gt;log/&lt;/code&gt; and &lt;code&gt;tmp/&lt;/code&gt; directories with the &lt;code&gt;mater&lt;/code&gt; alias. Just put this in one of your shell start-up scripts:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alias mater=&amp;quot;ls | grep -Ev &amp;#39;log|tmp&amp;#39; | xargs mate&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Adjust for other project types.&lt;/p&gt;
+
+&lt;h3 id='disable_project_tree_refresh_with_remate'&gt;Disable project tree refresh with ReMate&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href='http://ciaranwal.sh/remate/'&gt;The ReMate plugin&lt;/a&gt; adds a &lt;em&gt;Disable Refresh on Regaining Focus&lt;/em&gt; item to the &lt;em&gt;Window&lt;/em&gt; menu. Download and extract the plugin, double click to add to TextMate, and relaunch TextMate. Then, check the new menu option to disable the project refresh behavior entirely. (You can always temporarily uncheck it to refresh the project state.)&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>A Search Shortcut for "I'm Feeling Lucky"</title>
     <link rel="alternate" href="/a-search-shortcut-for-i-m-feeling-lucky/"/>
@@ -60,12 +92,12 @@
     </author>
     <summary type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;
 
-&lt;h2 id='getting_started'&gt;Getting Started&lt;/h2&gt;
+&lt;h3 id='getting_started'&gt;Getting Started&lt;/h3&gt;
 
 &lt;p&gt;The &lt;a href='https://github.com/middleman/middleman'&gt;middleman&lt;/a&gt; gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the &lt;a href='https://github.com/middleman/middleman-blog'&gt;middleman-blog&lt;/a&gt; extension.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;
 
-&lt;h2 id='getting_started'&gt;Getting Started&lt;/h2&gt;
+&lt;h3 id='getting_started'&gt;Getting Started&lt;/h3&gt;
 
 &lt;p&gt;The &lt;a href='https://github.com/middleman/middleman'&gt;middleman&lt;/a&gt; gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the &lt;a href='https://github.com/middleman/middleman-blog'&gt;middleman-blog&lt;/a&gt; extension.&lt;/p&gt;
 
@@ -100,7 +132,7 @@ middleman init myblog --template=blog&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;strong&gt;layout.erb&lt;/strong&gt; is the main site layout. ERB is the default, but middleman supports &lt;a href='http://middlemanapp.com/templates/'&gt;many other templating engines&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id='creating_an_article'&gt;Creating an article&lt;/h2&gt;
+&lt;h3 id='creating_an_article'&gt;Creating an article&lt;/h3&gt;
 
 &lt;p&gt;Actually, there&amp;#8217;s an example article included. But, to create our own:&lt;/p&gt;
 
@@ -120,7 +152,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 &lt;img alt='Initial middleman screenshot' src='/images/2013-04-28-middleman-screenshot.png' /&gt;
 &lt;p&gt;It&amp;#8217;s unsightly for now, but&amp;#8212;when deployed as static HTML&amp;#8212;it&amp;#8217;s very, very fast.&lt;/p&gt;
 
-&lt;h2 id='deploying'&gt;Deploying&lt;/h2&gt;
+&lt;h3 id='deploying'&gt;Deploying&lt;/h3&gt;
 
 &lt;p&gt;To compile the full site&amp;#8217;s static content:&lt;/p&gt;
 
@@ -146,7 +178,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Styling the site is left as an exercise, or feel free to borrow from &lt;a href='http://github.com/joeyAghion/joey.aghion.com'&gt;this site&amp;#8217;s source&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id='more_information'&gt;More information&lt;/h2&gt;
+&lt;h3 id='more_information'&gt;More information&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Advanced features, community extensions, and more at &lt;a href='http://middlemanapp.com'&gt;the middleman site&lt;/a&gt;&lt;/li&gt;
@@ -241,29 +273,5 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Check out the &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;full post&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Heroku with a side of EC2</title>
-    <link rel="alternate" href="/heroku-with-a-side-of-ec2/"/>
-    <id>/heroku-with-a-side-of-ec2/</id>
-    <published>2012-02-01T00:00:00Z</published>
-    <updated>2012-02-01T00:00:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;I &lt;a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'&gt;posted&lt;/a&gt; on the &lt;a href='http://artsy.github.com'&gt;Artsy Engineering blog&lt;/a&gt; about supplementing our Heroku web app with EC2-hosted Delayed Job workers:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Artsy engineers are big users and abusers of Heroku. It&amp;#8217;s a neat abstraction of server resources, so we were conflicted when parts of our application started to bump into Heroku&amp;#8217;s limitations. While we weren&amp;#8217;t eager to start managing additional infrastructure, we found that&amp;#8211;with a few good tools&amp;#8211;we could migrate some components away from Heroku without fragmenting the codebase or over-complicating our development environments.&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    <content type="html">&lt;p&gt;I &lt;a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'&gt;posted&lt;/a&gt; on the &lt;a href='http://artsy.github.com'&gt;Artsy Engineering blog&lt;/a&gt; about supplementing our Heroku web app with EC2-hosted Delayed Job workers:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Artsy engineers are big users and abusers of Heroku. It&amp;#8217;s a neat abstraction of server resources, so we were conflicted when parts of our application started to bump into Heroku&amp;#8217;s limitations. While we weren&amp;#8217;t eager to start managing additional infrastructure, we found that&amp;#8211;with a few good tools&amp;#8211;we could migrate some components away from Heroku without fragmenting the codebase or over-complicating our development environments.&lt;/p&gt;
-
-&lt;p&gt;There are a number of reasons your app might need to go beyond Heroku. It might rely on a locally installed tool (not possible on Heroku&amp;#8217;s locked-down servers), or require heavy file-system usage (limited to tmp/ and log/, and not permanent or shared). In our case, the culprit was Heroku&amp;#8217;s 512 MB RAM limit&amp;#8211;reasonable for most web processes, but quickly exceeded by the image-processing tasks of our delayed_job workers. We considered building a specialized image-processing service, but decided instead to supplement our web apps with a custom EC2 instance dedicated to processing background tasks. We call these servers &amp;#8220;satellites.&amp;#8221;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We use &lt;a href='http://www.opscode.com/chef'&gt;Chef&lt;/a&gt; and &lt;a href='http://fog.io'&gt;Fog&lt;/a&gt; to simplify the servers&amp;#8217; administration. Take a look at &lt;a href='https://github.com/joeyAghion/satellite_setup'&gt;the source&lt;/a&gt;, and see &lt;a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'&gt;the original post&lt;/a&gt; for all the gory details. Feedback welcome!&lt;/p&gt;</content>
   </entry>
 </feed>

@@ -50,7 +50,7 @@
 
 <p>In a related vein, <a href='http://www.mattinsler.com/'>Matt Insler</a> of <a href='http://www.signpost.com'>Signpost</a> recently posted about <a href='http://www.mattinsler.com/signpost-tracking-analytics-mysql-mongodb/'>building a tracking infrastructure on MongoDB</a>. Both approaches use a &#8220;fire and forget&#8221; method of emitting the tracked data, but while Statsd&#8217;s metrics are stripped down streams of counts and times, Matt opted to store exhaustive request and event data. One offers automatic graphing, the other powerful ad hoc querying&#8211;interesting and perhaps complementary strategies.</p>
 
-<h2 id='setting_up_statsd'>Setting up statsd</h2>
+<h3 id='setting_up_statsd'>Setting up statsd</h3>
 
 <p>Here are my steps for spawning and configuring a simple EC2 instance with statsd and graphite:</p>
 
@@ -99,7 +99,7 @@ $ spatula cook ubuntu@184.72.76.150 node --identity ~/.ec2/statsd_setup.pem  # a
 
 <p>At this point, statsd and Graphite are ready to start tracking metrics. Visit your instance in a browser to access Graphite&#8217;s web interface.</p>
 
-<h2 id='tracking_metrics_from_your_ruby_or_rails_app'>Tracking metrics from your Ruby or Rails app</h2>
+<h3 id='tracking_metrics_from_your_ruby_or_rails_app'>Tracking metrics from your Ruby or Rails app</h3>
 
 <p>I added the <code>statsd-ruby</code> gem to my app&#8217;s <code>Gemfile</code> and created an initializer with something like:</p>
 
@@ -136,6 +136,9 @@ $statsd.time(&#39;partners.facebook_api&#39;) {...}   # track time spent executi
           <ol>
             
               
+              <li><a href="/eliminating-textmate-lag/">Eliminating TextMate Lag</a> <span>May 21</span></li>
+            
+              
               <li><a href="/a-search-shortcut-for-i-m-feeling-lucky/">A Search Shortcut for "I'm Feeling Lucky"</a> <span>May  1</span></li>
             
               
@@ -146,9 +149,6 @@ $statsd.time(&#39;partners.facebook_api&#39;) {...}   # track time spent executi
             
               
               <li><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></li>
-            
-              
-              <li><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></li>
             
           </ol>
         </div>

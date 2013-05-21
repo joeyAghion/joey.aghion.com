@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Half a Mind</title>
+    <title>Eliminating TextMate Lag</title>
     
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
@@ -24,22 +24,36 @@
         by <a href="mailto:joey@aghion.com">Joey Aghion</a>
       </header>
       <section>
-        <h1>Archive for
-  
-    Dec  6 2011
-  
-</h1>
+          <h2>
+    <a href="/eliminating-textmate-lag/">Eliminating TextMate Lag</a>
+  </h2>
+  <article>
+    <p>I&#8217;m still using <a href='http://macromates.com/'>TextMate 1</a>, since 2.0 has been buggy for me. If you&#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&#8217;s file state on focus, and this can be noticeably slow.</p>
 
-  <p>Page 1 of 1</p>
+<p>These tips have eliminated the problem for me. Feel free to mix and match:</p>
 
-  
+<h3 id='avoid_loading_the_entire_project_directory'>Avoid loading the entire project directory</h3>
 
-<ul>
-  
-    <li><a href="/shallow-serialization-of-model-instances-for/">Shallow Serialization of Model Instances for Delayed_Job and MongoDB</a> <span>Dec  6</span></li>
-  
-</ul>
+<p>If you&#8217;re working with a Rails project, you can avoid loading the heavy <code>log/</code> and <code>tmp/</code> directories with the <code>mater</code> alias. Just put this in one of your shell start-up scripts:</p>
 
+<pre><code>alias mater=&quot;ls | grep -Ev &#39;log|tmp&#39; | xargs mate&quot;</code></pre>
+
+<p>Adjust for other project types.</p>
+
+<h3 id='disable_project_tree_refresh_with_remate'>Disable project tree refresh with ReMate</h3>
+
+<p><a href='http://ciaranwal.sh/remate/'>The ReMate plugin</a> adds a <em>Disable Refresh on Regaining Focus</em> item to the <em>Window</em> menu. Download and extract the plugin, double click to add to TextMate, and relaunch TextMate. Then, check the new menu option to disable the project refresh behavior entirely. (You can always temporarily uncheck it to refresh the project state.)</p>
+  </article>
+  
+    <div class="article_footer">
+      <p class="tags">
+        Tags:
+        <a href="/tags/programming/">programming</a>, <a href="/tags/tools/">tools</a>
+      </p>
+      <p class="timestamp">
+        2013-05-21
+      </p>
+    </div>
   
 
       </section>
