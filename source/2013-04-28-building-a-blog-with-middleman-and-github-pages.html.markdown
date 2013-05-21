@@ -7,7 +7,7 @@ tags: programming, middleman, github
 [Posterous is shutting down](http://blog.posterous.com/thanks-from-posterous), so I was finally forced to figure out a better blogging solution. Since my [day job](http://artsy.net) revolves around building and maintaining dynamic sites, that was exactly what I _didn't_ want for my personal site. Enter [Middleman](http://middlemanapp.com/), the super-simple **static** site engine. Best of all, it uses a toolchain that's very familiar to Ruby developers.
 
 
-## Getting Started
+### Getting Started
 
 The [middleman](https://github.com/middleman/middleman) gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the [middleman-blog](https://github.com/middleman/middleman-blog) extension.
 
@@ -38,7 +38,7 @@ Those files and folders are almost self-explanatory, but to call out a few:
 * **source** holds just that---the source files. These are later compiled (according to the middleman settings you've chosen) into a **build** directory that contains the final site's files.
 * **layout.erb** is the main site layout. ERB is the default, but middleman supports [many other templating engines](http://middlemanapp.com/templates/).
 
-## Creating an article
+### Creating an article
 
 Actually, there's an example article included. But, to create our own:
 
@@ -60,7 +60,7 @@ After starting up the development server with `bundle exec middleman`, we can op
 
 It's unsightly for now, but---when deployed as static HTML---it's very, very fast.
 
-## Deploying
+### Deploying
 
 To compile the full site's static content:
 
@@ -86,7 +86,7 @@ Finally, setting up a nice domain for your site is as simple as updating DNS rec
 
 Styling the site is left as an exercise, or feel free to borrow from [this site's source](http://github.com/joeyAghion/joey.aghion.com).
 
-## More information
+### More information
 
 * Advanced features, community extensions, and more at [the middleman site](http://middlemanapp.com)
 * [middleman-blog extension](http://middlemanapp.com/blogging/)

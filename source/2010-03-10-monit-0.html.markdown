@@ -102,8 +102,7 @@ Finally, let's add some global entries to our monitrc file to enable the web-bas
 
 Now, browsing to http://localhost:2812 displays my services' current status and allows me to perform basic management operations (see screenshot).
 
-Monit vs. god
--------------
+### Monit vs. god
 
 [God.rb](http://god.rubyforge.org) is a Ruby clone of monit and worth mentioning here. It's written in Ruby and accepts configuration in Ruby, so the syntax can in many cases be more powerful and less repetitive. As an exercise, I've incompletely translated our initial Redis configuration from above into god-compatible syntax:
 

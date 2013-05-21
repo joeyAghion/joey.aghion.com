@@ -22,7 +22,7 @@ Graphite offers a competent web UI and loads of options for data manipulation an
 
 In a related vein, [Matt Insler](http://www.mattinsler.com/) of [Signpost](http://www.signpost.com) recently posted about [building a tracking infrastructure on MongoDB](http://www.mattinsler.com/signpost-tracking-analytics-mysql-mongodb/). Both approaches use a "fire and forget" method of emitting the tracked data, but while Statsd's metrics are stripped down streams of counts and times, Matt opted to store exhaustive request and event data. One offers automatic graphing, the other powerful ad hoc querying--interesting and perhaps complementary strategies.
 
-## Setting up statsd ##
+### Setting up statsd
 
 Here are my steps for spawning and configuring a simple EC2 instance with statsd and graphite:
 
@@ -67,7 +67,7 @@ Run `ec2-describe-instances` to view the new instance's external IP, then substi
 
 At this point, statsd and Graphite are ready to start tracking metrics. Visit your instance in a browser to access Graphite's web interface.
 
-## Tracking metrics from your Ruby or Rails app ##
+### Tracking metrics from your Ruby or Rails app
 
 I added the `statsd-ruby` gem to my app's `Gemfile` and created an initializer with something like:
 
