@@ -39,7 +39,7 @@
         <div class="col">
           <h4>Tags</h4>
           <ol>
-            <% blog.tags.each_with_index do |(tag, articles), i| %>
+            <% blog.tags.sort_by{|tag, articles| articles.size }.reverse.each_with_index do |(tag, articles), i| %>
               <% break if i > 5 %>
               <li><a href="<%= tag_path tag %>"><%= tag %> (<%= articles.size %>)</a></li>
             <% end %>
