@@ -376,11 +376,11 @@ table {
 }
 body {
   padding:50px;
-  font-size: 15px;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-family: 'Droid Serif', Georgia, serif;
   color:#555;
   font-weight:400;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -532,7 +532,7 @@ footer {
   }
   
   section {
-    border:1px solid #e5e5e5;
+    border:1px solid #eee;
     border-width:1px 0;
     padding:20px 0;
     margin:0 0 20px;
@@ -666,16 +666,30 @@ header {
 header h1 {
   text-transform: uppercase;
   margin-bottom: 0;
+  font-size: 1em;
 }
 h1, h2 {
-  font-family: 'Droid Serif', Georgia, serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: bold;
+  font-size: 1.75em;
+  margin-bottom: 0;
 }
 h1 a, h2 a {
   font-weight: bold;
 }
+time {
+  display: block;
+  font-size: 14px;
+  font-weight: normal;
+  color: #bbb;
+  margin: 10px 0;
+}
+article {
+  margin: 1em 0;
+}
 footer {
-  font-size: 13px;
+  font-size: 14px;
+  color: #bbb;
 }
 footer h4 {
   margin-bottom: 10px;
@@ -694,13 +708,20 @@ footer .col {
 }
 footer p {
   clear: both;
+  margin: 0;
 }
 section .summary {
-  margin-bottom: 75px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 35px;
+}
+section .summary p {
+  margin: 0 0 10px 0;
 }
 section .article_footer {
-  font-size: 13px;
+  font-size: 14px;
   padding-top: 20px;
+  color: #bbb;
 }
 section .article_footer .tags {
   float: left;
@@ -708,8 +729,11 @@ section .article_footer .tags {
 section .article_footer .timestamp {
   float: right;
 }
-@media print, screen and (min-width: 1011px) and (max-height: 700px) {
+@media print, screen and (min-width: 1011px) and (max-height: 800px) {
   footer .col {
     display: none;
   }
+}
+.clear {
+  clear: both;
 }

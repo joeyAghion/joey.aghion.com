@@ -18,13 +18,7 @@
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;
-
-&lt;p&gt;These tips have eliminated the problem for me. Feel free to mix and match:&lt;/p&gt;
-
-&lt;h3 id='avoid_loading_the_entire_project_directory'&gt;Avoid loading the entire project directory&lt;/h3&gt;
-
-&lt;p&gt;If you&amp;#8217;re working with a Rails project, you can avoid loading the heavy &lt;code&gt;log/&lt;/code&gt; and &lt;code&gt;tmp/&lt;/code&gt; directories with the &lt;code&gt;mater&lt;/code&gt; alias. Just put this in one of your shell start-up scripts:&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;
 
 &lt;p&gt;These tips have eliminated the problem for me. Feel free to mix and match:&lt;/p&gt;
@@ -50,17 +44,7 @@
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;I created a custom search engine in Chrome for Google&amp;#8217;s &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt; function.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Go to &lt;strong&gt;Settings&lt;/strong&gt;, then &lt;strong&gt;Manage search engines&amp;#8230;&lt;/strong&gt;&lt;/li&gt;
-
-&lt;li&gt;At the bottom of the &lt;strong&gt;Other search engines&lt;/strong&gt; list, add a new entry called &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt;&lt;/li&gt;
-
-&lt;li&gt;For &lt;strong&gt;Keyword&lt;/strong&gt;, choose a convenient shortcut. I chose the single character &lt;em&gt;&amp;gt;&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;</summary>
+    <summary type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;
 
 &lt;p&gt;I created a custom search engine in Chrome for Google&amp;#8217;s &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt; function.&lt;/p&gt;
@@ -90,11 +74,7 @@
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;
-
-&lt;h3 id='getting_started'&gt;Getting Started&lt;/h3&gt;
-
-&lt;p&gt;The &lt;a href='https://github.com/middleman/middleman'&gt;middleman&lt;/a&gt; gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the &lt;a href='https://github.com/middleman/middleman-blog'&gt;middleman-blog&lt;/a&gt; extension.&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;
 
 &lt;h3 id='getting_started'&gt;Getting Started&lt;/h3&gt;
@@ -198,12 +178,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
       <name>Article Author</name>
     </author>
     <summary type="html">&lt;p&gt;The internet is a maze. Sometimes in my travels through this maze, I circle back on a path I&amp;#8217;ve already traveled. When that happens, my browser tabs start to look like this:&lt;/p&gt;
-&lt;img src='/images/2013-03-08-tabs.png' /&gt;
-&lt;p&gt;Some of those tabs are purely redundant. I discovered that Chrome used to include a Labs feature called &amp;#8220;Focus existing tab to open&amp;#8221; that attempted to avoid this, but it seems to have been removed.&lt;/p&gt;
-
-&lt;p&gt;You can now install my solution from the Chrome Web Store:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href='https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk'&gt;Unique Tabs&lt;/a&gt;&lt;/p&gt;</summary>
+&lt;img src='/images/2013-03-08-tabs.png' /&gt;</summary>
     <content type="html">&lt;p&gt;The internet is a maze. Sometimes in my travels through this maze, I circle back on a path I&amp;#8217;ve already traveled. When that happens, my browser tabs start to look like this:&lt;/p&gt;
 &lt;img src='/images/2013-03-08-tabs.png' /&gt;
 &lt;p&gt;Some of those tabs are purely redundant. I discovered that Chrome used to include a Labs feature called &amp;#8220;Focus existing tab to open&amp;#8221; that attempted to avoid this, but it seems to have been removed.&lt;/p&gt;
@@ -233,9 +208,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;
-
-&lt;p&gt;If you can test whether a given commit is good or bad with a single command, it gets even better. The &lt;code&gt;git bisect run&lt;/code&gt; command is autopilot for &lt;code&gt;git bisect&lt;/code&gt;&amp;#8211;just specify the command to test each commit and let it loose:&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;
 
 &lt;p&gt;If you can test whether a given commit is good or bad with a single command, it gets even better. The &lt;code&gt;git bisect run&lt;/code&gt; command is autopilot for &lt;code&gt;git bisect&lt;/code&gt;&amp;#8211;just specify the command to test each commit and let it loose:&lt;/p&gt;
@@ -255,11 +228,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
     <author>
       <name>Article Author</name>
     </author>
-    <summary type="html">&lt;p&gt;I&amp;#8217;ve been posting at the &lt;a href='http://artsy.github.com'&gt;Artsy engineering blog&lt;/a&gt;, most recently about how we &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;trick ourselves into sharing end users&amp;#8217; experiences&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;#8230;we stole a page from the agile development handbook and built an &lt;a href='http://alistair.cockburn.us/Information+radiator'&gt;information radiator&lt;/a&gt;. Like a &lt;a href='http://en.wikipedia.org/wiki/Kanban_board'&gt;kanban board&lt;/a&gt;, news ticker, or &lt;a href='https://demo.geckoboard.com/dashboard/B6782E562794C2F2'&gt;analytics wall board&lt;/a&gt;, our information radiator gives us an ambient awareness of end users&amp;#8217; experiences. How?&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
+    <summary type="html">&lt;p&gt;I&amp;#8217;ve been posting at the &lt;a href='http://artsy.github.com'&gt;Artsy engineering blog&lt;/a&gt;, most recently about how we &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;trick ourselves into sharing end users&amp;#8217; experiences&lt;/a&gt;:&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;I&amp;#8217;ve been posting at the &lt;a href='http://artsy.github.com'&gt;Artsy engineering blog&lt;/a&gt;, most recently about how we &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;trick ourselves into sharing end users&amp;#8217; experiences&lt;/a&gt;:&lt;/p&gt;
 
 &lt;blockquote&gt;

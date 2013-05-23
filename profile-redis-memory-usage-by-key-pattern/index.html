@@ -27,6 +27,7 @@
           <h2>
     <a href="/profile-redis-memory-usage-by-key-pattern/">Profile Redis memory usage by key pattern</a>
   </h2>
+  <time datetime="2010-10-13" pubdate>Oct 13, 2010</time>
   <article>
     <p>At <a href='http://www.weplay.com'>Weplay</a>, we use <a href='http://code.google.com/p/redis/'>Redis</a> quite a bit. As a Redis database grows, though, it can be difficult to understand how the space is being used. This script tries to identify which types of keys are occupying the most space in your Redis databases. To do so, it takes a random sample of keys and collapses them into similar patterns (basically by ignoring the numeric values).</p>
 
@@ -115,13 +116,14 @@ puts `redis-cli info | grep memory`</code></pre>
   </article>
   
     <div class="article_footer">
-      <p class="tags">
+      <div class="tags">
         Tags:
         <a href="/tags/programming/">programming</a>, <a href="/tags/redis/">redis</a>, <a href="/tags/ruby/">ruby</a>
-      </p>
-      <p class="timestamp">
+      </div>
+      <div class="timestamp">
         2010-10-13
-      </p>
+      </div>
+      <div class='clear'></div>
     </div>
   
 

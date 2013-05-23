@@ -28,85 +28,39 @@
   
   
 
-  <h2><a href="/eliminating-textmate-lag/">Eliminating TextMate Lag</a> <span>May 21</span></h2>
-  <div class="summary"><p>I&#8217;m still using <a href='http://macromates.com/'>TextMate 1</a>, since 2.0 has been buggy for me. If you&#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&#8217;s file state on focus, and this can be noticeably slow.</p>
-
-<p>These tips have eliminated the problem for me. Feel free to mix and match:</p>
-
-<h3 id='avoid_loading_the_entire_project_directory'>Avoid loading the entire project directory</h3>
-
-<p>If you&#8217;re working with a Rails project, you can avoid loading the heavy <code>log/</code> and <code>tmp/</code> directories with the <code>mater</code> alias. Just put this in one of your shell start-up scripts:</p></div>
-  <h2><a href="/a-search-shortcut-for-i-m-feeling-lucky/">A Search Shortcut for "I'm Feeling Lucky"</a> <span>May  1</span></h2>
-  <div class="summary"><p>I don&#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&#8217;s at least one unnecessary click in there, so&#8230;</p>
-
-<p>I created a custom search engine in Chrome for Google&#8217;s <em>I&#8217;m Feeling Lucky</em> function.</p>
-
-<ol>
-<li>Go to <strong>Settings</strong>, then <strong>Manage search engines&#8230;</strong></li>
-
-<li>At the bottom of the <strong>Other search engines</strong> list, add a new entry called <em>I&#8217;m Feeling Lucky</em></li>
-
-<li>For <strong>Keyword</strong>, choose a convenient shortcut. I chose the single character <em>&gt;</em></li>
-</ol></div>
-  <h2><a href="/building-a-blog-with-middleman-and-github-pages/">Building a blog with Middleman and GitHub pages</a> <span>Apr 28</span></h2>
-  <div class="summary"><p><a href='http://blog.posterous.com/thanks-from-posterous'>Posterous is shutting down</a>, so I was finally forced to figure out a better blogging solution. Since my <a href='http://artsy.net'>day job</a> revolves around building and maintaining dynamic sites, that was exactly what I <em>didn&#8217;t</em> want for my personal site. Enter <a href='http://middlemanapp.com/'>Middleman</a>, the super-simple <strong>static</strong> site engine. Best of all, it uses a toolchain that&#8217;s very familiar to Ruby developers.</p>
-
-<h3 id='getting_started'>Getting Started</h3>
-
-<p>The <a href='https://github.com/middleman/middleman'>middleman</a> gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the <a href='https://github.com/middleman/middleman-blog'>middleman-blog</a> extension.</p></div>
-  <h2><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a> <span>Mar  8</span></h2>
+  <h2><a href="/eliminating-textmate-lag/">Eliminating TextMate Lag</a></h2>
+  <time datetime="2013-05-21" pubdate>May 21, 2013</time>
+  <div class="summary"><p>I&#8217;m still using <a href='http://macromates.com/'>TextMate 1</a>, since 2.0 has been buggy for me. If you&#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&#8217;s file state on focus, and this can be noticeably slow.</p></div>
+  <h2><a href="/a-search-shortcut-for-i-m-feeling-lucky/">A Search Shortcut for "I'm Feeling Lucky"</a></h2>
+  <time datetime="2013-05-01" pubdate>May  1, 2013</time>
+  <div class="summary"><p>I don&#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&#8217;s at least one unnecessary click in there, so&#8230;</p></div>
+  <h2><a href="/building-a-blog-with-middleman-and-github-pages/">Building a blog with Middleman and GitHub pages</a></h2>
+  <time datetime="2013-04-28" pubdate>Apr 28, 2013</time>
+  <div class="summary"><p><a href='http://blog.posterous.com/thanks-from-posterous'>Posterous is shutting down</a>, so I was finally forced to figure out a better blogging solution. Since my <a href='http://artsy.net'>day job</a> revolves around building and maintaining dynamic sites, that was exactly what I <em>didn&#8217;t</em> want for my personal site. Enter <a href='http://middlemanapp.com/'>Middleman</a>, the super-simple <strong>static</strong> site engine. Best of all, it uses a toolchain that&#8217;s very familiar to Ruby developers.</p></div>
+  <h2><a href="/unique-tabs/">Unique Tabs - a Chrome extension for staying sane</a></h2>
+  <time datetime="2013-03-08" pubdate>Mar  8, 2013</time>
   <div class="summary"><p>The internet is a maze. Sometimes in my travels through this maze, I circle back on a path I&#8217;ve already traveled. When that happens, my browser tabs start to look like this:</p>
-<img src='/images/2013-03-08-tabs.png' />
-<p>Some of those tabs are purely redundant. I discovered that Chrome used to include a Labs feature called &#8220;Focus existing tab to open&#8221; that attempted to avoid this, but it seems to have been removed.</p>
-
-<p>You can now install my solution from the Chrome Web Store:</p>
-
-<p><a href='https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk'>Unique Tabs</a></p></div>
-  <h2><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a> <span>Jul 24</span></h2>
-  <div class="summary"><p>If you&#8217;re not familiar with <code>git bisect</code>, <a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'>check out the docs</a>. It&#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as <em>good</em> or <em>bad</em>, and <code>git bisect</code> narrows down the offending code.</p>
-
-<p>If you can test whether a given commit is good or bad with a single command, it gets even better. The <code>git bisect run</code> command is autopilot for <code>git bisect</code>&#8211;just specify the command to test each commit and let it loose:</p></div>
-  <h2><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a> <span>Jul  8</span></h2>
-  <div class="summary"><p>I&#8217;ve been posting at the <a href='http://artsy.github.com'>Artsy engineering blog</a>, most recently about how we <a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'>trick ourselves into sharing end users&#8217; experiences</a>:</p>
-
-<blockquote>
-<p>&#8230;we stole a page from the agile development handbook and built an <a href='http://alistair.cockburn.us/Information+radiator'>information radiator</a>. Like a <a href='http://en.wikipedia.org/wiki/Kanban_board'>kanban board</a>, news ticker, or <a href='https://demo.geckoboard.com/dashboard/B6782E562794C2F2'>analytics wall board</a>, our information radiator gives us an ambient awareness of end users&#8217; experiences. How?</p>
-</blockquote></div>
-  <h2><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a> <span>Feb  1</span></h2>
-  <div class="summary"><p>I <a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'>posted</a> on the <a href='http://artsy.github.com'>Artsy Engineering blog</a> about supplementing our Heroku web app with EC2-hosted Delayed Job workers:</p>
-
-<blockquote>
-<p>Artsy engineers are big users and abusers of Heroku. It&#8217;s a neat abstraction of server resources, so we were conflicted when parts of our application started to bump into Heroku&#8217;s limitations. While we weren&#8217;t eager to start managing additional infrastructure, we found that&#8211;with a few good tools&#8211;we could migrate some components away from Heroku without fragmenting the codebase or over-complicating our development environments.</p>
-</blockquote></div>
-  <h2><a href="/bash-aliases-and-helpers/">Bash aliases and helpers</a> <span>Jan 12</span></h2>
+<img src='/images/2013-03-08-tabs.png' /></div>
+  <h2><a href="/using-git-bisect-run-with-rvm/">Using `git bisect run` with RVM</a></h2>
+  <time datetime="2012-07-24" pubdate>Jul 24, 2012</time>
+  <div class="summary"><p>If you&#8217;re not familiar with <code>git bisect</code>, <a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'>check out the docs</a>. It&#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as <em>good</em> or <em>bad</em>, and <code>git bisect</code> narrows down the offending code.</p></div>
+  <h2><a href="/reminder-spend-time-with-your-site/">Reminder: Spend time with your site</a></h2>
+  <time datetime="2012-07-08" pubdate>Jul  8, 2012</time>
+  <div class="summary"><p>I&#8217;ve been posting at the <a href='http://artsy.github.com'>Artsy engineering blog</a>, most recently about how we <a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'>trick ourselves into sharing end users&#8217; experiences</a>:</p></div>
+  <h2><a href="/heroku-with-a-side-of-ec2/">Heroku with a side of EC2</a></h2>
+  <time datetime="2012-02-01" pubdate>Feb  1, 2012</time>
+  <div class="summary"><p>I <a href='http://artsy.github.com/blog/2012/01/31/beyond-heroku-satellite-delayed-job-workers-on-ec2'>posted</a> on the <a href='http://artsy.github.com'>Artsy Engineering blog</a> about supplementing our Heroku web app with EC2-hosted Delayed Job workers:</p></div>
+  <h2><a href="/bash-aliases-and-helpers/">Bash aliases and helpers</a></h2>
+  <time datetime="2012-01-12" pubdate>Jan 12, 2012</time>
   <div class="summary"><p>My ~/.bash_profile file contains these helpers and aliases.</p>
 <!-- from https://gist.github.com/joeyAghion/1371971 -->
-<pre><code># Display current git branch, nicely colored, in the prompt (with a * if there are changes)
-function parse_git_dirty {
-  [[ $(git status 2&gt; /dev/null | tail -n1) != &quot;nothing to commit (working directory clean)&quot; ]] &amp;&amp; echo &quot;*&quot;
-}
-function parse_git_branch {
-  git branch --no-color 2&gt; /dev/null | sed -e &#39;/^[^*]/d&#39; -e &quot;s/* \(.*\)/[\1$(parse_git_dirty)]/&quot;
-}</code></pre></div>
-  <h2><a href="/helpful-irb-methods/">Helpful IRB methods</a> <span>Jan 12</span></h2>
-  <div class="summary"><p>My <code>~/.irbrc</code> file contains these helpers for performing sql queries and outputting raw database (SQL or MongoDB) queries to the console. Just add them to your home directory&#8217;s .irbrc file to have these methods available in IRB or the Rails console.</p>
-<!-- from https://gist.github.com/joeyAghion/1371971 -->
-<pre><code># Output ActiveRecord-generated queries to the console
-def log_to_console
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
-  reload!
-end
-
-# Execute arbitrary SQL selects</code></pre></div>
-  <h2><a href="/shallow-serialization-of-model-instances-for/">Shallow Serialization of Model Instances for Delayed_Job and MongoDB</a> <span>Dec  6</span></h2>
-  <div class="summary"><p>Using <a href='https://github.com/collectiveidea/delayed_job'>delayed_job</a> and <a href='http://www.mongodb.org/'>MongoDB</a> (via <a href='http://mongoid.org/'>Mongoid</a>)? Delayed_Job&#8217;s <em>delay proxy</em> is a convenient way to queue up background tasks on a model instance:</p>
-
-<pre><code>user = User.find(id)
-user.delay.perform_time_consuming_task(args)</code></pre>
-
-<p>However, the model object is serialized and stored as YAML in the delayed_job record when called this way. It&#8217;s verbose and unnecessary.</p>
-
-<p>Introducing <a href='https://github.com/joeyAghion/delayed_job_shallow_mongoid'>delayed_job_shallow_mongoid</a>, which short-circuits that serialization. When a delayed job is called on a model instance or a model instance is passed to one as an argument, a stub object is recorded instead of the fully serialized object. When the job is run, the stub is recognized and a <em>find</em> is done to look up the underlying document(s). If a referenced model isn&#8217;t found at that point, the job simply returns.</p></div>
+<pre><code># Display current git branch, nicely colored, in the prompt (with a * if there are changes)</code></pre></div>
+  <h2><a href="/helpful-irb-methods/">Helpful IRB methods</a></h2>
+  <time datetime="2012-01-12" pubdate>Jan 12, 2012</time>
+  <div class="summary"><p>My <code>~/.irbrc</code> file contains these helpers for performing sql queries and outputting raw database (SQL or MongoDB) queries to the console. Just add them to your home directory&#8217;s .irbrc file to have these methods available in IRB or the Rails console.</p></div>
+  <h2><a href="/shallow-serialization-of-model-instances-for/">Shallow Serialization of Model Instances for Delayed_Job and MongoDB</a></h2>
+  <time datetime="2011-12-06" pubdate>Dec  6, 2011</time>
+  <div class="summary"><p>Using <a href='https://github.com/collectiveidea/delayed_job'>delayed_job</a> and <a href='http://www.mongodb.org/'>MongoDB</a> (via <a href='http://mongoid.org/'>Mongoid</a>)? Delayed_Job&#8217;s <em>delay proxy</em> is a convenient way to queue up background tasks on a model instance:</p></div>
 
   
     <p><a href="/page/2/">Next page</a></p>
