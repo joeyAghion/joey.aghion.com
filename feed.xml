@@ -5,10 +5,57 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2013-05-21T16:12:00Z</updated>
+  <updated>2013-07-12T14:08:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Simple 301 redirects</title>
+    <link rel="alternate" href="/simple-301-redirects/"/>
+    <id>/simple-301-redirects/</id>
+    <published>2013-07-12T14:08:00Z</published>
+    <updated>2013-07-12T14:08:00Z</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <summary type="html">&lt;p&gt;When I switched from &lt;a href='http://halfamind.aghion.com'&gt;halfamind.aghion.com&lt;/a&gt; to the more personal &lt;a href='http://joey.aghion.com'&gt;joey.aghion.com&lt;/a&gt; for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. &lt;a href='http://pages.github.com'&gt;Github pages&lt;/a&gt; (where this is hosted) only supports a single hostname and doesn&amp;#8217;t allow for redirects. You could redirect &lt;a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'&gt;in javascript&lt;/a&gt; or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;When I switched from &lt;a href='http://halfamind.aghion.com'&gt;halfamind.aghion.com&lt;/a&gt; to the more personal &lt;a href='http://joey.aghion.com'&gt;joey.aghion.com&lt;/a&gt; for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. &lt;a href='http://pages.github.com'&gt;Github pages&lt;/a&gt; (where this is hosted) only supports a single hostname and doesn&amp;#8217;t allow for redirects. You could redirect &lt;a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'&gt;in javascript&lt;/a&gt; or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://github.com/joeyAghion/rerouter'&gt;Rerouter&lt;/a&gt; is a simple rack app that accepts a map of source and destination hostnames. When it receives a request matching a source hostname, it issues a 301 (permanent) redirect to the new hostname while preserving the requested path and querystring.&lt;/p&gt;
+
+&lt;p&gt;The complete source is incredibly simple.&lt;/p&gt;
+
+&lt;h3 id='configru'&gt;config.ru&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;require &amp;#39;rack/rewrite&amp;#39;
+
+# Expects ENV[&amp;#39;REDIRECTS&amp;#39;] to be a ruby hash of source =&amp;gt; destination hostnames. E.g.:
+#   &amp;quot;{&amp;#39;old.domain.com&amp;#39; =&amp;gt; &amp;#39;new.domain.com&amp;#39;}&amp;quot;
+REDIRECTS = eval(ENV[&amp;#39;REDIRECTS&amp;#39;] || &amp;#39;&amp;#39;) || {}
+
+use Rack::Rewrite do
+
+  REDIRECTS.each do |from, to|
+    r301 %r{.*}, &amp;quot;http://#{to}$&amp;amp;&amp;quot;, if: -&amp;gt; (env) { env[&amp;#39;SERVER_NAME&amp;#39;] == from }
+  end
+
+end
+
+# Fall back to default app (empty).
+run -&amp;gt; (env) { [200, {}, []] }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id='steps_for_setting_up_your_own_rerouter_on_heroku'&gt;Steps for setting up your own rerouter on Heroku:&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/joeyAghion/rerouter.git
+cd rerouter
+gem install heroku
+heroku apps:create
+git push heroku master
+heroku config:set REDIRECTS=&amp;quot;{&amp;#39;old.domain.com&amp;#39;=&amp;gt;&amp;#39;new.domain.com&amp;#39;}&amp;quot;
+heroku domains:add old.domain.com&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, update the DNS of &lt;code&gt;old.domain.com&lt;/code&gt; to be a CNAME pointing to the new heroku app.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Eliminating TextMate Lag</title>
     <link rel="alternate" href="/eliminating-textmate-lag/"/>
@@ -218,29 +265,5 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;em&gt;BUT&lt;/em&gt;, if you use &lt;a href='https://rvm.io/'&gt;RVM&lt;/a&gt; and your environment is anything like mine, you might see errors implying that the command&amp;#8217;s &lt;code&gt;PATH&lt;/code&gt; isn&amp;#8217;t set correctly. The reason is that &lt;code&gt;git bisect&lt;/code&gt; prepends &lt;code&gt;/usr/libexec/git-core:/user/bin&lt;/code&gt; to the &lt;code&gt;PATH&lt;/code&gt; when executing your test command, and this can bypass the executables that RVM prefers. The solution:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;git bisect run sh -c &amp;#39;source ~/.rvm/scripts/rvm &amp;amp;&amp;amp; bundle exec rspec spec/models/whoops.rb&amp;#39;&lt;/code&gt;&lt;/pre&gt;</content>
-  </entry>
-  <entry>
-    <title>Reminder: Spend time with your site</title>
-    <link rel="alternate" href="/reminder-spend-time-with-your-site/"/>
-    <id>/reminder-spend-time-with-your-site/</id>
-    <published>2012-07-08T00:00:00Z</published>
-    <updated>2012-07-08T00:00:00Z</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <summary type="html">&lt;p&gt;I&amp;#8217;ve been posting at the &lt;a href='http://artsy.github.com'&gt;Artsy engineering blog&lt;/a&gt;, most recently about how we &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;trick ourselves into sharing end users&amp;#8217; experiences&lt;/a&gt;:&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;I&amp;#8217;ve been posting at the &lt;a href='http://artsy.github.com'&gt;Artsy engineering blog&lt;/a&gt;, most recently about how we &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;trick ourselves into sharing end users&amp;#8217; experiences&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&amp;#8230;we stole a page from the agile development handbook and built an &lt;a href='http://alistair.cockburn.us/Information+radiator'&gt;information radiator&lt;/a&gt;. Like a &lt;a href='http://en.wikipedia.org/wiki/Kanban_board'&gt;kanban board&lt;/a&gt;, news ticker, or &lt;a href='https://demo.geckoboard.com/dashboard/B6782E562794C2F2'&gt;analytics wall board&lt;/a&gt;, our information radiator gives us an ambient awareness of end users&amp;#8217; experiences. How?&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;It&amp;#8217;s our site, as a slideshow.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;That&amp;#8217;s all. Our wall-mounted display shows the same web page that a visitor to our site recently requested. Every 20 seconds, it refreshes and shows a new, more recently requested page.&lt;/p&gt;
-
-&lt;p&gt;Without much effort, this gives us a sense of where users spend time on the site (&lt;em&gt;nudes seem popular today&lt;/em&gt;). The impact of events such as email blasts or celebrity mentions is immediately apparent (&lt;em&gt;did &lt;a href='https://twitter.com/aplusk'&gt;@aplusk&lt;/a&gt; just tweet us?&lt;/em&gt;). And when problems happen, we notice them as soon as errors pop up on the screen (&lt;em&gt;&lt;a href='http://gigaom.com/cloud/some-of-amazon-web-services-are-down-again'&gt;AWS down again?&lt;/a&gt;&lt;/em&gt;).&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Check out the &lt;a href='http://artsy.github.com/blog/2012/07/05/spend-time-with-your-site'&gt;full post&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>

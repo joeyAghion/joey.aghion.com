@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Half a Mind</title>
+    <title>Simple 301 redirects</title>
     
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
@@ -24,22 +24,59 @@
         by <a href="mailto:joey@aghion.com">Joey Aghion</a>
       </header>
       <section>
-        <h1>Archive for
-  
-    Mar 10 2010
-  
-</h1>
+          <h2>
+    <a href="/simple-301-redirects/">Simple 301 redirects</a>
+  </h2>
+  <time datetime="2013-07-12" pubdate>Jul 12, 2013</time>
+  <article>
+    <p>When I switched from <a href='http://halfamind.aghion.com'>halfamind.aghion.com</a> to the more personal <a href='http://joey.aghion.com'>joey.aghion.com</a> for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. <a href='http://pages.github.com'>Github pages</a> (where this is hosted) only supports a single hostname and doesn&#8217;t allow for redirects. You could redirect <a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'>in javascript</a> or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.</p>
 
-  <p>Page 1 of 1</p>
+<p><a href='http://github.com/joeyAghion/rerouter'>Rerouter</a> is a simple rack app that accepts a map of source and destination hostnames. When it receives a request matching a source hostname, it issues a 301 (permanent) redirect to the new hostname while preserving the requested path and querystring.</p>
 
-  
+<p>The complete source is incredibly simple.</p>
 
-<ul>
-  
-    <li><a href="/monit-0/">Monit</a> <span>Mar 10</span></li>
-  
-</ul>
+<h3 id='configru'>config.ru</h3>
 
+<pre><code>require &#39;rack/rewrite&#39;
+
+# Expects ENV[&#39;REDIRECTS&#39;] to be a ruby hash of source =&gt; destination hostnames. E.g.:
+#   &quot;{&#39;old.domain.com&#39; =&gt; &#39;new.domain.com&#39;}&quot;
+REDIRECTS = eval(ENV[&#39;REDIRECTS&#39;] || &#39;&#39;) || {}
+
+use Rack::Rewrite do
+
+  REDIRECTS.each do |from, to|
+    r301 %r{.*}, &quot;http://#{to}$&amp;&quot;, if: -&gt; (env) { env[&#39;SERVER_NAME&#39;] == from }
+  end
+
+end
+
+# Fall back to default app (empty).
+run -&gt; (env) { [200, {}, []] }</code></pre>
+
+<h3 id='steps_for_setting_up_your_own_rerouter_on_heroku'>Steps for setting up your own rerouter on Heroku:</h3>
+
+<pre><code>git clone https://github.com/joeyAghion/rerouter.git
+cd rerouter
+gem install heroku
+heroku apps:create
+git push heroku master
+heroku config:set REDIRECTS=&quot;{&#39;old.domain.com&#39;=&gt;&#39;new.domain.com&#39;}&quot;
+heroku domains:add old.domain.com</code></pre>
+
+<p>Then, update the DNS of <code>old.domain.com</code> to be a CNAME pointing to the new heroku app.</p>
+  </article>
+  
+    <div class="article_footer">
+      <div class="tags">
+        Tags:
+        <a href="/tags/programming/">programming</a>, <a href="/tags/github/">github</a>
+      </div>
+      <div class="timestamp">
+        2013-07-12
+      </div>
+      <div class='clear'></div>
+    </div>
   
 
       </section>
