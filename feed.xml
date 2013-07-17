@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Blog Name</title>
-  <subtitle>Blog subtitle</subtitle>
-  <id>http://blog.url.com/</id>
-  <link href="http://blog.url.com/"/>
-  <link href="http://blog.url.com/feed.xml" rel="self"/>
+  <title>Half a Mind - Joey Aghion</title>
+  <id>http://joey.aghion.com</id>
+  <link href="http://joey.aghion.com"/>
+  <link href="http://joey.aghion.com/feed.xml" rel="self"/>
   <updated>2013-07-12T14:08:00Z</updated>
   <author>
-    <name>Blog Author</name>
+    <name>Joey Aghion</name>
   </author>
   <entry>
     <title>Simple 301 redirects</title>
@@ -16,7 +15,7 @@
     <published>2013-07-12T14:08:00Z</published>
     <updated>2013-07-12T14:08:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Joey Aghion</name>
     </author>
     <summary type="html">&lt;p&gt;When I switched from &lt;a href='http://halfamind.aghion.com'&gt;halfamind.aghion.com&lt;/a&gt; to the more personal &lt;a href='http://joey.aghion.com'&gt;joey.aghion.com&lt;/a&gt; for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. &lt;a href='http://pages.github.com'&gt;Github pages&lt;/a&gt; (where this is hosted) only supports a single hostname and doesn&amp;#8217;t allow for redirects. You could redirect &lt;a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'&gt;in javascript&lt;/a&gt; or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;When I switched from &lt;a href='http://halfamind.aghion.com'&gt;halfamind.aghion.com&lt;/a&gt; to the more personal &lt;a href='http://joey.aghion.com'&gt;joey.aghion.com&lt;/a&gt; for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. &lt;a href='http://pages.github.com'&gt;Github pages&lt;/a&gt; (where this is hosted) only supports a single hostname and doesn&amp;#8217;t allow for redirects. You could redirect &lt;a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'&gt;in javascript&lt;/a&gt; or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.&lt;/p&gt;
@@ -63,7 +62,7 @@ heroku domains:add old.domain.com&lt;/code&gt;&lt;/pre&gt;
     <published>2013-05-21T16:12:00Z</published>
     <updated>2013-05-21T16:12:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Joey Aghion</name>
     </author>
     <summary type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;
@@ -89,7 +88,7 @@ heroku domains:add old.domain.com&lt;/code&gt;&lt;/pre&gt;
     <published>2013-05-01T00:00:00Z</published>
     <updated>2013-05-01T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Joey Aghion</name>
     </author>
     <summary type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;
@@ -119,7 +118,7 @@ heroku domains:add old.domain.com&lt;/code&gt;&lt;/pre&gt;
     <published>2013-04-28T00:00:00Z</published>
     <updated>2013-04-28T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Joey Aghion</name>
     </author>
     <summary type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;
@@ -222,7 +221,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
     <published>2013-03-08T00:00:00Z</published>
     <updated>2013-03-08T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Joey Aghion</name>
     </author>
     <summary type="html">&lt;p&gt;The internet is a maze. Sometimes in my travels through this maze, I circle back on a path I&amp;#8217;ve already traveled. When that happens, my browser tabs start to look like this:&lt;/p&gt;
 &lt;img src='/images/2013-03-08-tabs.png' /&gt;</summary>
@@ -253,7 +252,7 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
     <published>2012-07-24T00:00:00Z</published>
     <updated>2012-07-24T00:00:00Z</updated>
     <author>
-      <name>Article Author</name>
+      <name>Joey Aghion</name>
     </author>
     <summary type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;
