@@ -4,10 +4,30 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2013-09-10T15:37:00Z</updated>
+  <updated>2013-09-13T04:53:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Artsy's experiment with AWS OpsWorks</title>
+    <link rel="alternate" href="/artsy-s-experiment-with-aws-opsworks/"/>
+    <id>/artsy-s-experiment-with-aws-opsworks/</id>
+    <published>2013-09-13T04:53:00Z</published>
+    <updated>2013-09-13T04:53:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;After struggling to make Artsy&amp;#8217;s largest application work within &lt;a href='https://www.heroku.com/'&gt;Heroku&amp;#8217;s&lt;/a&gt; platform for a long while, I began a series of experiments with other providers. Recently, those experiments culminated in switching our application to &lt;a href='http://aws.amazon.com/opsworks/'&gt;AWS OpsWorks&lt;/a&gt;.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;After struggling to make Artsy&amp;#8217;s largest application work within &lt;a href='https://www.heroku.com/'&gt;Heroku&amp;#8217;s&lt;/a&gt; platform for a long while, I began a series of experiments with other providers. Recently, those experiments culminated in switching our application to &lt;a href='http://aws.amazon.com/opsworks/'&gt;AWS OpsWorks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;OpsWorks offered us much more control, but balanced that with good automation and plenty of sane defaults. To help others up the learning curve I wrote an &lt;a href='http://artsy.github.io/blog/2013/08/27/introduction-to-aws-opsworks/'&gt;Introduction to AWS OpsWorks&lt;/a&gt; for the Artsy engineering blog.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;OpsWorks is a new service from Amazon that promises to provide high-level tools to manage your EC2-based deployment&amp;#8230;. If you&amp;#8217;ve been straining at the limits of your Platform as a Service (PaaS) provider, or just wishing for more automation for your EC2 deployment, you may want to try it out too.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href='http://artsy.github.io/blog/2013/08/27/introduction-to-aws-opsworks/'&gt;Continue reading&lt;/a&gt; or visit the &lt;a href='https://news.ycombinator.com/item?id=6297992'&gt;Hacker News comments&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Listing MongoDB collections by size</title>
     <link rel="alternate" href="/listing-mongodb-collections-by-size/"/>
@@ -263,36 +283,5 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 
 &lt;li&gt;&lt;a href='http://middlemanapp.com/pretty-urls/'&gt;&amp;#8220;Pretty&amp;#8221; URLs&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>Unique Tabs - a Chrome extension for staying sane</title>
-    <link rel="alternate" href="/unique-tabs/"/>
-    <id>/unique-tabs/</id>
-    <published>2013-03-08T00:00:00Z</published>
-    <updated>2013-03-08T00:00:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;The internet is a maze. Sometimes in my travels through this maze, I circle back on a path I&amp;#8217;ve already traveled. When that happens, my browser tabs start to look like this:&lt;/p&gt;
-&lt;img src='/images/2013-03-08-tabs.png' /&gt;</summary>
-    <content type="html">&lt;p&gt;The internet is a maze. Sometimes in my travels through this maze, I circle back on a path I&amp;#8217;ve already traveled. When that happens, my browser tabs start to look like this:&lt;/p&gt;
-&lt;img src='/images/2013-03-08-tabs.png' /&gt;
-&lt;p&gt;Some of those tabs are purely redundant. I discovered that Chrome used to include a Labs feature called &amp;#8220;Focus existing tab to open&amp;#8221; that attempted to avoid this, but it seems to have been removed.&lt;/p&gt;
-
-&lt;p&gt;You can now install my solution from the Chrome Web Store:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href='https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk'&gt;Unique Tabs&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Upon opening a new tab or navigating to a new page, it closes any earlier, duplicate tabs in the same window. Before closing the tabs, a notification is displayed. Clicking the notification within a brief delay (~5 seconds) prevents the tabs from being closed.&lt;/p&gt;
-
-&lt;p&gt;There are a lot of tab-management extensions available for Chrome, but none accomplished exactly what I wanted:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Close the duplicate tabs automatically and without interrupting the user&lt;/li&gt;
-
-&lt;li&gt;Allow the default action to be canceled on a case-by-case basis&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Since installing the extension, it&amp;#8217;s closed dozens of tabs for me and helped preserve my sanity (and RAM). I hope you find it useful!&lt;/p&gt;</content>
   </entry>
 </feed>
