@@ -26,6 +26,8 @@
 &lt;p&gt;OpsWorks is a new service from Amazon that promises to provide high-level tools to manage your EC2-based deployment&amp;#8230;. If you&amp;#8217;ve been straining at the limits of your Platform as a Service (PaaS) provider, or just wishing for more automation for your EC2 deployment, you may want to try it out too.&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;p&gt;We&amp;#8217;re all primarily developers, not system administrators. So over the next few months we&amp;#8217;ll be keeping a close watch on how much additional administrative overhead our new platform requires. So far, results have been very promising.&lt;/p&gt;
+
 &lt;p&gt;&lt;a href='http://artsy.github.io/blog/2013/08/27/introduction-to-aws-opsworks/'&gt;Continue reading&lt;/a&gt; or visit the &lt;a href='https://news.ycombinator.com/item?id=6297992'&gt;Hacker News comments&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
