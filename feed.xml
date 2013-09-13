@@ -4,10 +4,60 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2013-07-12T14:08:00Z</updated>
+  <updated>2013-09-10T15:37:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Listing MongoDB collections by size</title>
+    <link rel="alternate" href="/listing-mongodb-collections-by-size/"/>
+    <id>/listing-mongodb-collections-by-size/</id>
+    <published>2013-09-10T15:37:00Z</published>
+    <updated>2013-09-10T15:37:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;In a MongoDB shell, the &lt;code&gt;db.stats()&lt;/code&gt; command shows you the amount of space occupied by the selected database.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; db.stats()
+{
+  &amp;quot;db&amp;quot; : &amp;quot;my-db&amp;quot;,
+  &amp;quot;collections&amp;quot; : 242,
+  &amp;quot;dataSize&amp;quot; : 7167367172,&lt;/code&gt;&lt;/pre&gt;</summary>
+    <content type="html">&lt;p&gt;In a MongoDB shell, the &lt;code&gt;db.stats()&lt;/code&gt; command shows you the amount of space occupied by the selected database.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; db.stats()
+{
+  &amp;quot;db&amp;quot; : &amp;quot;my-db&amp;quot;,
+  &amp;quot;collections&amp;quot; : 242,
+  &amp;quot;dataSize&amp;quot; : 7167367172,
+  &amp;quot;storageSize&amp;quot; : 7885074432,
+   ...
+  &amp;quot;fileSize&amp;quot; : 14958985216,
+  &amp;quot;nsSizeMB&amp;quot; : 16,
+  &amp;quot;ok&amp;quot; : 1
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;db.collection_name.stats()&lt;/code&gt; command returns similar metrics for an individual collection, but there&amp;#8217;s no convenient way to see how the overall metrics are broken down by collection.&lt;/p&gt;
+
+&lt;h3 id='my_solution'&gt;My Solution&lt;/h3&gt;
+
+&lt;p&gt;This javascript lists collections in descending order of size and can be executed directly in the mongo shell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;var collectionNames = db.getCollectionNames(), stats = [];
+collectionNames.forEach(function (n) { stats.push(db[n].stats()); });
+stats = stats.sort(function(a, b) { return b[&amp;#39;size&amp;#39;] - a[&amp;#39;size&amp;#39;]; });
+for (var c in stats) { print(stats[c][&amp;#39;ns&amp;#39;] + &amp;quot;: &amp;quot; + stats[c][&amp;#39;size&amp;#39;] + &amp;quot; (&amp;quot; + stats[c][&amp;#39;storageSize&amp;#39;] + &amp;quot;)&amp;quot;); }&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or, see the gist: &lt;a href='https://gist.github.com/joeyAghion/6511184'&gt;mongodb_collection_sizes.js&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Example output (first metric is &lt;code&gt;size&lt;/code&gt;, second is &lt;code&gt;storageSize&lt;/code&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;my-db.foos: 5568196496 (7455608832)
+my-db.bars: 716999376 (929259520)
+...
+my-db.bazs: 0 (8192)&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
   <entry>
     <title>Simple 301 redirects</title>
     <link rel="alternate" href="/simple-301-redirects/"/>
@@ -244,25 +294,5 @@ Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Since installing the extension, it&amp;#8217;s closed dozens of tabs for me and helped preserve my sanity (and RAM). I hope you find it useful!&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Using `git bisect run` with RVM</title>
-    <link rel="alternate" href="/using-git-bisect-run-with-rvm/"/>
-    <id>/using-git-bisect-run-with-rvm/</id>
-    <published>2012-07-24T00:00:00Z</published>
-    <updated>2012-07-24T00:00:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;If you&amp;#8217;re not familiar with &lt;code&gt;git bisect&lt;/code&gt;, &lt;a href='http://www.kernel.org/pub/software/scm/git/docs/git-bisect.html'&gt;check out the docs&lt;/a&gt;. It&amp;#8217;s an invaluable tool for locating the commit that introduced a failure in your git repository (via binary search). You simply test and mark different code states as &lt;em&gt;good&lt;/em&gt; or &lt;em&gt;bad&lt;/em&gt;, and &lt;code&gt;git bisect&lt;/code&gt; narrows down the offending code.&lt;/p&gt;
-
-&lt;p&gt;If you can test whether a given commit is good or bad with a single command, it gets even better. The &lt;code&gt;git bisect run&lt;/code&gt; command is autopilot for &lt;code&gt;git bisect&lt;/code&gt;&amp;#8211;just specify the command to test each commit and let it loose:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git bisect run bundle exec rspec spec/models/whoops.rb&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;BUT&lt;/em&gt;, if you use &lt;a href='https://rvm.io/'&gt;RVM&lt;/a&gt; and your environment is anything like mine, you might see errors implying that the command&amp;#8217;s &lt;code&gt;PATH&lt;/code&gt; isn&amp;#8217;t set correctly. The reason is that &lt;code&gt;git bisect&lt;/code&gt; prepends &lt;code&gt;/usr/libexec/git-core:/user/bin&lt;/code&gt; to the &lt;code&gt;PATH&lt;/code&gt; when executing your test command, and this can bypass the executables that RVM prefers. The solution:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git bisect run sh -c &amp;#39;source ~/.rvm/scripts/rvm &amp;amp;&amp;amp; bundle exec rspec spec/models/whoops.rb&amp;#39;&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
 </feed>
