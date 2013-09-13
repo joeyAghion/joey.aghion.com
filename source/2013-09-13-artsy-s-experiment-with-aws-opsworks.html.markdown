@@ -10,4 +10,6 @@ OpsWorks offered us much more control, but balanced that with good automation an
 
 > OpsWorks is a new service from Amazon that promises to provide high-level tools to manage your EC2-based deployment.... If you've been straining at the limits of your Platform as a Service (PaaS) provider, or just wishing for more automation for your EC2 deployment, you may want to try it out too.
 
+We're all primarily developers, not system administrators. So over the next few months we'll be keeping a close watch on how much additional administrative overhead our new platform requires. So far, results have been very promising.
+
 [Continue reading](http://artsy.github.io/blog/2013/08/27/introduction-to-aws-opsworks/) or visit the [Hacker News comments](https://news.ycombinator.com/item?id=6297992).
