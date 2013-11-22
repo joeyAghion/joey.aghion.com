@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem "middleman", "~> 3.0.12"
 gem "middleman-blog", "~> 3.1.1"
