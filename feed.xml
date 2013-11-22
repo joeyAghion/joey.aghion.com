@@ -26,10 +26,6 @@
 
 &lt;pre&gt;&lt;code&gt;gem &amp;#39;console_color&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;And re-install the bundle:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; bundle&lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Your console will look like:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt='production console' src='http://f.cl.ly/items/3U2M3c1c230s0S2X3n22/Screen%20Shot%202013-11-22%20at%2012.06.43%20AM.png' /&gt;&lt;/p&gt;
@@ -37,6 +33,8 @@
 &lt;p&gt;I.e., DANGER. Or:&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt='development console' src='http://f.cl.ly/items/3j1o3w3N1E382a211d1P/Screen%20Shot%202013-11-21%20at%2011.48.18%20PM.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sure&amp;#8211;it&amp;#8217;s frivolous. But maybe it&amp;#8217;ll save you some trouble.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href='https://github.com/joeyAghion/console_color'&gt;Visit console_color on GitHub for more details.&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
