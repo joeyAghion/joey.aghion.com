@@ -4,10 +4,42 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2013-09-13T04:53:00Z</updated>
+  <updated>2013-11-22T14:38:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Let console_color keep you out of trouble</title>
+    <link rel="alternate" href="/let-console_color-keep-you-out-of-trouble/"/>
+    <id>/let-console_color-keep-you-out-of-trouble/</id>
+    <published>2013-11-22T14:38:00Z</published>
+    <updated>2013-11-22T14:38:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;Who hasn&amp;#8217;t mistakenly typed into a production Rails console thinking it was development?&lt;/p&gt;
+
+&lt;p&gt;Introducing &lt;a href='https://github.com/joeyAghion/console_color'&gt;console_color&lt;/a&gt;, so you&amp;#8217;re never unsure of your environment. To install, add &lt;code&gt;console_color&lt;/code&gt; to your Gemfile:&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Who hasn&amp;#8217;t mistakenly typed into a production Rails console thinking it was development?&lt;/p&gt;
+
+&lt;p&gt;Introducing &lt;a href='https://github.com/joeyAghion/console_color'&gt;console_color&lt;/a&gt;, so you&amp;#8217;re never unsure of your environment. To install, add &lt;code&gt;console_color&lt;/code&gt; to your Gemfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem &amp;#39;console_color&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And re-install the bundle:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; bundle&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Your console will look like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='production console' src='http://f.cl.ly/items/3U2M3c1c230s0S2X3n22/Screen%20Shot%202013-11-22%20at%2012.06.43%20AM.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;I.e., DANGER. Or:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt='development console' src='http://f.cl.ly/items/3j1o3w3N1E382a211d1P/Screen%20Shot%202013-11-21%20at%2011.48.18%20PM.png' /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='https://github.com/joeyAghion/console_color'&gt;Visit console_color on GitHub for more details.&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Artsy's experiment with AWS OpsWorks</title>
     <link rel="alternate" href="/artsy-s-experiment-with-aws-opsworks/"/>
@@ -182,108 +214,5 @@ heroku domains:add old.domain.com&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now, you just need to type &lt;code&gt;&amp;gt;&lt;/code&gt; (or your preferred keyword) and hit &lt;code&gt;Tab&lt;/code&gt; to type a query. When you hit &lt;code&gt;Enter&lt;/code&gt;, you&amp;#8217;ll navigate directly to the first result.&lt;/p&gt;
 
 &lt;p&gt;&lt;img alt='Search Im feeling lucky' src='/images/2013-05-01-search-im-feeling-lucky.png' /&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Building a blog with Middleman and GitHub pages</title>
-    <link rel="alternate" href="/building-a-blog-with-middleman-and-github-pages/"/>
-    <id>/building-a-blog-with-middleman-and-github-pages/</id>
-    <published>2013-04-28T00:00:00Z</published>
-    <updated>2013-04-28T00:00:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;&lt;a href='http://blog.posterous.com/thanks-from-posterous'&gt;Posterous is shutting down&lt;/a&gt;, so I was finally forced to figure out a better blogging solution. Since my &lt;a href='http://artsy.net'&gt;day job&lt;/a&gt; revolves around building and maintaining dynamic sites, that was exactly what I &lt;em&gt;didn&amp;#8217;t&lt;/em&gt; want for my personal site. Enter &lt;a href='http://middlemanapp.com/'&gt;Middleman&lt;/a&gt;, the super-simple &lt;strong&gt;static&lt;/strong&gt; site engine. Best of all, it uses a toolchain that&amp;#8217;s very familiar to Ruby developers.&lt;/p&gt;
-
-&lt;h3 id='getting_started'&gt;Getting Started&lt;/h3&gt;
-
-&lt;p&gt;The &lt;a href='https://github.com/middleman/middleman'&gt;middleman&lt;/a&gt; gem supports static sites of all sorts, but since this site is primarily a blog, I reached straight for the &lt;a href='https://github.com/middleman/middleman-blog'&gt;middleman-blog&lt;/a&gt; extension.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gem install middleman-blog
-middleman init myblog --template=blog&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This generates the following folder structure:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;myblog
- |- .gitignore
- |- config.rb
- |- Gemfile
- |- Gemfile.lock
- |- source
-    |- 2012-01-01-example-article.html.markdown
-    |- calendar.html.erb
-    |- feed.xml.builder
-    |- images
-    |- index.html.erb
-    |- javascripts
-    |- layout.erb
-    |- stylesheets
-    |- tag.html.erb&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Those files and folders are almost self-explanatory, but to call out a few:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;config.rb&lt;/strong&gt; holds all of middleman&amp;#8217;s configuration, including a block for blog-specific settings.&lt;/li&gt;
-
-&lt;li&gt;&lt;strong&gt;source&lt;/strong&gt; holds just that&amp;#8212;the source files. These are later compiled (according to the middleman settings you&amp;#8217;ve chosen) into a &lt;strong&gt;build&lt;/strong&gt; directory that contains the final site&amp;#8217;s files.&lt;/li&gt;
-
-&lt;li&gt;&lt;strong&gt;layout.erb&lt;/strong&gt; is the main site layout. ERB is the default, but middleman supports &lt;a href='http://middlemanapp.com/templates/'&gt;many other templating engines&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id='creating_an_article'&gt;Creating an article&lt;/h3&gt;
-
-&lt;p&gt;Actually, there&amp;#8217;s an example article included. But, to create our own:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bundle exec middleman article &amp;quot;Launching my blog&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This creates a new source file at &lt;code&gt;source/2013-04-28-launching-my-blog.html.markdown&lt;/code&gt; with the appropriate YAML-formatted &amp;#8220;frontmatter.&amp;#8221; You can add comma-delimited tags and compose the post in markdown:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;---
-title: Launching my blog
-date: 2013-04-28 03:26 UTC
-tags: posterous, github pages
----
-
-Buh bye posterous!&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After starting up the development server with &lt;code&gt;bundle exec middleman&lt;/code&gt;, we can open http://localhost:4567 to check our work:&lt;/p&gt;
-&lt;img alt='Initial middleman screenshot' src='/images/2013-04-28-middleman-screenshot.png' /&gt;
-&lt;p&gt;It&amp;#8217;s unsightly for now, but&amp;#8212;when deployed as static HTML&amp;#8212;it&amp;#8217;s very, very fast.&lt;/p&gt;
-
-&lt;h3 id='deploying'&gt;Deploying&lt;/h3&gt;
-
-&lt;p&gt;To compile the full site&amp;#8217;s static content:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bundle exec middleman build&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Note that the &lt;code&gt;build&lt;/code&gt; folder containing the compiled site is &lt;em&gt;not&lt;/em&gt; checked in (it&amp;#8217;s listed in the default &lt;code&gt;.gitignore&lt;/code&gt; file).&lt;/p&gt;
-
-&lt;p&gt;At this stage, that folder&amp;#8217;s contents could be hosted just about anywhere. We&amp;#8217;ll deploy our site to &lt;a href='http://pages.github.com/'&gt;github pages&lt;/a&gt; with help from the &lt;a href='https://github.com/neo/middleman-gh-pages'&gt;middleman-gh-pages&lt;/a&gt; gem. First, we add it to the Gemfile:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;gem &amp;quot;middleman-gh-pages&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And require it in a &lt;code&gt;Rakefile&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;require &amp;#39;middleman-gh-pages&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After bundle-installing again, we&amp;#8217;ll have a new &lt;code&gt;publish&lt;/code&gt; rake task that pushes the static site to a special &lt;code&gt;gh-pages&lt;/code&gt; branch on the same remote as the source. (If you haven&amp;#8217;t made a github repo for this project yet, now would be a good time.)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bundle exec rake publish&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This last step is worth explaining. The &amp;#8220;gh-pages&amp;#8221; branch is specially named so that Github will publish its contents to your site at &lt;em&gt;username.github.io/projectname&lt;/em&gt;. It&amp;#8217;s an &amp;#8220;orphan&amp;#8221; branch (meaning it has no parents). I.e., it&amp;#8217;s completely divorced from your master branch&amp;#8217;s content. The master branch contains your source files, and the static files compiled to the &lt;code&gt;build&lt;/code&gt; subdirectory become the root folder&amp;#8217;s content in the &lt;code&gt;gh-pages&lt;/code&gt; branch. Luckily, you don&amp;#8217;t have to manage the &lt;code&gt;gh-pages&lt;/code&gt; branch directly; the &lt;code&gt;publish&lt;/code&gt; task takes care of compiling your site and creating the corresponding commits on &lt;code&gt;gh-pages&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Finally, setting up a nice domain for your site is as simple as updating DNS records and adding a &lt;code&gt;CNAME&lt;/code&gt; file to the root of your site (or, in middleman&amp;#8217;s case, the &lt;code&gt;source&lt;/code&gt; directory) with the specified domain. &lt;a href='https://help.github.com/articles/setting-up-a-custom-domain-with-pages'&gt;See github&amp;#8217;s more detailed instructions.&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Styling the site is left as an exercise, or feel free to borrow from &lt;a href='http://github.com/joeyAghion/joey.aghion.com'&gt;this site&amp;#8217;s source&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id='more_information'&gt;More information&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Advanced features, community extensions, and more at &lt;a href='http://middlemanapp.com'&gt;the middleman site&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;a href='http://middlemanapp.com/blogging/'&gt;middleman-blog extension&lt;/a&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;a href='http://middlemanapp.com/pretty-urls/'&gt;&amp;#8220;Pretty&amp;#8221; URLs&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content>
   </entry>
 </feed>
