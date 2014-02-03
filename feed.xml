@@ -4,10 +4,28 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2013-11-22T14:38:00Z</updated>
+  <updated>2014-01-30T16:38:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>New Artsy post: Isolating Spurious and Nondeterministic Tests</title>
+    <link rel="alternate" href="/new-artsy-post-isolating-spurious-and-nondeterministic-tests/"/>
+    <id>/new-artsy-post-isolating-spurious-and-nondeterministic-tests/</id>
+    <published>2014-01-30T16:38:00Z</published>
+    <updated>2014-01-30T16:38:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;Solid tests are a great asset. Tests that fail spurously are toxic; they threaten our ability to ship quickly and our confidence in the end product.&lt;/p&gt;
+
+&lt;p&gt;We&amp;#8217;re now experimenting with a test &amp;#8220;quarantine&amp;#8221;&amp;#8211;a suite of problematic tests that&amp;#8217;s isolated from the usual build pipeline and limited in size.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Solid tests are a great asset. Tests that fail spurously are toxic; they threaten our ability to ship quickly and our confidence in the end product.&lt;/p&gt;
+
+&lt;p&gt;We&amp;#8217;re now experimenting with a test &amp;#8220;quarantine&amp;#8221;&amp;#8211;a suite of problematic tests that&amp;#8217;s isolated from the usual build pipeline and limited in size.&lt;/p&gt;
+
+&lt;p&gt;Read more on the Artsy engineering blog: &lt;a href='http://artsy.github.io/blog/2014/01/30/isolating-spurious-and-nondeterministic-tests/'&gt;Isolating Spurious and Nondeterministic Tests&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Let console_color keep you out of trouble</title>
     <link rel="alternate" href="/let-console_color-keep-you-out-of-trouble/"/>
@@ -182,35 +200,5 @@ heroku domains:add old.domain.com&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id='disable_project_tree_refresh_with_remate'&gt;Disable project tree refresh with ReMate&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href='http://ciaranwal.sh/remate/'&gt;The ReMate plugin&lt;/a&gt; adds a &lt;em&gt;Disable Refresh on Regaining Focus&lt;/em&gt; item to the &lt;em&gt;Window&lt;/em&gt; menu. Download and extract the plugin, double click to add to TextMate, and relaunch TextMate. Then, check the new menu option to disable the project refresh behavior entirely. (You can always temporarily uncheck it to refresh the project state.)&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>A Search Shortcut for "I'm Feeling Lucky"</title>
-    <link rel="alternate" href="/a-search-shortcut-for-i-m-feeling-lucky/"/>
-    <id>/a-search-shortcut-for-i-m-feeling-lucky/</id>
-    <published>2013-05-01T00:00:00Z</published>
-    <updated>2013-05-01T00:00:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;I don&amp;#8217;t make an effort to remember URLs, so often I type the name of a site into the Chrome location bar, hit enter, and then immediately click on the first search result to navigate to the site. There&amp;#8217;s at least one unnecessary click in there, so&amp;#8230;&lt;/p&gt;
-
-&lt;p&gt;I created a custom search engine in Chrome for Google&amp;#8217;s &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt; function.&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Go to &lt;strong&gt;Settings&lt;/strong&gt;, then &lt;strong&gt;Manage search engines&amp;#8230;&lt;/strong&gt;&lt;/li&gt;
-
-&lt;li&gt;At the bottom of the &lt;strong&gt;Other search engines&lt;/strong&gt; list, add a new entry called &lt;em&gt;I&amp;#8217;m Feeling Lucky&lt;/em&gt;&lt;/li&gt;
-
-&lt;li&gt;For &lt;strong&gt;Keyword&lt;/strong&gt;, choose a convenient shortcut. I chose the single character &lt;em&gt;&amp;gt;&lt;/em&gt;&lt;/li&gt;
-
-&lt;li&gt;For &lt;strong&gt;URL&lt;/strong&gt;, enter: &lt;em&gt;http://www.google.com/search?hl=en&amp;amp;q=%s&amp;amp;btnI=I%27m+Feeling+Lucky&amp;amp;aq=f&amp;amp;oq=&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img alt='Manage search engines screenshot' src='/images/2013-05-01-manage-search-engines.png' /&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, you just need to type &lt;code&gt;&amp;gt;&lt;/code&gt; (or your preferred keyword) and hit &lt;code&gt;Tab&lt;/code&gt; to type a query. When you hit &lt;code&gt;Enter&lt;/code&gt;, you&amp;#8217;ll navigate directly to the first result.&lt;/p&gt;
-
-&lt;p&gt;&lt;img alt='Search Im feeling lucky' src='/images/2013-05-01-search-im-feeling-lucky.png' /&gt;&lt;/p&gt;</content>
   </entry>
 </feed>
