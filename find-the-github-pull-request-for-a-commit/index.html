@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Find the github pull request for a commit</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="alternate" type="application/rss+xml"  href="/feed.xml" title="Half a Mind - Joey Aghion">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/find-the-github-pull-request-for-a-commit/">Find the github pull request for a commit</a>
+  </h2>
+  <time datetime="2014-02-19" pubdate>Feb 19, 2014</time>
+  <article>
+    <p>Inspired by the post <a href='http://mislav.uniqpath.com/2014/02/hidden-documentation/'>Every line of code is always documented</a>, I upgraded my development environment with a few new tools:</p>
+
+<ul>
+<li><a href='https://github.com/cbumgard/GitCommitMsg'>GitCommitMsg</a> plug-in for Sublime Text - provides easy access to the entire commit history for selected lines.</li>
+
+<li>The <code>pr_for_sha</code> command below (stored in my ~/.bash_profile) - If you employ <a href='http://scottchacon.com/2011/08/31/github-flow.html'>github flow</a>, this command pops open the github page for the pull request where a given commit originated:</li>
+</ul>
+<pre>
+export GITHUB_UPSTREAM=artsy
+
+function pr_for_sha {
+  git log --merges --ancestry-path --oneline $1..master | grep 'pull request' | tail -n1 | awk '{print $5}' | cut -c2- | xargs -I % open https://github.com/$GITHUB_UPSTREAM/${PWD##*/}/pull/%
+}
+</pre>
+<p>Just update <code>GITHUB_UPSTREAM</code> to match whatever you call your upstream repo (e.g., <code>upstream</code> or <code>origin</code>).</p>
+
+<p>And if you&#8217;re not already using them, you should of course install these Sublime Text plug-ins (via <a href='https://sublime.wbond.net/'>Package Control</a>):</p>
+
+<ul>
+<li><a href='https://github.com/kemayo/sublime-text-git'>Git</a> - integrates the ever-useful <strong>Git Blame</strong> command.</li>
+
+<li><a href='http://www.jisaacks.com/gitgutter'>GitGutter</a> - indicates added, removed, and modified lines right in your editor.</li>
+</ul>
+  </article>
+  
+    <div class="article_footer">
+      <div class="tags">
+        Tags:
+        <a href="/tags/programming/">programming</a>, <a href="/tags/github/">github</a>, <a href="/tags/bash/">bash</a>
+      </div>
+      <div class="timestamp">
+        2014-02-19
+      </div>
+      <div class='clear'></div>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/find-the-github-pull-request-for-a-commit/">Find the github pull request for a commit</a> <span>Feb 19</span></li>
+            
+              
+              <li><a href="/new-artsy-post-isolating-spurious-and-nondeterministic-tests/">New Artsy post: Isolating Spurious and Nondeterministic Tests</a> <span>Jan 30</span></li>
+            
+              
+              <li><a href="/let-console_color-keep-you-out-of-trouble/">Let console_color keep you out of trouble</a> <span>Nov 22</span></li>
+            
+              
+              <li><a href="/artsy-s-experiment-with-aws-opsworks/">Artsy's experiment with AWS OpsWorks</a> <span>Sep 13</span></li>
+            
+              
+              <li><a href="/listing-mongodb-collections-by-size/">Listing MongoDB collections by size</a> <span>Sep 10</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/programming/">programming (20)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/ruby/">ruby (8)</a></li>
+            
+              
+              <li><a href="/tags/tools/">tools (6)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

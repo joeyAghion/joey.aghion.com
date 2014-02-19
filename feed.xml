@@ -4,10 +4,48 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2014-01-30T16:38:00Z</updated>
+  <updated>2014-02-19T16:21:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Find the github pull request for a commit</title>
+    <link rel="alternate" href="/find-the-github-pull-request-for-a-commit/"/>
+    <id>/find-the-github-pull-request-for-a-commit/</id>
+    <published>2014-02-19T16:21:00Z</published>
+    <updated>2014-02-19T16:21:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;Inspired by the post &lt;a href='http://mislav.uniqpath.com/2014/02/hidden-documentation/'&gt;Every line of code is always documented&lt;/a&gt;, I upgraded my development environment with a few new tools:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='https://github.com/cbumgard/GitCommitMsg'&gt;GitCommitMsg&lt;/a&gt; plug-in for Sublime Text - provides easy access to the entire commit history for selected lines.&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    <content type="html">&lt;p&gt;Inspired by the post &lt;a href='http://mislav.uniqpath.com/2014/02/hidden-documentation/'&gt;Every line of code is always documented&lt;/a&gt;, I upgraded my development environment with a few new tools:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='https://github.com/cbumgard/GitCommitMsg'&gt;GitCommitMsg&lt;/a&gt; plug-in for Sublime Text - provides easy access to the entire commit history for selected lines.&lt;/li&gt;
+
+&lt;li&gt;The &lt;code&gt;pr_for_sha&lt;/code&gt; command below (stored in my ~/.bash_profile) - If you employ &lt;a href='http://scottchacon.com/2011/08/31/github-flow.html'&gt;github flow&lt;/a&gt;, this command pops open the github page for the pull request where a given commit originated:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;
+export GITHUB_UPSTREAM=artsy
+
+function pr_for_sha {
+  git log --merges --ancestry-path --oneline $1..master | grep 'pull request' | tail -n1 | awk '{print $5}' | cut -c2- | xargs -I % open https://github.com/$GITHUB_UPSTREAM/${PWD##*/}/pull/%
+}
+&lt;/pre&gt;
+&lt;p&gt;Just update &lt;code&gt;GITHUB_UPSTREAM&lt;/code&gt; to match whatever you call your upstream repo (e.g., &lt;code&gt;upstream&lt;/code&gt; or &lt;code&gt;origin&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;And if you&amp;#8217;re not already using them, you should of course install these Sublime Text plug-ins (via &lt;a href='https://sublime.wbond.net/'&gt;Package Control&lt;/a&gt;):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href='https://github.com/kemayo/sublime-text-git'&gt;Git&lt;/a&gt; - integrates the ever-useful &lt;strong&gt;Git Blame&lt;/strong&gt; command.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href='http://www.jisaacks.com/gitgutter'&gt;GitGutter&lt;/a&gt; - indicates added, removed, and modified lines right in your editor.&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>New Artsy post: Isolating Spurious and Nondeterministic Tests</title>
     <link rel="alternate" href="/new-artsy-post-isolating-spurious-and-nondeterministic-tests/"/>
@@ -174,31 +212,5 @@ heroku config:set REDIRECTS=&amp;quot;{&amp;#39;old.domain.com&amp;#39;=&amp;gt;
 heroku domains:add old.domain.com&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Then, update the DNS of &lt;code&gt;old.domain.com&lt;/code&gt; to be a CNAME pointing to the new heroku app.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Eliminating TextMate Lag</title>
-    <link rel="alternate" href="/eliminating-textmate-lag/"/>
-    <id>/eliminating-textmate-lag/</id>
-    <published>2013-05-21T16:12:00Z</published>
-    <updated>2013-05-21T16:12:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;I&amp;#8217;m still using &lt;a href='http://macromates.com/'&gt;TextMate 1&lt;/a&gt;, since 2.0 has been buggy for me. If you&amp;#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&amp;#8217;s file state on focus, and this can be noticeably slow.&lt;/p&gt;
-
-&lt;p&gt;These tips have eliminated the problem for me. Feel free to mix and match:&lt;/p&gt;
-
-&lt;h3 id='avoid_loading_the_entire_project_directory'&gt;Avoid loading the entire project directory&lt;/h3&gt;
-
-&lt;p&gt;If you&amp;#8217;re working with a Rails project, you can avoid loading the heavy &lt;code&gt;log/&lt;/code&gt; and &lt;code&gt;tmp/&lt;/code&gt; directories with the &lt;code&gt;mater&lt;/code&gt; alias. Just put this in one of your shell start-up scripts:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;alias mater=&amp;quot;ls | grep -Ev &amp;#39;log|tmp&amp;#39; | xargs mate&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Adjust for other project types.&lt;/p&gt;
-
-&lt;h3 id='disable_project_tree_refresh_with_remate'&gt;Disable project tree refresh with ReMate&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href='http://ciaranwal.sh/remate/'&gt;The ReMate plugin&lt;/a&gt; adds a &lt;em&gt;Disable Refresh on Regaining Focus&lt;/em&gt; item to the &lt;em&gt;Window&lt;/em&gt; menu. Download and extract the plugin, double click to add to TextMate, and relaunch TextMate. Then, check the new menu option to disable the project refresh behavior entirely. (You can always temporarily uncheck it to refresh the project state.)&lt;/p&gt;</content>
   </entry>
 </feed>
