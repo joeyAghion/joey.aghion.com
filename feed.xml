@@ -4,10 +4,24 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2014-02-19T16:21:00Z</updated>
+  <updated>2014-04-10T23:48:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Refactoring Infrastructure</title>
+    <link rel="alternate" href="/refactoring-infrastructure/"/>
+    <id>/refactoring-infrastructure/</id>
+    <published>2014-04-10T23:48:00Z</published>
+    <updated>2014-04-10T23:48:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;Artsy has been growing its audience and scaling its systems. In the process, we&amp;#8217;ve been launching new services and extracting, migrating, or discarding existing ones. I wrote &lt;a href='http://artsy.github.io/blog/2014/04/02/refactoring-infrastructure/'&gt;Refactoring Infrastructure&lt;/a&gt; about how we&amp;#8217;ve done that with incremental improvements and minimal interruption.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Artsy has been growing its audience and scaling its systems. In the process, we&amp;#8217;ve been launching new services and extracting, migrating, or discarding existing ones. I wrote &lt;a href='http://artsy.github.io/blog/2014/04/02/refactoring-infrastructure/'&gt;Refactoring Infrastructure&lt;/a&gt; about how we&amp;#8217;ve done that with incremental improvements and minimal interruption.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='http://artsy.github.io/blog/2014/04/02/refactoring-infrastructure/'&gt;Visit the Artsy engineering blog to continue reading&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Find the github pull request for a commit</title>
     <link rel="alternate" href="/find-the-github-pull-request-for-a-commit/"/>
@@ -165,52 +179,5 @@ for (var c in stats) { print(stats[c][&amp;#39;ns&amp;#39;] + &amp;quot;: &amp;q
 my-db.bars: 716999376 (929259520)
 ...
 my-db.bazs: 0 (8192)&lt;/code&gt;&lt;/pre&gt;</content>
-  </entry>
-  <entry>
-    <title>Simple 301 redirects</title>
-    <link rel="alternate" href="/simple-301-redirects/"/>
-    <id>/simple-301-redirects/</id>
-    <published>2013-07-12T14:08:00Z</published>
-    <updated>2013-07-12T14:08:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;When I switched from &lt;a href='http://halfamind.aghion.com'&gt;halfamind.aghion.com&lt;/a&gt; to the more personal &lt;a href='http://joey.aghion.com'&gt;joey.aghion.com&lt;/a&gt; for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. &lt;a href='http://pages.github.com'&gt;Github pages&lt;/a&gt; (where this is hosted) only supports a single hostname and doesn&amp;#8217;t allow for redirects. You could redirect &lt;a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'&gt;in javascript&lt;/a&gt; or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;When I switched from &lt;a href='http://halfamind.aghion.com'&gt;halfamind.aghion.com&lt;/a&gt; to the more personal &lt;a href='http://joey.aghion.com'&gt;joey.aghion.com&lt;/a&gt; for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. &lt;a href='http://pages.github.com'&gt;Github pages&lt;/a&gt; (where this is hosted) only supports a single hostname and doesn&amp;#8217;t allow for redirects. You could redirect &lt;a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'&gt;in javascript&lt;/a&gt; or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href='http://github.com/joeyAghion/rerouter'&gt;Rerouter&lt;/a&gt; is a simple rack app that accepts a map of source and destination hostnames. When it receives a request matching a source hostname, it issues a 301 (permanent) redirect to the new hostname while preserving the requested path and querystring.&lt;/p&gt;
-
-&lt;p&gt;The complete source is incredibly simple.&lt;/p&gt;
-
-&lt;h3 id='configru'&gt;config.ru&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;require &amp;#39;rack/rewrite&amp;#39;
-
-# Expects ENV[&amp;#39;REDIRECTS&amp;#39;] to be a ruby hash of source =&amp;gt; destination hostnames. E.g.:
-#   &amp;quot;{&amp;#39;old.domain.com&amp;#39; =&amp;gt; &amp;#39;new.domain.com&amp;#39;}&amp;quot;
-REDIRECTS = eval(ENV[&amp;#39;REDIRECTS&amp;#39;] || &amp;#39;&amp;#39;) || {}
-
-use Rack::Rewrite do
-
-  REDIRECTS.each do |from, to|
-    r301 %r{.*}, &amp;quot;http://#{to}$&amp;amp;&amp;quot;, if: -&amp;gt; (env) { env[&amp;#39;SERVER_NAME&amp;#39;] == from }
-  end
-
-end
-
-# Fall back to default app (empty).
-run -&amp;gt; (env) { [200, {}, []] }&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id='steps_for_setting_up_your_own_rerouter_on_heroku'&gt;Steps for setting up your own rerouter on Heroku:&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/joeyAghion/rerouter.git
-cd rerouter
-gem install heroku
-heroku apps:create
-git push heroku master
-heroku config:set REDIRECTS=&amp;quot;{&amp;#39;old.domain.com&amp;#39;=&amp;gt;&amp;#39;new.domain.com&amp;#39;}&amp;quot;
-heroku domains:add old.domain.com&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then, update the DNS of &lt;code&gt;old.domain.com&lt;/code&gt; to be a CNAME pointing to the new heroku app.&lt;/p&gt;</content>
   </entry>
 </feed>
