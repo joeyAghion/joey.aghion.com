@@ -4,10 +4,24 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2014-04-10T23:48:00Z</updated>
+  <updated>2014-05-13T20:04:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Mourning the Monolith</title>
+    <link rel="alternate" href="/mourning-the-monolith/"/>
+    <id>/mourning-the-monolith/</id>
+    <published>2014-05-13T20:04:00Z</published>
+    <updated>2014-05-13T20:04:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;We at &lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; have been carving a monolith into separate applications. It&amp;#8217;s an appropriate move at our scale and complexity, but not as easy a decision as some might believe. One casualty: the usefulness of our tests.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;We at &lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; have been carving a monolith into separate applications. It&amp;#8217;s an appropriate move at our scale and complexity, but not as easy a decision as some might believe. One casualty: the usefulness of our tests.&lt;/p&gt;
+
+&lt;p&gt;Read on at the Artsy engineering blog: &lt;a href='http://artsy.github.io/blog/2014/05/12/continuous-integration-for-service-oriented-architectures/'&gt;Coninuous Integration for Service-Oriented Architectures&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Refactoring Infrastructure</title>
     <link rel="alternate" href="/refactoring-infrastructure/"/>
@@ -129,55 +143,5 @@ function pr_for_sha {
 &lt;p&gt;We&amp;#8217;re all primarily developers, not system administrators. So over the next few months we&amp;#8217;ll be keeping a close watch on how much additional administrative overhead our new platform requires. So far, results have been very promising.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href='http://artsy.github.io/blog/2013/08/27/introduction-to-aws-opsworks/'&gt;Continue reading&lt;/a&gt; or visit the &lt;a href='https://news.ycombinator.com/item?id=6297992'&gt;Hacker News comments&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Listing MongoDB collections by size</title>
-    <link rel="alternate" href="/listing-mongodb-collections-by-size/"/>
-    <id>/listing-mongodb-collections-by-size/</id>
-    <published>2013-09-10T15:37:00Z</published>
-    <updated>2013-09-10T15:37:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;In a MongoDB shell, the &lt;code&gt;db.stats()&lt;/code&gt; command shows you the amount of space occupied by the selected database.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; db.stats()
-{
-  &amp;quot;db&amp;quot; : &amp;quot;my-db&amp;quot;,
-  &amp;quot;collections&amp;quot; : 242,
-  &amp;quot;dataSize&amp;quot; : 7167367172,&lt;/code&gt;&lt;/pre&gt;</summary>
-    <content type="html">&lt;p&gt;In a MongoDB shell, the &lt;code&gt;db.stats()&lt;/code&gt; command shows you the amount of space occupied by the selected database.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;gt; db.stats()
-{
-  &amp;quot;db&amp;quot; : &amp;quot;my-db&amp;quot;,
-  &amp;quot;collections&amp;quot; : 242,
-  &amp;quot;dataSize&amp;quot; : 7167367172,
-  &amp;quot;storageSize&amp;quot; : 7885074432,
-   ...
-  &amp;quot;fileSize&amp;quot; : 14958985216,
-  &amp;quot;nsSizeMB&amp;quot; : 16,
-  &amp;quot;ok&amp;quot; : 1
-}&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The &lt;code&gt;db.collection_name.stats()&lt;/code&gt; command returns similar metrics for an individual collection, but there&amp;#8217;s no convenient way to see how the overall metrics are broken down by collection.&lt;/p&gt;
-
-&lt;h3 id='my_solution'&gt;My Solution&lt;/h3&gt;
-
-&lt;p&gt;This javascript lists collections in descending order of size and can be executed directly in the mongo shell:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;var collectionNames = db.getCollectionNames(), stats = [];
-collectionNames.forEach(function (n) { stats.push(db[n].stats()); });
-stats = stats.sort(function(a, b) { return b[&amp;#39;size&amp;#39;] - a[&amp;#39;size&amp;#39;]; });
-for (var c in stats) { print(stats[c][&amp;#39;ns&amp;#39;] + &amp;quot;: &amp;quot; + stats[c][&amp;#39;size&amp;#39;] + &amp;quot; (&amp;quot; + stats[c][&amp;#39;storageSize&amp;#39;] + &amp;quot;)&amp;quot;); }&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Or, see the gist: &lt;a href='https://gist.github.com/joeyAghion/6511184'&gt;mongodb_collection_sizes.js&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Example output (first metric is &lt;code&gt;size&lt;/code&gt;, second is &lt;code&gt;storageSize&lt;/code&gt;):&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;my-db.foos: 5568196496 (7455608832)
-my-db.bars: 716999376 (929259520)
-...
-my-db.bazs: 0 (8192)&lt;/code&gt;&lt;/pre&gt;</content>
   </entry>
 </feed>
