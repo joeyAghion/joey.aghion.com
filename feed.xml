@@ -4,10 +4,27 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2014-05-13T20:04:00Z</updated>
+  <updated>2014-06-09T21:52:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Unique Tabs v0.4 now available</title>
+    <link rel="alternate" href="/unique-tabs-v0-4-now-available/"/>
+    <id>/unique-tabs-v0-4-now-available/</id>
+    <published>2014-06-09T21:52:00Z</published>
+    <updated>2014-06-09T21:52:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;Chrome&amp;#8217;s recent update removed the &lt;code&gt;webkitNotifications&lt;/code&gt; API, which broke Unique Tabs briefly. I&amp;#8217;ve just pushed version 0.4 of the extension. Enjoy!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk'&gt;Add Unique Tabs from the Chrome web store&lt;/a&gt;&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;Chrome&amp;#8217;s recent update removed the &lt;code&gt;webkitNotifications&lt;/code&gt; API, which broke Unique Tabs briefly. I&amp;#8217;ve just pushed version 0.4 of the extension. Enjoy!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href='https://chrome.google.com/webstore/detail/unique-tabs/cicbejncjmbkbahiicbiflndmhbcgibk'&gt;Add Unique Tabs from the Chrome web store&lt;/a&gt;&lt;/p&gt;
+&lt;img alt='Unique Tabs screenshot' src='/images/2014-06-09-unique-tabs.png' /&gt;</content>
+  </entry>
   <entry>
     <title>Mourning the Monolith</title>
     <link rel="alternate" href="/mourning-the-monolith/"/>
@@ -121,27 +138,5 @@ function pr_for_sha {
 &lt;p&gt;Sure&amp;#8211;it&amp;#8217;s frivolous. But maybe it&amp;#8217;ll save you some trouble.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href='https://github.com/joeyAghion/console_color'&gt;Visit console_color on GitHub for more details.&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Artsy's experiment with AWS OpsWorks</title>
-    <link rel="alternate" href="/artsy-s-experiment-with-aws-opsworks/"/>
-    <id>/artsy-s-experiment-with-aws-opsworks/</id>
-    <published>2013-09-13T04:53:00Z</published>
-    <updated>2013-09-13T04:53:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;After struggling to make Artsy&amp;#8217;s largest application work within &lt;a href='https://www.heroku.com/'&gt;Heroku&amp;#8217;s&lt;/a&gt; platform for a long while, I began a series of experiments with other providers. Recently, those experiments culminated in switching our application to &lt;a href='http://aws.amazon.com/opsworks/'&gt;AWS OpsWorks&lt;/a&gt;.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;After struggling to make Artsy&amp;#8217;s largest application work within &lt;a href='https://www.heroku.com/'&gt;Heroku&amp;#8217;s&lt;/a&gt; platform for a long while, I began a series of experiments with other providers. Recently, those experiments culminated in switching our application to &lt;a href='http://aws.amazon.com/opsworks/'&gt;AWS OpsWorks&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;OpsWorks offered us much more control, but balanced that with good automation and plenty of sane defaults. To help others up the learning curve I wrote an &lt;a href='http://artsy.github.io/blog/2013/08/27/introduction-to-aws-opsworks/'&gt;Introduction to AWS OpsWorks&lt;/a&gt; for the Artsy engineering blog.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;OpsWorks is a new service from Amazon that promises to provide high-level tools to manage your EC2-based deployment&amp;#8230;. If you&amp;#8217;ve been straining at the limits of your Platform as a Service (PaaS) provider, or just wishing for more automation for your EC2 deployment, you may want to try it out too.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;We&amp;#8217;re all primarily developers, not system administrators. So over the next few months we&amp;#8217;ll be keeping a close watch on how much additional administrative overhead our new platform requires. So far, results have been very promising.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href='http://artsy.github.io/blog/2013/08/27/introduction-to-aws-opsworks/'&gt;Continue reading&lt;/a&gt; or visit the &lt;a href='https://news.ycombinator.com/item?id=6297992'&gt;Hacker News comments&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
