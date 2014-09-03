@@ -11,7 +11,7 @@ I created a custom search engine in Chrome for Google's _I'm Feeling Lucky_ func
 1. Go to **Settings**, then **Manage search engines...**
 2. At the bottom of the **Other search engines** list, add a new entry called _I'm Feeling Lucky_
 3. For **Keyword**, choose a convenient shortcut. I chose the single character _>_
-4. For **URL**, enter: _http://www.google.com/search?hl=en&q=%s&btnI=I%27m+Feeling+Lucky&aq=f&oq=_
+4. For **URL**, enter: `http://www.google.com.ph/search?q=%s&btnI=745`
 
 ![Manage search engines screenshot](/images/2013-05-01-manage-search-engines.png)
 
