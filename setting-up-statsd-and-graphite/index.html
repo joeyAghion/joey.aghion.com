@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Setting up StatsD and Graphite</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="alternate" type="application/rss+xml"  href="/feed.xml" title="Half a Mind - Joey Aghion">
+    <link rel="author" href="https://plus.google.com/+JoeyAghion" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/setting-up-statsd-and-graphite/">Setting up StatsD and Graphite</a>
+  </h2>
+  <time datetime="2014-09-16" pubdate>Sep 16, 2014</time>
+  <article>
+    <p><a href='https://artsy.net'>Artsy</a> depends on <a href='https://github.com/etsy/statsd'>statsd</a> and <a href='http://graphite.wikidot.com/'>graphite</a> every day. When our graphite server failed recently, I took the opportunity to revisit an <a href='/tracking-application-metrics-with-statsd'>old post</a> about the simplest possible steps for setting up your own statsd and graphite server.</p>
+
+<p>It turns out, the tools have improved quite a bit since then. <a href='https://coderwall.com/p/pb74zq'>This post</a> provided an outline in which you only need a Berksfile (to specify cookbooks) and a Vagrantfile (to drive the provisioning). Its settings and cookbooks were slightly out of date, so I made some modifications.</p>
+
+<p>In <em>Berksfile</em>:</p>
+
+<pre><code>source &quot;https://supermarket.getchef.com&quot;
+
+cookbook &#39;apt&#39;
+cookbook &#39;statsd&#39;, git: &#39;https://github.com/librato/statsd-cookbook.git&#39;
+cookbook &#39;graphite&#39;, git: &#39;https://github.com/hectcastro/chef-graphite.git&#39;</code></pre>
+
+<p>In <em>Vagrantfile</em>:</p>
+
+<pre><code>VAGRANTFILE_API_VERSION = &quot;2&quot;
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.omnibus.chef_version = :latest
+  config.vm.box = &quot;dummy&quot;
+  config.vm.box_url = &quot;https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box&quot;
+  
+  # Provider
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id = &#39;...YOUR AWS_ACCESS_KEY_ID...&#39;
+    aws.secret_access_key = &#39;...YOUR AWS_SECRET_ACCESS_KEY...&#39;
+    aws.keypair_name = &#39;your_keypair_name&#39;
+    aws.ami = &quot;ami-d017b2b8&quot; # Ubuntu 12.04.2 LTS us-east ebs-backed 64-bit (chef?)
+    aws.region = &quot;us-east-1&quot;
+    aws.instance_type = &quot;m3.large&quot;
+    aws.security_groups = [&quot;default&quot;, &quot;statsd_graphite&quot;]
+    override.ssh.username = &quot;ubuntu&quot;
+    override.ssh.private_key_path = &quot;/path/to/your/keypair.pem&quot;
+    aws.tags = {
+      &#39;Name&#39; =&gt; &#39;Statsd (Vagrant Provision)&#39;
+    }
+
+    # Mount a 50 GB root partition rather than run out of space on the default
+    aws.block_device_mapping = [
+      {
+        &#39;DeviceName&#39; =&gt; &quot;/dev/sda1&quot;,
+        &#39;VirtualName&#39; =&gt; &quot;root&quot;,
+        &#39;Ebs.VolumeSize&#39; =&gt; &#39;50&#39;
+      }
+    ]
+  end
+
+  # Provisioning
+  config.berkshelf.enabled = true
+  config.vm.provision :chef_solo do |chef|
+
+    chef.add_recipe &quot;apt&quot;
+    chef.add_recipe &quot;statsd&quot;
+    chef.add_recipe &quot;graphite&quot;
+
+    # We override the graphite cookbook&#39;s default storage_aggregation and storage_schemas settings according to Etsy&#39;s recommendations at https://github.com/etsy/statsd/blob/master/docs/graphite.md
+    chef.json = {
+      statsd: {
+        legacyNamespace: false  # adopt new, preferred namespace scheme (all statsd metrics managed under &quot;stats&quot;)
+      },
+      graphite: {
+        storage_aggregation: [
+          {
+            min: {
+              pattern: &quot;\\.lower$&quot;,
+              xFilesFactor: &quot;0.1&quot;,
+              aggregationMethod: &quot;min&quot;
+            }
+          },
+          {
+            max: {
+              pattern: &quot;\\.upper(_\\d+)?$&quot;,
+              xFilesFactor: &quot;0.1&quot;,
+              aggregationMethod: &quot;max&quot;
+            }
+          },
+          {
+            sum: {
+              pattern: &quot;\\.sum$&quot;,
+              xFilesFactor: &quot;0&quot;,
+              aggregationMethod: &quot;sum&quot;
+            }
+          },
+          {
+            count: {
+              pattern: &quot;\\.count$&quot;,
+              xFilesFactor: &quot;0&quot;,
+              aggregationMethod: &quot;sum&quot;
+            }
+          },
+          {
+            count_legacy: {
+              pattern: &quot;^stats_counts.*&quot;,
+              xFilesFactor: &quot;0&quot;,
+              aggregationMethod: &quot;sum&quot;
+            }
+          },
+          {
+            default_average: {
+              pattern: &quot;.*&quot;,
+              xFilesFactor: &quot;0.3&quot;,
+              aggregationMethod: &quot;average&quot;
+            }
+          }
+        ],
+        storage_schemas: [
+          {
+            stats: {
+              priority: &quot;100&quot;,
+              pattern: &quot;^stats.*&quot;,
+              retentions: &quot;10s:6h,1min:6d,10min:1800d&quot;
+            }
+          },
+          {
+            catchall: {
+              priority: &quot;0&quot;,
+              pattern: &quot;.*&quot;,
+              retentions: &quot;60s:5y&quot;
+            }
+          }
+        ]
+      }
+    }
+  end
+end</code></pre>
+
+<p>What you&#8217;ll need to do:</p>
+
+<ol>
+<li>Download and install <a href='http://www.vagrantup.com/downloads.html'>Vagrant</a></li>
+
+<li>Download and install <a href='https://downloads.getchef.com/chef-dk'>ChefDK</a></li>
+
+<li>Create an AWS keypair</li>
+
+<li>Create a <code>statsd_graphite</code> AWS security group that allows SSH and HTTP access, as well as UDP access to port 8125 (for statsd)</li>
+
+<li>Update the <code>access_key_id</code>, <code>secret_access_key</code>, <code>keypair_name</code>, and <code>private_key_path</code> values in the Berksfile</li>
+
+<li>Run the following commands: <code>
+vagrant plugin install vagrant-berkshelf vagrant-omnibus vagrant-aws
+vagrant up --provider aws
+</code></li>
+</ol>
+
+<p>That&#8217;s it!</p>
+  </article>
+  
+    <div class="article_footer">
+      <div class="tags">
+        Tags:
+        <a href="/tags/programming/">programming</a>, <a href="/tags/vagrant/">vagrant</a>, <a href="/tags/berkshelf/">berkshelf</a>, <a href="/tags/aws/">aws</a>
+      </div>
+      <div class="timestamp">
+        2014-09-16
+      </div>
+      <div class='clear'></div>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/setting-up-statsd-and-graphite/">Setting up StatsD and Graphite</a> <span>Sep 16</span></li>
+            
+              
+              <li><a href="/unique-tabs-v0-4-now-available/">Unique Tabs v0.4 now available</a> <span>Jun  9</span></li>
+            
+              
+              <li><a href="/mourning-the-monolith/">Mourning the Monolith</a> <span>May 13</span></li>
+            
+              
+              <li><a href="/refactoring-infrastructure/">Refactoring Infrastructure</a> <span>Apr 10</span></li>
+            
+              
+              <li><a href="/find-the-github-pull-request-for-a-commit/">Find the github pull request for a commit</a> <span>Feb 19</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/programming/">programming (24)</a></li>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/ruby/">ruby (9)</a></li>
+            
+              
+              <li><a href="/tags/tools/">tools (7)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

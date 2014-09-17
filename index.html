@@ -30,6 +30,9 @@
   
   
 
+  <h2><a href="/setting-up-statsd-and-graphite/">Setting up StatsD and Graphite</a></h2>
+  <time datetime="2014-09-16" pubdate>Sep 16, 2014</time>
+  <div class="summary"><p><a href='https://artsy.net'>Artsy</a> depends on <a href='https://github.com/etsy/statsd'>statsd</a> and <a href='http://graphite.wikidot.com/'>graphite</a> every day. When our graphite server failed recently, I took the opportunity to revisit an <a href='/tracking-application-metrics-with-statsd'>old post</a> about the simplest possible steps for setting up your own statsd and graphite server.</p></div>
   <h2><a href="/unique-tabs-v0-4-now-available/">Unique Tabs v0.4 now available</a></h2>
   <time datetime="2014-06-09" pubdate>Jun  9, 2014</time>
   <div class="summary"><p>Chrome&#8217;s recent update removed the <code>webkitNotifications</code> API, which broke Unique Tabs briefly. I&#8217;ve just pushed version 0.4 of the extension. Enjoy!</p>
@@ -73,9 +76,6 @@
   <h2><a href="/simple-301-redirects/">Simple 301 redirects</a></h2>
   <time datetime="2013-07-12" pubdate>Jul 12, 2013</time>
   <div class="summary"><p>When I switched from <a href='http://halfamind.aghion.com'>halfamind.aghion.com</a> to the more personal <a href='http://joey.aghion.com'>joey.aghion.com</a> for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. <a href='http://pages.github.com'>Github pages</a> (where this is hosted) only supports a single hostname and doesn&#8217;t allow for redirects. You could redirect <a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'>in javascript</a> or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.</p></div>
-  <h2><a href="/eliminating-textmate-lag/">Eliminating TextMate Lag</a></h2>
-  <time datetime="2013-05-21" pubdate>May 21, 2013</time>
-  <div class="summary"><p>I&#8217;m still using <a href='http://macromates.com/'>TextMate 1</a>, since 2.0 has been buggy for me. If you&#8217;re in the same boat, you might share my frustration with the recurring lag that TextMate experiences when switching focus between applications. TextMate tries to reload the entire project&#8217;s file state on focus, and this can be noticeably slow.</p></div>
 
   
     <p><a href="/page/2/">Next page</a></p>
@@ -86,6 +86,9 @@
         <div class="col">
           <h4>Recent Articles</h4>
           <ol>
+            
+              
+              <li><a href="/setting-up-statsd-and-graphite/">Setting up StatsD and Graphite</a> <span>Sep 16</span></li>
             
               
               <li><a href="/unique-tabs-v0-4-now-available/">Unique Tabs v0.4 now available</a> <span>Jun  9</span></li>
@@ -99,9 +102,6 @@
               
               <li><a href="/find-the-github-pull-request-for-a-commit/">Find the github pull request for a commit</a> <span>Feb 19</span></li>
             
-              
-              <li><a href="/new-artsy-post-isolating-spurious-and-nondeterministic-tests/">New Artsy post: Isolating Spurious and Nondeterministic Tests</a> <span>Jan 30</span></li>
-            
           </ol>
         </div>
         <div class="col">
@@ -109,7 +109,7 @@
           <ol>
             
               
-              <li><a href="/tags/programming/">programming (23)</a></li>
+              <li><a href="/tags/programming/">programming (24)</a></li>
             
               
               <li><a href="/tags/home/">home (22)</a></li>
