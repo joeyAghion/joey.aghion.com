@@ -14,7 +14,7 @@ Three characteristics in particular got my attention:
 - Bounded data storage needs, since Graphite stores the ever-growing metrics data in decreasing resolution over time ([like RRDtool but different](http://graphite.wikidot.com/faq#toc8))
 - Practically no management of metrics is necessary--the first time a metric is triggered, statsd will start tracking it and Graphite will start making the graph available, with results organized into "folders" according to the dots in their names (e.g., `system.deploys`, `cart.products_added`, etc.)
 
-![Log-in successes and failures, courtesy of Etsy's Code as Craft blog](http://etsycodeascraft.files.wordpress.com/2011/02/logins2.png?w=500&amp;h=300 "log-in successes and failures")
+![Log-in successes and failures, courtesy of Etsy's Code as Craft blog](http://etsycac.wpengine.com/wp-content/uploads/2011/02/logins2.png "log-in successes and failures")
 
 _(Graph from [Measure Anything, Measure Everything](http://codeascraft.etsy.com/2011/02/15/measure-anything-measure-everything/).)_
 
@@ -84,3 +84,5 @@ Then, tracking stats is as simple as:
     $statsd.time('partners.facebook_api') {...}   # track time spent executing the given block
 
 You can always terminate the instance with `ec2-terminate-instance i-17fc3c76` (substituting the appropriate instance id).
+
+_Update (2014-09-16): See a [more recent post](/setting-up-statsd-and-graphite) for updated instructions._
