@@ -136,11 +136,11 @@ What you'll need to do:
 3. Create an AWS keypair
 4. Create a `statsd_graphite` AWS security group that allows SSH and HTTP access, as well as UDP access to port 8125 (for statsd)
 5. Update the `access_key_id`, `secret_access_key`, `keypair_name`, and `private_key_path` values in the Berksfile
-6. Run the following commands:
-```
-vagrant plugin install vagrant-berkshelf vagrant-omnibus vagrant-aws
-vagrant up --provider aws
-```
+
+Then, run the following commands:
+
+    vagrant plugin install vagrant-berkshelf vagrant-omnibus vagrant-aws
+    vagrant up --provider aws
 
 That's it!
 
