@@ -14,5 +14,9 @@
 
 <h2>Calendar:</h2>
 <p>
-  <iframe src="https://www.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=DAY&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=joey%40artsymail.com&amp;color=%232F6309&amp;ctz=America%2FNew_York" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
+  <script type="text/javascript">
+    var today = new Date(),
+      todayStr = '' + today.getFullYear() + ('0' + (1 + today.getMonth())).slice(-2) + ('0' + today.getDate()).slice(-2);
+    document.write("<iframe src='https://www.google.com/calendar/embed?showNav=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=DAY&amp;dates=" + todayStr + "/" + todayStr + "&amp;height=700&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=joey%40artsymail.com&amp;color=%232F6309&amp;ctz=America%2FNew_York' style='border-width:0' width='800' height='700' frameborder='0' scrolling='no'></iframe>");
+  </script>
 </p>
