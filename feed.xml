@@ -4,10 +4,134 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2014-09-16T23:45:00Z</updated>
+  <updated>2015-02-25T13:16:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Instance variables, class variables, and class instance variables in Ruby</title>
+    <link rel="alternate" href="/instance-variables-class-variables-and-class-instance-variables-in-ruby/"/>
+    <id>/instance-variables-class-variables-and-class-instance-variables-in-ruby/</id>
+    <published>2015-02-25T13:16:00Z</published>
+    <updated>2015-02-25T13:16:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;Trying to understand how instance variables, class variables, and &lt;em&gt;class&lt;/em&gt; instance variables interacted in Ruby, I wrote this quick demo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Foo
+  def get_instance_v
+    @v ||= &amp;#39;@v&amp;#39;.tap { puts &amp;#39;Setting @v from instance method!&amp;#39; }&lt;/code&gt;&lt;/pre&gt;</summary>
+    <content type="html">&lt;p&gt;Trying to understand how instance variables, class variables, and &lt;em&gt;class&lt;/em&gt; instance variables interacted in Ruby, I wrote this quick demo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Foo
+  def get_instance_v
+    @v ||= &amp;#39;@v&amp;#39;.tap { puts &amp;#39;Setting @v from instance method!&amp;#39; }
+  end
+
+  def get_class_v
+    @@v ||= &amp;#39;@@v&amp;#39;.tap { puts &amp;#39;Setting @@v from instance method!&amp;#39; }
+  end
+
+  def self.get_instance_v
+    @v ||= &amp;#39;class @v&amp;#39;.tap { puts &amp;#39;Setting @v from class method!&amp;#39; }
+  end
+
+  def self.get_class_v
+    @@v ||= &amp;#39;class @@v&amp;#39;.tap { puts &amp;#39;Setting @@v from class method!&amp;#39; }
+  end
+end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Try to guess what will happen&amp;#8230;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; foo = Foo.new
+&amp;gt; foo.get_instance_v
+Setting @v from instance method!
+=&amp;gt; &amp;quot;@v&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;#8217;s pretty predictable. Let&amp;#8217;s set the class variable &lt;code&gt;@@v&lt;/code&gt; from an instance method:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; foo.get_class_v
+Setting @@v from instance method!
+=&amp;gt; &amp;quot;@@v&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All good. Now, let&amp;#8217;s set an instance variable &lt;code&gt;@v&lt;/code&gt; from within a class method (usually called a &lt;em&gt;class instance variable&lt;/em&gt;).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; foo.class.get_instance_v
+Setting @v from class method!
+=&amp;gt; &amp;quot;class @v&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Equivalently, we could have called &lt;code&gt;Foo.get_instance_v&lt;/code&gt;. Now, let&amp;#8217;s again refer to the class variable &lt;code&gt;@@v&lt;/code&gt;, but from a class method:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; foo.class.get_class_v
+=&amp;gt; &amp;quot;@@v&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(It was already set by the instance method.) The &lt;code&gt;@@v&lt;/code&gt; reference resolves to the same variable from an instance context &lt;em&gt;or&lt;/em&gt; a class context.&lt;/p&gt;
+
+&lt;p&gt;Now we&amp;#8217;ll extend the &lt;code&gt;Foo&lt;/code&gt; class and see how these variables work with inheritance.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Bar &amp;lt; Foo
+  def get_instance_v
+    @v ||= &amp;#39;@v in Bar&amp;#39;.tap { puts &amp;#39;Setting @v from Bar instance method!&amp;#39; }
+  end
+
+  def get_class_v
+    @@v ||= &amp;#39;@@v in Bar&amp;#39;.tap { puts &amp;#39;Setting @@v from Bar instance method!&amp;#39; }
+  end
+
+  def self.get_instance_v
+    @v ||= &amp;#39;class @v in Bar&amp;#39;.tap { puts &amp;#39;Setting @v from Bar class method!&amp;#39; }
+  end
+
+  def self.get_class_v
+    @@v ||= &amp;#39;class @@v in Bar&amp;#39;.tap { puts &amp;#39;Setting @@v from Bar class method!&amp;#39; }
+  end
+end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As expected, instance variables are scoped to our instance:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bar = Bar.new
+&amp;gt; bar.get_instance_v
+Setting @v from Bar instance method!
+=&amp;gt; &amp;quot;@v in Bar&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What about class variables?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bar.get_class_v
+=&amp;gt; &amp;quot;@@v&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Apparently, class variable references in the child class refer to the base class. But is that always the case? We&amp;#8217;ll reopen both classes to see what happens if the class variable is first set in the child class:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Foo
+  def get_class_x
+    @@x ||= &amp;quot;Foo&amp;#39;s @@x&amp;quot;.tap { puts &amp;#39;Setting @@x in Foo&amp;#39; }
+  end
+end
+
+class Bar &amp;lt; Foo
+  def get_class_x
+    @@x ||= &amp;quot;Bar&amp;#39;s @@x&amp;quot;.tap { puts &amp;#39;Setting @@x in Bar&amp;#39; }
+  end
+end
+
+&amp;gt; bar.get_class_x
+Setting @@x in Bar
+=&amp;gt; &amp;quot;Bar&amp;#39;s @@x&amp;quot;
+&amp;gt; foo.get_class_x
+Setting @@x in Foo
+=&amp;gt; &amp;quot;Foo&amp;#39;s @@x&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That was a surprise. The class variable isn&amp;#8217;t exactly &lt;em&gt;shared&lt;/em&gt; between the parent and child classes. The child class looks up the class variable in the base class, but sets it on itself. The base class keeps its own copy.&lt;/p&gt;
+
+&lt;p&gt;Something strange happens if the child class again references the class variable:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bar.get_class_x
+&amp;quot;Foo&amp;#39;s @@x&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Huh? Apparently the child class &lt;em&gt;prefers&lt;/em&gt; the class variable set on its base class to its own.&lt;/p&gt;
+
+&lt;p&gt;There are further wrinkles when these class variables &lt;span&gt;and class instance variables&lt;/span&gt; are used from modules, but that&amp;#8217;s a topic for another post.&lt;/p&gt;</content>
+  </entry>
   <entry>
     <title>Setting up StatsD and Graphite</title>
     <link rel="alternate" href="/setting-up-statsd-and-graphite/"/>
@@ -246,23 +370,5 @@ function pr_for_sha {
 
 &lt;li&gt;&lt;a href='http://www.jisaacks.com/gitgutter'&gt;GitGutter&lt;/a&gt; - indicates added, removed, and modified lines right in your editor.&lt;/li&gt;
 &lt;/ul&gt;</content>
-  </entry>
-  <entry>
-    <title>New Artsy post: Isolating Spurious and Nondeterministic Tests</title>
-    <link rel="alternate" href="/new-artsy-post-isolating-spurious-and-nondeterministic-tests/"/>
-    <id>/new-artsy-post-isolating-spurious-and-nondeterministic-tests/</id>
-    <published>2014-01-30T16:38:00Z</published>
-    <updated>2014-01-30T16:38:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;Solid tests are a great asset. Tests that fail spuriously are toxic; they threaten our ability to ship quickly and our confidence in the end product.&lt;/p&gt;
-
-&lt;p&gt;We at &lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; have been experimenting with a test &amp;#8220;quarantine&amp;#8221;&amp;#8211;a suite of problematic tests that&amp;#8217;s isolated from the usual build pipeline and limited in size.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;Solid tests are a great asset. Tests that fail spuriously are toxic; they threaten our ability to ship quickly and our confidence in the end product.&lt;/p&gt;
-
-&lt;p&gt;We at &lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; have been experimenting with a test &amp;#8220;quarantine&amp;#8221;&amp;#8211;a suite of problematic tests that&amp;#8217;s isolated from the usual build pipeline and limited in size.&lt;/p&gt;
-
-&lt;p&gt;Read more on the Artsy engineering blog: &lt;a href='http://artsy.github.io/blog/2014/01/30/isolating-spurious-and-nondeterministic-tests/'&gt;Isolating Spurious and Nondeterministic Tests&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
 </feed>

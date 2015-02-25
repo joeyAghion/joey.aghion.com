@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Instance variables, class variables, and class instance variables in Ruby</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="alternate" type="application/rss+xml"  href="/feed.xml" title="Half a Mind - Joey Aghion">
+    <link rel="author" href="https://plus.google.com/+JoeyAghion" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/instance-variables-class-variables-and-class-instance-variables-in-ruby/">Instance variables, class variables, and class instance variables in Ruby</a>
+  </h2>
+  <time datetime="2015-02-25" pubdate>Feb 25, 2015</time>
+  <article>
+    <p>Trying to understand how instance variables, class variables, and <em>class</em> instance variables interacted in Ruby, I wrote this quick demo:</p>
+
+<pre><code>class Foo
+  def get_instance_v
+    @v ||= &#39;@v&#39;.tap { puts &#39;Setting @v from instance method!&#39; }
+  end
+
+  def get_class_v
+    @@v ||= &#39;@@v&#39;.tap { puts &#39;Setting @@v from instance method!&#39; }
+  end
+
+  def self.get_instance_v
+    @v ||= &#39;class @v&#39;.tap { puts &#39;Setting @v from class method!&#39; }
+  end
+
+  def self.get_class_v
+    @@v ||= &#39;class @@v&#39;.tap { puts &#39;Setting @@v from class method!&#39; }
+  end
+end</code></pre>
+
+<p>Try to guess what will happen&#8230;</p>
+
+<pre><code>&gt; foo = Foo.new
+&gt; foo.get_instance_v
+Setting @v from instance method!
+=&gt; &quot;@v&quot;</code></pre>
+
+<p>That&#8217;s pretty predictable. Let&#8217;s set the class variable <code>@@v</code> from an instance method:</p>
+
+<pre><code>&gt; foo.get_class_v
+Setting @@v from instance method!
+=&gt; &quot;@@v&quot;</code></pre>
+
+<p>All good. Now, let&#8217;s set an instance variable <code>@v</code> from within a class method (usually called a <em>class instance variable</em>).</p>
+
+<pre><code>&gt; foo.class.get_instance_v
+Setting @v from class method!
+=&gt; &quot;class @v&quot;</code></pre>
+
+<p>Equivalently, we could have called <code>Foo.get_instance_v</code>. Now, let&#8217;s again refer to the class variable <code>@@v</code>, but from a class method:</p>
+
+<pre><code>&gt; foo.class.get_class_v
+=&gt; &quot;@@v&quot;</code></pre>
+
+<p>(It was already set by the instance method.) The <code>@@v</code> reference resolves to the same variable from an instance context <em>or</em> a class context.</p>
+
+<p>Now we&#8217;ll extend the <code>Foo</code> class and see how these variables work with inheritance.</p>
+
+<pre><code>class Bar &lt; Foo
+  def get_instance_v
+    @v ||= &#39;@v in Bar&#39;.tap { puts &#39;Setting @v from Bar instance method!&#39; }
+  end
+
+  def get_class_v
+    @@v ||= &#39;@@v in Bar&#39;.tap { puts &#39;Setting @@v from Bar instance method!&#39; }
+  end
+
+  def self.get_instance_v
+    @v ||= &#39;class @v in Bar&#39;.tap { puts &#39;Setting @v from Bar class method!&#39; }
+  end
+
+  def self.get_class_v
+    @@v ||= &#39;class @@v in Bar&#39;.tap { puts &#39;Setting @@v from Bar class method!&#39; }
+  end
+end</code></pre>
+
+<p>As expected, instance variables are scoped to our instance:</p>
+
+<pre><code>&gt; bar = Bar.new
+&gt; bar.get_instance_v
+Setting @v from Bar instance method!
+=&gt; &quot;@v in Bar&quot;</code></pre>
+
+<p>What about class variables?</p>
+
+<pre><code>&gt; bar.get_class_v
+=&gt; &quot;@@v&quot;</code></pre>
+
+<p>Apparently, class variable references in the child class refer to the base class. But is that always the case? We&#8217;ll reopen both classes to see what happens if the class variable is first set in the child class:</p>
+
+<pre><code>class Foo
+  def get_class_x
+    @@x ||= &quot;Foo&#39;s @@x&quot;.tap { puts &#39;Setting @@x in Foo&#39; }
+  end
+end
+
+class Bar &lt; Foo
+  def get_class_x
+    @@x ||= &quot;Bar&#39;s @@x&quot;.tap { puts &#39;Setting @@x in Bar&#39; }
+  end
+end
+
+&gt; bar.get_class_x
+Setting @@x in Bar
+=&gt; &quot;Bar&#39;s @@x&quot;
+&gt; foo.get_class_x
+Setting @@x in Foo
+=&gt; &quot;Foo&#39;s @@x&quot;</code></pre>
+
+<p>That was a surprise. The class variable isn&#8217;t exactly <em>shared</em> between the parent and child classes. The child class looks up the class variable in the base class, but sets it on itself. The base class keeps its own copy.</p>
+
+<p>Something strange happens if the child class again references the class variable:</p>
+
+<pre><code>&gt; bar.get_class_x
+&quot;Foo&#39;s @@x&quot;</code></pre>
+
+<p>Huh? Apparently the child class <em>prefers</em> the class variable set on its base class to its own.</p>
+
+<p>There are further wrinkles when these class variables <span>and class instance variables</span> are used from modules, but that&#8217;s a topic for another post.</p>
+  </article>
+  
+    <div class="article_footer">
+      <div class="tags">
+        Tags:
+        <a href="/tags/programming/">programming</a>, <a href="/tags/ruby/">ruby</a>
+      </div>
+      <div class="timestamp">
+        2015-02-25
+      </div>
+      <div class='clear'></div>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/instance-variables-class-variables-and-class-instance-variables-in-ruby/">Instance variables, class variables, and class instance variables in Ruby</a> <span>Feb 25</span></li>
+            
+              
+              <li><a href="/setting-up-statsd-and-graphite/">Setting up StatsD and Graphite</a> <span>Sep 16</span></li>
+            
+              
+              <li><a href="/unique-tabs-v0-4-now-available/">Unique Tabs v0.4 now available</a> <span>Jun  9</span></li>
+            
+              
+              <li><a href="/mourning-the-monolith/">Mourning the Monolith</a> <span>May 13</span></li>
+            
+              
+              <li><a href="/refactoring-infrastructure/">Refactoring Infrastructure</a> <span>Apr 10</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/programming/">programming (25)</a></li>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/ruby/">ruby (10)</a></li>
+            
+              
+              <li><a href="/tags/tools/">tools (7)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
