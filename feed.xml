@@ -317,7 +317,7 @@ vagrant up --provider aws&lt;/code&gt;&lt;/pre&gt;
     <summary type="html">&lt;p&gt;We at &lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; have been carving a monolith into separate applications. It&amp;#8217;s an appropriate move at our scale and complexity, but not as easy a decision as some might believe. One casualty: the usefulness of our tests.&lt;/p&gt;</summary>
     <content type="html">&lt;p&gt;We at &lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; have been carving a monolith into separate applications. It&amp;#8217;s an appropriate move at our scale and complexity, but not as easy a decision as some might believe. One casualty: the usefulness of our tests.&lt;/p&gt;
 
-&lt;p&gt;Read on at the Artsy engineering blog: &lt;a href='http://artsy.github.io/blog/2014/05/12/continuous-integration-for-service-oriented-architectures/'&gt;Coninuous Integration for Service-Oriented Architectures&lt;/a&gt;&lt;/p&gt;</content>
+&lt;p&gt;Read on at the Artsy engineering blog: &lt;a href='http://artsy.github.io/blog/2014/05/12/continuous-integration-for-service-oriented-architectures/'&gt;Continuous Integration for Service-Oriented Architectures&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
   <entry>
     <title>Refactoring Infrastructure</title>
