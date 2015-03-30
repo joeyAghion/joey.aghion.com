@@ -33,6 +33,15 @@
   
   
 
+  <h2><a href="/listing-mongodb-collections-by-size/">Listing MongoDB collections by size</a></h2>
+  <time datetime="2013-09-10" pubdate>Sep 10, 2013</time>
+  <div class="summary"><p>In a MongoDB shell, the <code>db.stats()</code> command shows you the amount of space occupied by the selected database.</p>
+
+<pre><code>&gt; db.stats()
+{
+  &quot;db&quot; : &quot;my-db&quot;,
+  &quot;collections&quot; : 242,
+  &quot;dataSize&quot; : 7167367172,</code></pre></div>
   <h2><a href="/simple-301-redirects/">Simple 301 redirects</a></h2>
   <time datetime="2013-07-12" pubdate>Jul 12, 2013</time>
   <div class="summary"><p>When I switched from <a href='http://halfamind.aghion.com'>halfamind.aghion.com</a> to the more personal <a href='http://joey.aghion.com'>joey.aghion.com</a> for this site, I needed a way to permanently redirect all requests for the old hostname to the new one. <a href='http://pages.github.com'>Github pages</a> (where this is hosted) only supports a single hostname and doesn&#8217;t allow for redirects. You could redirect <a href='http://stackoverflow.com/questions/9276817/301-redirect-for-site-hosted-at-github'>in javascript</a> or with a meta-tag, but I wanted to guarantee that search engines would respect the new location.</p></div>
@@ -63,9 +72,6 @@
   <div class="summary"><p>My ~/.bash_profile file contains these helpers and aliases.</p>
 <!-- from https://gist.github.com/joeyAghion/1371971 -->
 <pre><code># Display current git branch, nicely colored, in the prompt (with a * if there are changes)</code></pre></div>
-  <h2><a href="/helpful-irb-methods/">Helpful IRB methods</a></h2>
-  <time datetime="2012-01-12" pubdate>Jan 12, 2012</time>
-  <div class="summary"><p>My <code>~/.irbrc</code> file contains these helpers for performing sql queries and outputting raw database (SQL or MongoDB) queries to the console. Just add them to your home directory&#8217;s .irbrc file to have these methods available in IRB or the Rails console.</p></div>
 
   
     <p><a href="/page/3/">Next page</a></p>
@@ -76,6 +82,9 @@
         <div class="col">
           <h4>Recent Articles</h4>
           <ol>
+            
+              
+              <li><a href="/track-out-of-date-releases-with-releasecop/">Track out-of-date releases with Releasecop</a> <span>Mar 30</span></li>
             
               
               <li><a href="/instance-variables-class-variables-and-class-instance-variables-in-ruby/">Instance variables, class variables, and class instance variables in Ruby</a> <span>Feb 25</span></li>
@@ -89,9 +98,6 @@
               
               <li><a href="/mourning-the-monolith/">Mourning the Monolith</a> <span>May 13</span></li>
             
-              
-              <li><a href="/refactoring-infrastructure/">Refactoring Infrastructure</a> <span>Apr 10</span></li>
-            
           </ol>
         </div>
         <div class="col">
@@ -99,7 +105,7 @@
           <ol>
             
               
-              <li><a href="/tags/programming/">programming (25)</a></li>
+              <li><a href="/tags/programming/">programming (26)</a></li>
             
               
               <li><a href="/tags/home/">home (22)</a></li>

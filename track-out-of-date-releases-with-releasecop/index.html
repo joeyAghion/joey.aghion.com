@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Track out-of-date releases with Releasecop</title>
+    
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="alternate" type="application/rss+xml"  href="/feed.xml" title="Half a Mind - Joey Aghion">
+    <link rel="author" href="https://plus.google.com/+JoeyAghion" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/">
+          <img src="/images/joey.jpg" width="75" height="75" alt="Joey Aghion" />
+        </a>
+        <h1><a href="/">Half a Mind</a></h1>
+        by <a href="mailto:joey@aghion.com">Joey Aghion</a>
+      </header>
+      <section>
+          <h2>
+    <a href="/track-out-of-date-releases-with-releasecop/">Track out-of-date releases with Releasecop</a>
+  </h2>
+  <time datetime="2015-03-30" pubdate>Mar 30, 2015</time>
+  <article>
+    <p>Artsy practices a sort of <a href='http://en.wikipedia.org/wiki/Continuous_delivery'>continuous delivery</a>: builds are automated, and there is always a deployable version of the codebase. Thus commits form a pipeline:</p>
+
+<ul>
+<li>From developers&#8217; working branches</li>
+
+<li>To the master branch</li>
+
+<li>Through a [hopefully successful] build</li>
+
+<li>Often to a staging environment</li>
+
+<li>Upon deploy, to the production environment</li>
+</ul>
+
+<p>We have a number of tools to help us shepherd commits through this pipeline, but now that the number of apps and services we deploy has grown, sometimes things fall through the cracks. I just released a quick-and-dirty tool to help track how out-of-date different environments are: <a href='https://github.com/joeyAghion/releasecop'><strong>Releasecop</strong></a>.</p>
+
+<p>Just list the different environments for each project (by git repo or branch name) in a <em>manifest</em> file, and the <code>releasecop check</code> command reports which commits have yet to be deployed to each environment. We set up a nightly Jenkins task to email us the results.</p>
+  </article>
+  
+    <div class="article_footer">
+      <div class="tags">
+        Tags:
+        <a href="/tags/programming/">programming</a>, <a href="/tags/heroku/">heroku</a>, <a href="/tags/git/">git</a>, <a href="/tags/github/">github</a>
+      </div>
+      <div class="timestamp">
+        2015-03-30
+      </div>
+      <div class='clear'></div>
+    </div>
+  
+
+      </section>
+      <footer>
+        <div class="col">
+          <h4>Recent Articles</h4>
+          <ol>
+            
+              
+              <li><a href="/track-out-of-date-releases-with-releasecop/">Track out-of-date releases with Releasecop</a> <span>Mar 30</span></li>
+            
+              
+              <li><a href="/instance-variables-class-variables-and-class-instance-variables-in-ruby/">Instance variables, class variables, and class instance variables in Ruby</a> <span>Feb 25</span></li>
+            
+              
+              <li><a href="/setting-up-statsd-and-graphite/">Setting up StatsD and Graphite</a> <span>Sep 16</span></li>
+            
+              
+              <li><a href="/unique-tabs-v0-4-now-available/">Unique Tabs v0.4 now available</a> <span>Jun  9</span></li>
+            
+              
+              <li><a href="/mourning-the-monolith/">Mourning the Monolith</a> <span>May 13</span></li>
+            
+          </ol>
+        </div>
+        <div class="col">
+          <h4>Tags</h4>
+          <ol>
+            
+              
+              <li><a href="/tags/programming/">programming (26)</a></li>
+            
+              
+              <li><a href="/tags/home/">home (22)</a></li>
+            
+              
+              <li><a href="/tags/kitchen/">kitchen (14)</a></li>
+            
+              
+              <li><a href="/tags/ruby/">ruby (10)</a></li>
+            
+              
+              <li><a href="/tags/tools/">tools (7)</a></li>
+            
+              
+              <li><a href="/tags/bathroom/">bathroom (4)</a></li>
+            
+              
+          </ol>
+        </div>
+        <p>Joey Aghion &mdash; <a href="mailto:joey@aghion.com">joey@aghion.com</a></p>
+      </footer>
+    </div>
+    <script src="/javascripts/scale.fix.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-10920982-2']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>
