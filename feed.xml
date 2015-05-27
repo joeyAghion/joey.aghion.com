@@ -4,10 +4,32 @@
   <id>http://joey.aghion.com</id>
   <link href="http://joey.aghion.com"/>
   <link href="http://joey.aghion.com/feed.xml" rel="self"/>
-  <updated>2015-03-30T14:01:00Z</updated>
+  <updated>2015-05-27T13:23:00Z</updated>
   <author>
     <name>Joey Aghion</name>
   </author>
+  <entry>
+    <title>Kitchen renovation 2015</title>
+    <link rel="alternate" href="/kitchen-renovation-2015/"/>
+    <id>/kitchen-renovation-2015/</id>
+    <published>2015-05-27T13:23:00Z</published>
+    <updated>2015-05-27T13:23:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;h2 id='20141216_existing_kitchen'&gt;2014-12-16: existing kitchen&lt;/h2&gt;
+&lt;img alt='kitchen from dining room' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen1.jpg' /&gt;&lt;img alt='kitchen south and east sides' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen2.jpg' /&gt;</summary>
+    <content type="html">&lt;h2 id='20141216_existing_kitchen'&gt;2014-12-16: existing kitchen&lt;/h2&gt;
+&lt;img alt='kitchen from dining room' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen1.jpg' /&gt;&lt;img alt='kitchen south and east sides' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen2.jpg' /&gt;&lt;img alt='kitchen south, east, and north sides' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen3.jpg' /&gt;
+&lt;h2 id='20150101_deleading_demolition_sheetrock'&gt;2015-01-01: deleading, demolition, sheetrock&lt;/h2&gt;
+&lt;img alt='demolition and deleading' src='/images/2015-05-27-kitchen-renovation-2015/2015-01-01_construction1.jpg' /&gt;&lt;img alt='demolition and deleading' src='/images/2015-05-27-kitchen-renovation-2015/2015-01-01_construction2.jpg' /&gt;&lt;img alt='new sheetrock' src='/images/2015-05-27-kitchen-renovation-2015/2015-01-01_construction1.jpg' /&gt;
+&lt;h2 id='20150322__20150426_cabinets'&gt;2015-03-22 - 2015-04-26: cabinets&lt;/h2&gt;
+&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets1.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets2.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets3.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets4.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets5.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets6.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets7.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets8.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets9.jpg' /&gt;
+&lt;h2 id='20150429_countertop'&gt;2015-04-29: countertop&lt;/h2&gt;
+&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-04-29_countertop1.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-04-29_countertop2.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-04-29_countertop3.jpg' /&gt;
+&lt;h2 id='20150517_finished'&gt;2015-05-17: finished&lt;/h2&gt;
+&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-05-17_finished2.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-05-17_finished1.jpg' /&gt;</content>
+  </entry>
   <entry>
     <title>Track out-of-date releases with Releasecop</title>
     <link rel="alternate" href="/track-out-of-date-releases-with-releasecop/"/>
@@ -346,19 +368,5 @@ vagrant up --provider aws&lt;/code&gt;&lt;/pre&gt;
     <content type="html">&lt;p&gt;We at &lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; have been carving a monolith into separate applications. It&amp;#8217;s an appropriate move at our scale and complexity, but not as easy a decision as some might believe. One casualty: the usefulness of our tests.&lt;/p&gt;
 
 &lt;p&gt;Read on at the Artsy engineering blog: &lt;a href='http://artsy.github.io/blog/2014/05/12/continuous-integration-for-service-oriented-architectures/'&gt;Continuous Integration for Service-Oriented Architectures&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Refactoring Infrastructure</title>
-    <link rel="alternate" href="/refactoring-infrastructure/"/>
-    <id>/refactoring-infrastructure/</id>
-    <published>2014-04-10T23:48:00Z</published>
-    <updated>2014-04-10T23:48:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;p&gt;Artsy has been growing its audience and scaling its systems. In the process, we&amp;#8217;ve been launching new services and extracting, migrating, or discarding existing ones. I wrote &lt;a href='http://artsy.github.io/blog/2014/04/02/refactoring-infrastructure/'&gt;Refactoring Infrastructure&lt;/a&gt; about how we&amp;#8217;ve done that with incremental improvements and minimal interruption.&lt;/p&gt;</summary>
-    <content type="html">&lt;p&gt;Artsy has been growing its audience and scaling its systems. In the process, we&amp;#8217;ve been launching new services and extracting, migrating, or discarding existing ones. I wrote &lt;a href='http://artsy.github.io/blog/2014/04/02/refactoring-infrastructure/'&gt;Refactoring Infrastructure&lt;/a&gt; about how we&amp;#8217;ve done that with incremental improvements and minimal interruption.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href='http://artsy.github.io/blog/2014/04/02/refactoring-infrastructure/'&gt;Visit the Artsy engineering blog to continue reading&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
 </feed>
