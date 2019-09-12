@@ -10,4 +10,4 @@ I recently posted to the Artsy engineering blog about [why projects need code na
 
 It took me a while to be convinced of code names' value, and I even propose some rules for your own project naming scheme:
 
-https://artsy.github.io/blog/2019/05/10/why-projects-need-codenames/
+[https://artsy.github.io/blog/2019/05/10/why-projects-need-codenames/](https://artsy.github.io/blog/2019/05/10/why-projects-need-codenames/)
