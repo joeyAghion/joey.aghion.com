@@ -90,28 +90,6 @@ gem &amp;#39;gridhook&amp;#39;  # handle sendgrid event notifications&lt;/code&g
 &lt;p&gt;Read more on the Artsy Engineering blog: &lt;a href='http://artsy.github.io/blog/2015/12/22/future-fridays/'&gt;Future Fridays&lt;/a&gt;.&lt;/p&gt;</content>
   </entry>
   <entry>
-    <title>Kitchen renovation 2015</title>
-    <link rel="alternate" href="/kitchen-renovation-2015/"/>
-    <id>/kitchen-renovation-2015/</id>
-    <published>2015-05-27T13:23:00Z</published>
-    <updated>2015-05-27T13:23:00Z</updated>
-    <author>
-      <name>Joey Aghion</name>
-    </author>
-    <summary type="html">&lt;h2 id='20141216_existing_kitchen'&gt;2014-12-16: existing kitchen&lt;/h2&gt;
-&lt;img alt='kitchen from dining room' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen1.jpg' /&gt;&lt;img alt='kitchen south and east sides' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen2.jpg' /&gt;</summary>
-    <content type="html">&lt;h2 id='20141216_existing_kitchen'&gt;2014-12-16: existing kitchen&lt;/h2&gt;
-&lt;img alt='kitchen from dining room' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen1.jpg' /&gt;&lt;img alt='kitchen south and east sides' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen2.jpg' /&gt;&lt;img alt='kitchen south, east, and north sides' src='/images/2015-05-27-kitchen-renovation-2015/2014-12-16_kitchen3.jpg' /&gt;
-&lt;h2 id='20150101_deleading_demolition_sheetrock'&gt;2015-01-01: deleading, demolition, sheetrock&lt;/h2&gt;
-&lt;img alt='demolition and deleading' src='/images/2015-05-27-kitchen-renovation-2015/2015-01-01_construction1.jpg' /&gt;&lt;img alt='demolition and deleading' src='/images/2015-05-27-kitchen-renovation-2015/2015-01-01_construction2.jpg' /&gt;&lt;img alt='new sheetrock' src='/images/2015-05-27-kitchen-renovation-2015/2015-01-01_construction1.jpg' /&gt;
-&lt;h2 id='20150322__20150426_cabinets'&gt;2015-03-22 - 2015-04-26: cabinets&lt;/h2&gt;
-&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets1.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets2.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets3.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets4.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets5.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets6.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets7.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets8.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-03-22_cabinets9.jpg' /&gt;
-&lt;h2 id='20150429_countertop'&gt;2015-04-29: countertop&lt;/h2&gt;
-&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-04-29_countertop1.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-04-29_countertop2.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-04-29_countertop3.jpg' /&gt;
-&lt;h2 id='20150517_finished'&gt;2015-05-17: finished&lt;/h2&gt;
-&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-05-17_finished2.jpg' /&gt;&lt;img src='/images/2015-05-27-kitchen-renovation-2015/2015-05-17_finished1.jpg' /&gt;</content>
-  </entry>
-  <entry>
     <title>Track out-of-date releases with Releasecop</title>
     <link rel="alternate" href="/track-out-of-date-releases-with-releasecop/"/>
     <id>/track-out-of-date-releases-with-releasecop/</id>
@@ -262,5 +240,161 @@ Setting @@x in Foo
 &lt;p&gt;Huh? Apparently the child class &lt;em&gt;prefers&lt;/em&gt; the class variable set on its base class to its own.&lt;/p&gt;
 
 &lt;p&gt;There are further wrinkles when these class variables &lt;span&gt;and class instance variables&lt;/span&gt; are used from modules, but that&amp;#8217;s a topic for another post.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Setting up StatsD and Graphite</title>
+    <link rel="alternate" href="/setting-up-statsd-and-graphite/"/>
+    <id>/setting-up-statsd-and-graphite/</id>
+    <published>2014-09-16T23:45:00Z</published>
+    <updated>2014-09-16T23:45:00Z</updated>
+    <author>
+      <name>Joey Aghion</name>
+    </author>
+    <summary type="html">&lt;p&gt;&lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; depends on &lt;a href='https://github.com/etsy/statsd'&gt;statsd&lt;/a&gt; and &lt;a href='http://graphite.wikidot.com/'&gt;graphite&lt;/a&gt; every day. When our graphite server failed recently, I took the opportunity to revisit an &lt;a href='/tracking-application-metrics-with-statsd'&gt;old post&lt;/a&gt; about the simplest possible steps for setting up your own statsd and graphite server.&lt;/p&gt;</summary>
+    <content type="html">&lt;p&gt;&lt;a href='https://artsy.net'&gt;Artsy&lt;/a&gt; depends on &lt;a href='https://github.com/etsy/statsd'&gt;statsd&lt;/a&gt; and &lt;a href='http://graphite.wikidot.com/'&gt;graphite&lt;/a&gt; every day. When our graphite server failed recently, I took the opportunity to revisit an &lt;a href='/tracking-application-metrics-with-statsd'&gt;old post&lt;/a&gt; about the simplest possible steps for setting up your own statsd and graphite server.&lt;/p&gt;
+
+&lt;p&gt;It turns out, the tools have improved quite a bit since then. &lt;a href='https://coderwall.com/p/pb74zq'&gt;This post&lt;/a&gt; provided an outline in which you only need a Berksfile (to specify cookbooks) and a Vagrantfile (to drive the provisioning). Its settings and cookbooks were slightly out of date, so I made some modifications.&lt;/p&gt;
+
+&lt;p&gt;In &lt;em&gt;Berksfile&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source &amp;quot;https://supermarket.getchef.com&amp;quot;
+
+cookbook &amp;#39;apt&amp;#39;
+cookbook &amp;#39;statsd&amp;#39;, git: &amp;#39;https://github.com/librato/statsd-cookbook.git&amp;#39;
+cookbook &amp;#39;graphite&amp;#39;, git: &amp;#39;https://github.com/hectcastro/chef-graphite.git&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In &lt;em&gt;Vagrantfile&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;VAGRANTFILE_API_VERSION = &amp;quot;2&amp;quot;
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.omnibus.chef_version = :latest
+  config.vm.box = &amp;quot;dummy&amp;quot;
+  config.vm.box_url = &amp;quot;https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box&amp;quot;
+  
+  # Provider
+  config.vm.provider :aws do |aws, override|
+    aws.access_key_id = &amp;#39;...YOUR AWS_ACCESS_KEY_ID...&amp;#39;
+    aws.secret_access_key = &amp;#39;...YOUR AWS_SECRET_ACCESS_KEY...&amp;#39;
+    aws.keypair_name = &amp;#39;your_keypair_name&amp;#39;
+    aws.ami = &amp;quot;ami-d017b2b8&amp;quot; # Ubuntu 12.04.2 LTS us-east ebs-backed 64-bit (chef?)
+    aws.region = &amp;quot;us-east-1&amp;quot;
+    aws.instance_type = &amp;quot;m3.large&amp;quot;
+    aws.security_groups = [&amp;quot;default&amp;quot;, &amp;quot;statsd_graphite&amp;quot;]
+    override.ssh.username = &amp;quot;ubuntu&amp;quot;
+    override.ssh.private_key_path = &amp;quot;/path/to/your/keypair.pem&amp;quot;
+    aws.tags = {
+      &amp;#39;Name&amp;#39; =&amp;gt; &amp;#39;Statsd (Vagrant Provision)&amp;#39;
+    }
+
+    # Mount a 50 GB root partition rather than run out of space on the default
+    aws.block_device_mapping = [
+      {
+        &amp;#39;DeviceName&amp;#39; =&amp;gt; &amp;quot;/dev/sda1&amp;quot;,
+        &amp;#39;VirtualName&amp;#39; =&amp;gt; &amp;quot;root&amp;quot;,
+        &amp;#39;Ebs.VolumeSize&amp;#39; =&amp;gt; &amp;#39;50&amp;#39;
+      }
+    ]
+  end
+
+  # Provisioning
+  config.berkshelf.enabled = true
+  config.vm.provision :chef_solo do |chef|
+
+    chef.add_recipe &amp;quot;apt&amp;quot;
+    chef.add_recipe &amp;quot;statsd&amp;quot;
+    chef.add_recipe &amp;quot;graphite&amp;quot;
+
+    # We override the graphite cookbook&amp;#39;s default storage_aggregation and storage_schemas settings according to Etsy&amp;#39;s recommendations at https://github.com/etsy/statsd/blob/master/docs/graphite.md
+    chef.json = {
+      statsd: {
+        legacyNamespace: false  # adopt new, preferred namespace scheme (all statsd metrics managed under &amp;quot;stats&amp;quot;)
+      },
+      graphite: {
+        storage_aggregation: [
+          {
+            min: {
+              pattern: &amp;quot;\\.lower$&amp;quot;,
+              xFilesFactor: &amp;quot;0.1&amp;quot;,
+              aggregationMethod: &amp;quot;min&amp;quot;
+            }
+          },
+          {
+            max: {
+              pattern: &amp;quot;\\.upper(_\\d+)?$&amp;quot;,
+              xFilesFactor: &amp;quot;0.1&amp;quot;,
+              aggregationMethod: &amp;quot;max&amp;quot;
+            }
+          },
+          {
+            sum: {
+              pattern: &amp;quot;\\.sum$&amp;quot;,
+              xFilesFactor: &amp;quot;0&amp;quot;,
+              aggregationMethod: &amp;quot;sum&amp;quot;
+            }
+          },
+          {
+            count: {
+              pattern: &amp;quot;\\.count$&amp;quot;,
+              xFilesFactor: &amp;quot;0&amp;quot;,
+              aggregationMethod: &amp;quot;sum&amp;quot;
+            }
+          },
+          {
+            count_legacy: {
+              pattern: &amp;quot;^stats_counts.*&amp;quot;,
+              xFilesFactor: &amp;quot;0&amp;quot;,
+              aggregationMethod: &amp;quot;sum&amp;quot;
+            }
+          },
+          {
+            default_average: {
+              pattern: &amp;quot;.*&amp;quot;,
+              xFilesFactor: &amp;quot;0.3&amp;quot;,
+              aggregationMethod: &amp;quot;average&amp;quot;
+            }
+          }
+        ],
+        storage_schemas: [
+          {
+            stats: {
+              priority: &amp;quot;100&amp;quot;,
+              pattern: &amp;quot;^stats.*&amp;quot;,
+              retentions: &amp;quot;10s:6h,1min:6d,10min:1800d&amp;quot;
+            }
+          },
+          {
+            catchall: {
+              priority: &amp;quot;0&amp;quot;,
+              pattern: &amp;quot;.*&amp;quot;,
+              retentions: &amp;quot;60s:5y&amp;quot;
+            }
+          }
+        ]
+      }
+    }
+  end
+end&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What you&amp;#8217;ll need to do:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Download and install &lt;a href='http://www.vagrantup.com/downloads.html'&gt;Vagrant&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;Download and install &lt;a href='https://downloads.getchef.com/chef-dk'&gt;ChefDK&lt;/a&gt;&lt;/li&gt;
+
+&lt;li&gt;Create an AWS keypair&lt;/li&gt;
+
+&lt;li&gt;Create a &lt;code&gt;statsd_graphite&lt;/code&gt; AWS security group that allows SSH and HTTP access, as well as UDP access to port 8125 (for statsd)&lt;/li&gt;
+
+&lt;li&gt;Update the &lt;code&gt;access_key_id&lt;/code&gt;, &lt;code&gt;secret_access_key&lt;/code&gt;, &lt;code&gt;keypair_name&lt;/code&gt;, and &lt;code&gt;private_key_path&lt;/code&gt; values in the Berksfile&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Then, run the following commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vagrant plugin install vagrant-berkshelf vagrant-omnibus vagrant-aws
+vagrant up --provider aws&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;#8217;s it!&lt;/p&gt;</content>
   </entry>
 </feed>
